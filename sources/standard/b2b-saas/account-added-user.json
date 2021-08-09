@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/b2b-saas/account-added-user",
+  "title": "Account Added User",
+  "description": "User is added to a group or account",
+  "type": "object",
+  "properties": {
+    "context": {
+      "type": "array",
+      "description": "The context array",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "description": "The id of the account being created/updated/deleted"
+        }
+      }
+    },
+    "role": {
+      "type": "string",
+      "description": "Permission group for the user"
+    }
+  },
+  "required": []
+}

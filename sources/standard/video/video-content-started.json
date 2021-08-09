@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/video/video-content-started",
+  "title": "Video Content Started",
+  "description": "The video content starts playing",
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "The unique ID of the overall session."
+    },
+    "content_asset_id": {
+      "type": "string",
+      "description": "Asset Id of the video playing/about to be played"
+    },
+    "content_pod_id": {
+      "type": "string",
+      "description": "Pod Id of the video playing/about to be played"
+    },
+    "title": {
+      "type": "string",
+      "description": "User's salutation"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of the video content."
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Arbitrary keywords/tags that describe/categorize the content."
+    },
+    "season": {
+      "type": "string",
+      "description": "The season number if applicable."
+    },
+    "episode": {
+      "type": "string",
+      "description": "The episode number if applicable."
+    },
+    "genre": {
+      "type": "string",
+      "description": "The genre of the content, ie. ‘comedy’, ‘action’."
+    },
+    "program": {
+      "type": "string",
+      "description": "The name of the program, show, etc. of the content if applicable."
+    },
+    "publisher": {
+      "type": "string",
+      "description": "The content creator, author, producer, or publisher."
+    },
+    "position": {
+      "type": "integer",
+      "description": "Position of product in the list"
+    },
+    "total_length": {
+      "type": "integer",
+      "description": "Total duration of the playback in seconds"
+    },
+    "channel": {
+      "type": "string",
+      "description": "The channel in which the video content is playing"
+    },
+    "full_episode": {
+      "type": "boolean",
+      "description": "true if content is a full episode and false otherwise."
+    },
+    "livestream": {
+      "type": "boolean",
+      "description": "True f the playback will be a livetream"
+    },
+    "airdate": {
+      "type": "string",
+      "description": "ISO 8601 Date String for the original air date or published date."
+    },
+    "bitrate": {
+      "type": "integer",
+      "description": "The current kbps."
+    },
+    "framerate": {
+      "type": "integer",
+      "description": "The average fps."
+    }
+  },
+  "required": []
+}

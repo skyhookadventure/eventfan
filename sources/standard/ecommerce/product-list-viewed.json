@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/product-list-viewed",
+  "title": "Product List Viewed",
+  "description": "User viewed a product list or category",
+  "type": "object",
+  "properties": {
+    "list_id": {
+      "type": "string",
+      "description": "Product list being viewed"
+    },
+    "category": {
+      "type": "string",
+      "description": "Product category being viewed"
+    },
+    "products": {
+      "type": "array",
+      "description": "Products displayed in the product list",
+      "items": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "Product ID displayed in the list"
+          },
+          "sku": {
+            "type": "string",
+            "description": "Product SKU displayed in the list"
+          },
+          "category": {
+            "type": "string",
+            "description": "Product Category displayed in the list"
+          },
+          "name": {
+            "type": "string",
+            "description": "Product Name displayed in the list"
+          },
+          "brand": {
+            "type": "string",
+            "description": "Product Brand displayed in the list"
+          },
+          "variant": {
+            "type": "string",
+            "description": "Product Variant displayed in the list"
+          },
+          "price": {
+            "type": "number",
+            "description": "Product Price displayed in the list"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Product quantity displayed in the list"
+          },
+          "coupon": {
+            "type": "string",
+            "description": "Coupon code associated with the product"
+          },
+          "position": {
+            "type": "number",
+            "description": "Position of product in the list"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the product page for product in the list"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image url of the product in the list"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "products"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/b2b-saas/account-created",
+  "title": "Account Created",
+  "description": "New account is created",
+  "type": "object",
+  "properties": {
+    "account_name": {
+      "type": "string",
+      "description": "The name of the account being created"
+    },
+    "context": {
+      "type": "array",
+      "description": "The context array",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "description": "The id of the account being created/updated/deleted"
+        }
+      }
+    }
+  },
+  "required": [
+    "account_name"
+  ]
+}

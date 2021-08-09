@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/mobile/push-notification-received",
+  "title": "Push Notification Received",
+  "description": "Push notification received by your app Collected automatically by iOS!",
+  "type": "object",
+  "properties": {
+    "push_campaign": {
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Push provider"
+        },
+        "name": {
+          "type": "string",
+          "description": "Campaign name"
+        },
+        "medium": {
+          "type": "string",
+          "description": "What type of link was pushed"
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the notification"
+        }
+      }
+    }
+  },
+  "required": []
+}

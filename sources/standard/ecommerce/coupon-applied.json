@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/coupon-applied",
+  "title": "Coupon Applied",
+  "description": "Coupon was applied on a user’s shopping cart or order",
+  "type": "object",
+  "properties": {
+    "order_id": {
+      "type": "string",
+      "description": "Order/transaction ID"
+    },
+    "cart_id": {
+      "type": "string",
+      "description": "Cart ID associated with the product displayed"
+    },
+    "coupon_id": {
+      "type": "string",
+      "description": "ID of the coupon"
+    },
+    "coupon_name": {
+      "type": "string",
+      "description": "Name of the coupon"
+    },
+    "discount": {
+      "type": "number",
+      "description": "Total discount associated with the transaction"
+    }
+  },
+  "required": [
+    "order_id",
+    "coupon_id"
+  ]
+}

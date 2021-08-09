@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/video/video-ad-started",
+  "title": "Video Ad Started",
+  "description": "The ad content starts playing",
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "The unique ID of the overall session."
+    },
+    "ad_asset_id": {
+      "type": "string",
+      "description": "The unique ID of the ad asset."
+    },
+    "ad_pod_id": {
+      "type": "string",
+      "description": "The unique ID of the ad pod."
+    },
+    "ad_type": {
+      "type": "string",
+      "description": "The ad type"
+    },
+    "ad_title": {
+      "type": "string",
+      "description": "The title of the video ad."
+    },
+    "ad_position": {
+      "type": "integer",
+      "description": "The current index position in seconds of the playhead with respect to the length of the ad."
+    },
+    "ad_pod_position": {
+      "type": "integer",
+      "description": "Position of the ad asset relative to other assets in the same pod."
+    },
+    "total_ad_length": {
+      "type": "integer",
+      "description": "The total duration of the current ad asset in seconds."
+    },
+    "ad_publisher": {
+      "type": "string",
+      "description": "The ad creator, author, producer, or publisher."
+    },
+    "ad_load_type": {
+      "type": "string",
+      "description": "Linear if ads are same for all users."
+    }
+  },
+  "required": []
+}

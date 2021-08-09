@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/video/video-playback-completed",
+  "title": "Video Playback Completed",
+  "description": "Playback is complete and only when the session is finished",
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "The unique ID of the overall session."
+    },
+    "content_asset_id": {
+      "type": "string",
+      "description": "Asset Id of the video playing/about to be played"
+    },
+    "content_pod_id": {
+      "type": "string",
+      "description": "Pod Id of the video playing/about to be played"
+    },
+    "position": {
+      "type": "integer",
+      "description": "Position of product in the list"
+    },
+    "total_length": {
+      "type": "integer",
+      "description": "Total duration of the playback in seconds"
+    },
+    "bitrate": {
+      "type": "integer",
+      "description": "The current kbps."
+    },
+    "framerate": {
+      "type": "integer",
+      "description": "The average fps."
+    },
+    "video_player": {
+      "type": "string",
+      "description": "The name of the video player (ie ‘youtube’, ‘vimeo’)."
+    },
+    "sound": {
+      "type": "integer",
+      "description": "The sound level of the playback"
+    },
+    "full_screen": {
+      "type": "boolean",
+      "description": "true if playback is in full screen mode"
+    },
+    "ad_enabled": {
+      "type": "boolean",
+      "description": "false if the user has any ad blockers"
+    },
+    "quality": {
+      "type": "string",
+      "description": "The quality of the video"
+    },
+    "livestream": {
+      "type": "boolean",
+      "description": "True f the playback will be a livetream"
+    }
+  },
+  "required": []
+}

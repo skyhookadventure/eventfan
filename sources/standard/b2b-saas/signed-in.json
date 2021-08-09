@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/b2b-saas/signed-in",
+  "title": "Signed In",
+  "description": "User signs in to your service",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "description": "The username of the user"
+    },
+    "context": {
+      "type": "array",
+      "description": "The context array",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "description": "The id of the account being created/updated/deleted"
+        }
+      }
+    }
+  },
+  "required": [
+    "username"
+  ]
+}

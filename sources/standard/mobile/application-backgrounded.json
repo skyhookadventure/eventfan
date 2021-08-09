@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/mobile/application-backgrounded",
+  "title": "Application Backgrounded",
+  "description": "User backgrounds the application upon applicationDidEnterBackground",
+  "type": "object",
+  "properties": {
+    "": {
+      "type": "",
+      "description": ""
+    }
+  },
+  "required": []
+}

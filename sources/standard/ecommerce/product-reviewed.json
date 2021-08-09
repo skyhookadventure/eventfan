@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/product-reviewed",
+  "title": "Product Reviewed",
+  "description": "User reviewed a product",
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string",
+      "description": "Database ID of the product"
+    },
+    "review_id": {
+      "type": "string",
+      "description": "ID of the review posted"
+    },
+    "review_body": {
+      "type": "string",
+      "description": "Content of the review"
+    },
+    "rating": {
+      "type": "integer",
+      "description": "Star rating"
+    }
+  },
+  "required": [
+    "product_id"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/promotion-viewed",
+  "title": "Promotion Viewed",
+  "description": "User viewed promotion",
+  "type": "object",
+  "properties": {
+    "promotion_id": {
+      "type": "string",
+      "description": "ID of the promotion"
+    },
+    "promotion_creative": {
+      "type": "string",
+      "description": "Description of promotion's creative"
+    },
+    "promotion_name": {
+      "type": "string",
+      "description": "Name of the promotion"
+    },
+    "promotion_position": {
+      "type": "string",
+      "description": "Position of the promotion"
+    }
+  },
+  "required": []
+}

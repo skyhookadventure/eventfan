@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/mobile/application-installed",
+  "title": "Application Installed",
+  "description": "User first opens your mobile app. Collected automatically!",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version installed"
+    },
+    "build": {
+      "type": "number",
+      "description": "Build number of the installed app"
+    }
+  },
+  "required": []
+}

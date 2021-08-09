@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/mobile/deep-link-clicked",
+  "title": "Deep Link Clicked",
+  "description": "User clicks on a deep link associated with your app",
+  "type": "object",
+  "properties": {
+    "deep_link_provider": {
+      "type": "string",
+      "description": "The deep link provider"
+    },
+    "deep_link_url": {
+      "type": "string",
+      "description": "The deep link url clicked"
+    }
+  },
+  "required": [
+    "deep_link_provider",
+    "deep_link_url"
+  ]
+}

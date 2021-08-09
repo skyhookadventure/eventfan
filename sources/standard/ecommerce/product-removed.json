@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/product-removed",
+  "title": "Product Removed",
+  "description": "User removed a product from their shopping cart",
+  "type": "object",
+  "properties": {
+    "cart_id": {
+      "type": "string",
+      "description": "Cart ID associated with the product displayed"
+    },
+    "product_id": {
+      "type": "string",
+      "description": "Database ID of the product"
+    },
+    "sku": {
+      "type": "string",
+      "description": "Sku of the product"
+    },
+    "category": {
+      "type": "string",
+      "description": "Product category being viewed"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the product"
+    },
+    "brand": {
+      "type": "string",
+      "description": "Brand of the product"
+    },
+    "variant": {
+      "type": "string",
+      "description": "Variant of the product"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price of the product"
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "Quantity of the product"
+    },
+    "coupon": {
+      "type": "string",
+      "description": "Coupon code associated with the product"
+    },
+    "position": {
+      "type": "integer",
+      "description": "Position of product in the list"
+    },
+    "url": {
+      "type": "string",
+      "description": "URL of the product page for product"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Image url of the product"
+    }
+  },
+  "required": [
+    "product_id",
+    "price"
+  ]
+}

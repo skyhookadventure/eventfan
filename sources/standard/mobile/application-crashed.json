@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eventfan.io/schemas/source/segment/mobile/application-crashed",
+  "title": "Application Crashed",
+  "description": "The application crashes.",
+  "type": "object",
+  "properties": {
+    "": {
+      "type": "",
+      "description": ""
+    }
+  },
+  "required": []
+}
