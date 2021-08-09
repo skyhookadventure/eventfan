@@ -11,12 +11,14 @@
     "test": "./node_modules/.bin/jest",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
-    "bump": "./node_modules/.bin/versiony package.json --patch"
+    "bump": "./node_modules/.bin/versiony package.json --patch",
+    "codegen": "ts-node ./src/sourceTypes/codegen.ts"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
+    "change-case": "^4.1.2",
     "eslint": "^7.16.0",
     "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-config-prettier": "^8.3.0",
@@ -24,7 +26,10 @@
     "eslint-plugin-prettier": "^3.1.2",
     "jest": "^27.0.6",
     "prettier": "^2.0.4",
+    "quicktype-core": "^6.0.70",
+    "recursive-readdir-sync": "^1.0.6",
     "ts-jest": "^27.0.4",
+    "ts-node": "^10.2.0",
     "typescript": "~4.3.5",
     "versiony-cli": "^1.3.0"
   },
@@ -47,4 +52,3 @@
   },
   "private": true
 }
-
