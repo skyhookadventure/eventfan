@@ -30,7 +30,7 @@ _Event specifications are defined with JSON Schemas. They can then be converted 
 Dart, Python, C#, Go, C++, Java, TypeScript, Swift, Objective-C, Elm, Pike, Prop-Types, Haskell, or any other language
 supported by [QuickType](https://github.com/quicktype/quicktype)._
 
-### 2. Map events to destination (Facebook Ads, Google Analytics..) using defaults or TypeScript snippets
+### 2. Map events to destinations (Facebook Ads, Google Analytics..) using defaults or TypeScript snippets
 
 Either use the default mappings (similar to RudderStack/Segment), or write your own:
 
