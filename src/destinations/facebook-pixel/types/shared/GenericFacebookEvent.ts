@@ -75,11 +75,12 @@ export interface GenericFacebookEvent {
  * product_group.
  */
 export enum ContentType {
-  Destination = "destination",
-  Flight = "flight",
-  Hotel = "hotel",
-  Product = "product",
-  ProductGroup = "product_group",
+  DESTINATION = "destination",
+  FLIGHT = "flight",
+  HOTEL = "hotel",
+  PRODUCT = "product",
+  PRODUCT_GROUP = "product_group",
+  APARTMENT = "apartment",
 }
 
 /**

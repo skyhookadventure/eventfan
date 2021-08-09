@@ -1,3 +1,4 @@
+import { Destination } from "./shared/Destination";
 import { GenericFacebookEvent } from "./shared/GenericFacebookEvent";
 
 /**
@@ -11,4 +12,5 @@ export type Search = Pick<
   | "currency"
   | "search_string"
   | "value"
->;
+> &
+  Destination;

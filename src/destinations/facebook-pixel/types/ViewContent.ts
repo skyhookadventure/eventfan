@@ -1,3 +1,4 @@
+import { Destination } from "./shared/Destination";
 import { GenericFacebookEvent } from "./shared/GenericFacebookEvent";
 
 /**
@@ -14,4 +15,5 @@ export type ViewContent = Pick<
   | "contents"
   | "currency"
   | "value"
->;
+> &
+  Destination;

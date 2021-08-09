@@ -1,3 +1,4 @@
+import { Destination } from "./shared/Destination";
 import { GenericFacebookEvent } from "./shared/GenericFacebookEvent";
 
 /**
@@ -12,4 +13,5 @@ export type InitiateCheckout = Pick<
   | "currency"
   | "num_items"
   | "value"
->;
+> &
+  Destination;
