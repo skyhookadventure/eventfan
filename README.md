@@ -36,7 +36,7 @@ Either use the default mappings (similar to RudderStack/Segment), or write your 
 
 ```typescript
 // Default "Order Completed" -> Facebook Pixel "Purchase" mapping
-export default function orderCompleted(
+export function orderCompleted(
   props: OrderCompleted
 ): DestinationEvent<Purchase> {
   return {
@@ -53,4 +53,20 @@ export default function orderCompleted(
     },
   };
 }
+
+// Or write your own...
+export function customOrderCompleted(
+  props: CustomOrderCompleted
+): DestinationEvent<FacebookDestination.Purchase> {
+  // ...
+}
+
+// ...and add it to your destination implementation
+FacebookDestination.addCustomMapping("Order Completed", customOrderCompleted);
 ```
+
+### 3. Trivial to add new analytics tools
+
+Have a tool you want to add?
+
+Match up the key operation names, add the types and then create some snippets for any event mappings you need.
