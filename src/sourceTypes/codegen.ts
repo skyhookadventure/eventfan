@@ -57,6 +57,8 @@ export default async function codegen(): Promise<void> {
 
   // Process each
   for (const path of filteredSourceFiles) {
+    console.log(path);
+
     const json = require(path);
     const typeName = pascalCase(json.title);
     console.log(typeName);
@@ -73,7 +75,6 @@ export default async function codegen(): Promise<void> {
       .replace(".json", ".ts");
 
     // Make the directory if it doesn't exist
-    console.log(dirname(typesPath));
     mkdirSync(dirname(typesPath), { recursive: true });
 
     // Write the types file
