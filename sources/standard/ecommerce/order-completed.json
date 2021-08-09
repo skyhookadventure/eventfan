@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/order-completed",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/order-completed",
   "title": "Order Completed",
   "description": "User completed the order",
   "type": "object",
@@ -96,15 +96,9 @@
           }
         },
         "type": "object",
-        "required": [
-          "product_id"
-        ]
+        "required": ["product_id"]
       }
     }
   },
-  "required": [
-    "order_id",
-    "revenue",
-    "products"
-  ]
+  "required": ["order_id", "revenue", "products"]
 }

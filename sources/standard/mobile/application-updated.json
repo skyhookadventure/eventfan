@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/mobile/application-updated",
+  "$id": "https://eventfan.io/schemas/sources/standard/mobile/application-updated",
   "title": "Application Updated",
   "description": "User updates the app Collected automatically!",
   "type": "object",

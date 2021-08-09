@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/mobile/push-notification-received",
+  "$id": "https://eventfan.io/schemas/sources/standard/mobile/push-notification-received",
   "title": "Push Notification Received",
   "description": "Push notification received by your app Collected automatically by iOS!",
   "type": "object",

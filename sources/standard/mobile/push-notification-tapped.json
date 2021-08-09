@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/mobile/push-notification-tapped",
+  "$id": "https://eventfan.io/schemas/sources/standard/mobile/push-notification-tapped",
   "title": "Push Notification Tapped",
   "description": "User taps push notification associated with your app Collected automatically by iOS!",
   "type": "object",

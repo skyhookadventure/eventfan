@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/payment-info-entered",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/payment-info-entered",
   "title": "Payment Info Entered",
   "description": "User added payment information",
   "type": "object",
@@ -26,7 +26,5 @@
       "description": "String representing the payment method chosen"
     }
   },
-  "required": [
-    "order_id"
-  ]
+  "required": ["order_id"]
 }

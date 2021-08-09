@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/product-list-viewed",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/product-list-viewed",
   "title": "Product List Viewed",
   "description": "User viewed a product list or category",
   "type": "object",
@@ -68,13 +68,9 @@
           }
         },
         "type": "object",
-        "required": [
-          "product_id"
-        ]
+        "required": ["product_id"]
       }
     }
   },
-  "required": [
-    "products"
-  ]
+  "required": ["products"]
 }

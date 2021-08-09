@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/product-removed-from-wishlist",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/product-removed-from-wishlist",
   "title": "Product Removed from Wishlist",
   "description": "User removed a product from the wish list",
   "type": "object",
@@ -62,9 +62,5 @@
       "description": "Image url of the product"
     }
   },
-  "required": [
-    "wishlist_id",
-    "product_id",
-    "price"
-  ]
+  "required": ["wishlist_id", "product_id", "price"]
 }

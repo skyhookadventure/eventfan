@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/product-reviewed",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/product-reviewed",
   "title": "Product Reviewed",
   "description": "User reviewed a product",
   "type": "object",
@@ -22,7 +22,5 @@
       "description": "Star rating"
     }
   },
-  "required": [
-    "product_id"
-  ]
+  "required": ["product_id"]
 }

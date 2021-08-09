@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/b2b-saas/account-removed-user",
+  "$id": "https://eventfan.io/schemas/sources/standard/b2b-saas/account-removed-user",
   "title": "Account Removed User",
   "description": "User is removed from a group or account",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/coupon-denied",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/coupon-denied",
   "title": "Coupon Denied",
   "description": "Coupon was denied from a user’s shopping cart or order",
   "type": "object",
@@ -26,8 +26,5 @@
       "description": "Reason the coupon was denied"
     }
   },
-  "required": [
-    "order_id",
-    "coupon_id"
-  ]
+  "required": ["order_id", "coupon_id"]
 }

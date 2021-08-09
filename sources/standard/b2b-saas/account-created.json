@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/b2b-saas/account-created",
+  "$id": "https://eventfan.io/schemas/sources/standard/b2b-saas/account-created",
   "title": "Account Created",
   "description": "New account is created",
   "type": "object",
@@ -20,7 +20,5 @@
       }
     }
   },
-  "required": [
-    "account_name"
-  ]
+  "required": ["account_name"]
 }

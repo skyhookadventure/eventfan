@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/b2b-saas/trial-ended",
+  "$id": "https://eventfan.io/schemas/sources/standard/b2b-saas/trial-ended",
   "title": "Trial Ended",
   "description": "Trial is ended",
   "type": "object",
@@ -28,8 +28,5 @@
       }
     }
   },
-  "required": [
-    "trial_start_date",
-    "trial_end_date"
-  ]
+  "required": ["trial_start_date", "trial_end_date"]
 }

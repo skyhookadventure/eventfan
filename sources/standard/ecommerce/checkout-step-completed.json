@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/checkout-step-completed",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/checkout-step-completed",
   "title": "Checkout Step Completed",
   "description": "User completed a checkout step",
   "type": "object",

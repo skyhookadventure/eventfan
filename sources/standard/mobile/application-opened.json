@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/mobile/application-opened",
+  "$id": "https://eventfan.io/schemas/sources/standard/mobile/application-opened",
   "title": "Application Opened",
   "description": "User launches or foregrounds your mobile app after the first open Collected Automatically!",
   "type": "object",

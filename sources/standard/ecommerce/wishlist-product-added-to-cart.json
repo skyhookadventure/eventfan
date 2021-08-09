@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/wishlist-product-added-to-cart",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/wishlist-product-added-to-cart",
   "title": "Wishlist Product Added to Cart",
   "description": "User added a wishlist product to the cart",
   "type": "object",
@@ -66,9 +66,5 @@
       "description": "Image url of the product"
     }
   },
-  "required": [
-    "wishlist_id",
-    "product_id",
-    "price"
-  ]
+  "required": ["wishlist_id", "product_id", "price"]
 }

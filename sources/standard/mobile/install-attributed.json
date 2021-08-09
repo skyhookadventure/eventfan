@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/mobile/install-attributed",
+  "$id": "https://eventfan.io/schemas/sources/standard/mobile/install-attributed",
   "title": "Install Attributed",
   "description": "Segment or an integrated partner can discern the source of an install",
   "type": "object",

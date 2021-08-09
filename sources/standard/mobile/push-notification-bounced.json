@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/mobile/push-notification-bounced",
+  "$id": "https://eventfan.io/schemas/sources/standard/mobile/push-notification-bounced",
   "title": "Push Notification Bounced",
   "description": "Push notification from a provider bounces",
   "type": "object",

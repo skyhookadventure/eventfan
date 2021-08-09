@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/b2b-saas/signed-up",
+  "$id": "https://eventfan.io/schemas/sources/standard/b2b-saas/signed-up",
   "title": "Signed Up",
   "description": "User signs up for your service",
   "type": "object",
@@ -44,8 +44,5 @@
       "description": "User's salutation"
     }
   },
-  "required": [
-    "username",
-    "email"
-  ]
+  "required": ["username", "email"]
 }

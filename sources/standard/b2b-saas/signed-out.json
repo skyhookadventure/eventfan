@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/b2b-saas/signed-out",
+  "$id": "https://eventfan.io/schemas/sources/standard/b2b-saas/signed-out",
   "title": "Signed Out",
   "description": "User signs out for your service",
   "type": "object",
@@ -20,7 +20,5 @@
       }
     }
   },
-  "required": [
-    "username"
-  ]
+  "required": ["username"]
 }

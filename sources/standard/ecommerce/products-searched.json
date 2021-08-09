@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/products-searched",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/products-searched",
   "title": "Products Searched",
   "description": "User searched for products",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/video/video-ad-started",
+  "$id": "https://eventfan.io/schemas/sources/standard/video/video-ad-started",
   "title": "Video Ad Started",
   "description": "The ad content starts playing",
   "type": "object",

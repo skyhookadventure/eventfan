@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/coupon-entered",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/coupon-entered",
   "title": "Coupon Entered",
   "description": "User entered a coupon on a shopping cart or order",
   "type": "object",
@@ -22,8 +22,5 @@
       "description": "Name of the coupon"
     }
   },
-  "required": [
-    "order_id",
-    "coupon_id"
-  ]
+  "required": ["order_id", "coupon_id"]
 }

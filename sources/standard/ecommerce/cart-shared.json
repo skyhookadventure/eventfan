@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/cart-shared",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/cart-shared",
   "title": "Cart Shared",
   "description": "Shared the cart with one or more friends",
   "type": "object",
@@ -32,14 +32,9 @@
           }
         },
         "type": "object",
-        "required": [
-          "product_id"
-        ]
+        "required": ["product_id"]
       }
     }
   },
-  "required": [
-    "share_via",
-    "products"
-  ]
+  "required": ["share_via", "products"]
 }

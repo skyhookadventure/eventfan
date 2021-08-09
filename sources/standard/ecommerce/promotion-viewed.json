@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/promotion-viewed",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/promotion-viewed",
   "title": "Promotion Viewed",
   "description": "User viewed promotion",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/source/segment/ecommerce/product-clicked",
+  "$id": "https://eventfan.io/schemas/sources/standard/ecommerce/product-clicked",
   "title": "Product Clicked",
   "description": "User clicked on a product",
   "type": "object",
@@ -58,8 +58,5 @@
       "description": "Image url of the product"
     }
   },
-  "required": [
-    "product_id",
-    "price"
-  ]
+  "required": ["product_id", "price"]
 }
