@@ -4,11 +4,5 @@
   "title": "Application Uninstalled",
   "description": "User uninstalls the application Often collected automatically!",
   "type": "object",
-  "properties": {
-    "": {
-      "type": "",
-      "description": ""
-    }
-  },
   "required": []
 }

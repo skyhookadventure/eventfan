@@ -4,11 +4,5 @@
   "title": "Application Crashed",
   "description": "The application crashes.",
   "type": "object",
-  "properties": {
-    "": {
-      "type": "",
-      "description": ""
-    }
-  },
   "required": []
 }

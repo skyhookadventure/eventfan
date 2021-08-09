@@ -14,8 +14,7 @@
       "description": "The value of UIApplicationLaunchOptionsURLKey from launchOptions (auto-collected on iOS only)"
     },
     "referring_application": {
-      "type": "",
-      "description": ""
+      "type": "string"
     },
     "version": {
       "type": "string",

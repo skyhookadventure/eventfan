@@ -4,11 +4,5 @@
   "title": "Application Backgrounded",
   "description": "User backgrounds the application upon applicationDidEnterBackground",
   "type": "object",
-  "properties": {
-    "": {
-      "type": "",
-      "description": ""
-    }
-  },
   "required": []
 }
