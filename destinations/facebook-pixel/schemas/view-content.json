@@ -1,0 +1,81 @@
+{
+  "$id": "https://eventfan.io/schemas/destinations/facebook-pixel/view-content",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A visit to a web page you care about (for example, a product page or landing page). ViewContent tells you if someone visits a web page's URL, but not what they see or do on that page. A person lands on a product details page.",
+  "properties": {
+    "city": {
+      "description": "city, don't use abbreviations",
+      "type": "string"
+    },
+    "content_category": {
+      "description": "Category of the page/product.",
+      "type": "string"
+    },
+    "content_ids": {
+      "description": "Product IDs associated with the event, such as SKUs (e.g. ['ABC123', 'XYZ789']).",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "content_name": {
+      "description": "Name of the page/product.",
+      "type": "string"
+    },
+    "content_type": {
+      "description": "Either product or product_group based on the content_ids or contents being passed. If the IDs being passed in content_ids or contents parameter are IDs of products then the value should be product. If product group IDs are being passed, then the value should be product_group.",
+      "enum": ["destination", "flight", "hotel", "product_group", "product"],
+      "type": "string"
+    },
+    "contents": {
+      "description": "An array of JSON objects that contains the quantity and the International Article Number (EAN) when applicable, or other product or content identifier(s). id and quantity are the required fields. e.g. [{'id': 'ABC123', 'quantity': 2}, {'id': 'XYZ789', 'quantity': 2}].",
+      "items": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        },
+        "required": ["id", "quantity"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "country": {
+      "description": "country, don't use abbreviations",
+      "type": "string"
+    },
+    "currency": {
+      "description": "The currency for the value specified.",
+      "type": "string"
+    },
+    "num_adults": {
+      "description": "number of adults",
+      "type": "integer"
+    },
+    "num_children": {
+      "description": "number of children",
+      "type": "integer"
+    },
+    "region": {
+      "description": "region, don't use abbreviations",
+      "type": "string"
+    },
+    "travel_end": {
+      "description": "use YYYYMMDD, YYYY-MM-DD, YYYY-MM-DDThh:mmTZD or YYYY-MM-DDThh:mm:ssTZD",
+      "type": "string"
+    },
+    "travel_start": {
+      "description": "Allows you to target people based on their travel dates (using a booking window). Improves the landing experience with travel dates filled in (using template tags) use YYYYMMDD, YYYY-MM-DD, YYYY-MM-DDThh:mmTZD or YYYY-MM-DDThh:mm:ssTZD",
+      "type": "string"
+    },
+    "value": {
+      "description": "The value of a user performing this event to the business.",
+      "type": "number"
+    }
+  },
+  "title": "ViewContent",
+  "type": "object"
+}

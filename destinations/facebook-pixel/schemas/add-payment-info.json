@@ -1,0 +1,44 @@
+{
+  "$id": "https://eventfan.io/schemas/destinations/facebook-pixel/add-payment-info",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "When payment information is added in the checkout flow. A person clicks on a save billing information button.",
+  "properties": {
+    "content_category": {
+      "description": "Category of the page/product.",
+      "type": "string"
+    },
+    "content_ids": {
+      "description": "Product IDs associated with the event, such as SKUs (e.g. ['ABC123', 'XYZ789']).",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "contents": {
+      "description": "An array of JSON objects that contains the quantity and the International Article Number (EAN) when applicable, or other product or content identifier(s). id and quantity are the required fields. e.g. [{'id': 'ABC123', 'quantity': 2}, {'id': 'XYZ789', 'quantity': 2}].",
+      "items": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        },
+        "required": ["id", "quantity"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "currency": {
+      "description": "The currency for the value specified.",
+      "type": "string"
+    },
+    "value": {
+      "description": "The value of a user performing this event to the business.",
+      "type": "number"
+    }
+  },
+  "title": "AddPaymentInfo",
+  "type": "object"
+}
