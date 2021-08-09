@@ -1,5 +1,0 @@
-src/
-.cdk.staging
-cdk.out
-coverage
-yarn.lock
