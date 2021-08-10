@@ -5,7 +5,7 @@ typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](htt
 
 Send tracking/analytics events to multiple destinations (Google Analytics, Facebook, Rudderstack...), with TypeScript.
 
-## Quickstart
+## Quick Start
 
 ```typescript
 import EventFan, { FacebookPixel, Ecommerce } from "event-fan";
