@@ -3,7 +3,37 @@
 [![Built with
 typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
 
-Send tracking/analytics events to multiple destinations (Google Analytics, Facebook, Rudderstack...).
+Send tracking/analytics events to multiple destinations (Google Analytics, Facebook, Rudderstack...), with TypeScript.
+
+## Quickstart
+
+```typescript
+import EventFan, { FacebookPixel, Ecommerce } from "event-fan";
+
+// Initialise your client
+const eventFan = new EventFan({
+  destinations: [
+    // Any destinations you want here
+    new FacebookPixel("your-facebook-key"),
+  ],
+});
+
+// Identify if a user is logged in
+eventFan.identify({
+  first_name: "First name",
+});
+
+// Track an event
+// Uses a standard (typed) format
+// The properties will automatically be mapped to the corresponding destination formats
+eventFan.track<Ecommerce.OrderCompleted>({
+  eventName: "Order Completed",
+  props: {
+    order_id: "order_UUID",
+    // ...
+  },
+});
+```
 
 ## Key features
 
