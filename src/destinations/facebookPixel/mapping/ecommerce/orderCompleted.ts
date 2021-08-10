@@ -1,14 +1,14 @@
-import { OrderCompleted } from "../../../../../sourceEvents/standard/ecommerce/order-completed";
-import { DestinationEvent } from "../../../../DestinationEvent";
+import { OrderCompleted } from "../../../../sourceEvents/ecommerce/OrderCompleted";
+import { TEvent } from "../../../../types/TrackEvent";
 import { Purchase } from "../../types/Purchase";
 import { ContentType } from "../../types/shared/GenericFacebookEvent";
 
-export default function orderCompleted(
-  props: OrderCompleted
-): DestinationEvent<Purchase> {
+export default function orderCompleted({
+  props,
+}: OrderCompleted): TEvent<"Purchase", Purchase> {
   return {
-    name: "Purchase",
-    properties: {
+    eventName: "Purchase",
+    props: {
       content_ids: props.products.map((product) => product.product_id),
       content_type: ContentType.PRODUCT,
       contents: props.products.map((product) => ({

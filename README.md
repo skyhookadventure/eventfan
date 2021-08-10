@@ -1,47 +1,55 @@
 # Event Fan
 
-Send tracking/analytics events to multiple destinations (Google Analytics, Facebook, Rudderstack...).
-
 [![Built with
 typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
+
+Send tracking/analytics events to multiple destinations (Google Analytics, Facebook, Rudderstack...).
 
 ## Key features
 
 ### 1. Emit Type-Safe Events
 
-Emit default events (e.g. "Order Completed") from the
-RudderStack/Segment specifications, or use your own custom typings.
-
-Then run the codegen to create your unique client, so that you can run e.g.
+Use the included event types (e.g. "Order Completed") from the
+RudderStack/Segment specifications, or create your own custom typings.
 
 ```typescript
-// TypeScript
-eventFan.ecommerce.orderCompleted({
-    order_id: string;
+// Example standard event
+eventFan.track<Ecommerce.OrderCompleted>({
+  eventName: "Order Completed",
+  props: {
+    order_id: "order_UUID",
     products: [{
-        product_id: string;
+        product_id: "product_UUID",
         // ...
     }]
     // ...
+  }
 })
+
+// Example custom event
+type CustomEvent = TEvent<"Custom Event Name", {
+  iceCream: string;
+}>
+eventFan.track<CustomEvent>({
+  eventName: "Custom Event Name", {
+    icCream: "vanilla"
+  }
+})
+
 ```
 
-_Event specifications are defined with JSON Schemas. They can then be converted into types for Ruby, JavaScript, Flow, Rust, Kotlin,
-Dart, Python, C#, Go, C++, Java, TypeScript, Swift, Objective-C, Elm, Pike, Prop-Types, Haskell, or any other language
-supported by [QuickType](https://github.com/quicktype/quicktype)._
-
-### 2. Map events to destinations (Facebook Ads, Google Analytics..) using defaults or TypeScript snippets
+### 2. Map events to destination event (Facebook Ads, Google Analytics..), with sensible defaults
 
 Either use the default mappings (similar to RudderStack/Segment), or write your own:
 
 ```typescript
 // Default "Order Completed" -> Facebook Pixel "Purchase" mapping
-export function orderCompleted(
-  props: OrderCompleted
-): DestinationEvent<Purchase> {
+export default function orderCompleted({
+  props,
+}: OrderCompleted): TEvent<"Purchase", Purchase> {
   return {
-    name: "Purchase",
-    properties: {
+    eventName: "Purchase",
+    props: {
       content_ids: props.products.map((product) => product.product_id),
       content_type: ContentType.PRODUCT,
       contents: props.products.map((product) => ({
@@ -55,18 +63,30 @@ export function orderCompleted(
 }
 
 // Or write your own...
-export function customOrderCompleted(
-  props: CustomOrderCompleted
-): DestinationEvent<FacebookDestination.Purchase> {
-  // ...
+export function customOrderCompleted({
+  props,
+}: CustomOrderCompleted): TEvent<"Purchase", Purchase> {
+  // E.g. start with the default mapping
+  const defaults = FacebookPixel.orderCompleted({ props });
+  return {
+    ...props,
+    // And change the content type to always be a travel destination
+    content_type: FacebookPixel.ContentType.DESTINATION,
+  };
 }
-
-// ...and add it to your destination implementation
-FacebookDestination.addCustomMapping("Order Completed", customOrderCompleted);
+facebookPixel.mapping["Order Completed"] = customOrderCompleted;
 ```
 
-### 3. Trivial to add new analytics tools
+### 3. Extend with new destinations
 
-Have a tool you want to add?
+Have a new destination you want to add? Simply implement the `Destination` class:
 
-Match up the key operation names, add the types and then create some snippets for any event mappings you need.
+```typescript
+class CustomDestination implements Destination {
+  initialise(): void {
+    destinationNodeModule.initialise(this.eventKey);
+  }
+
+  // ...
+}
+```

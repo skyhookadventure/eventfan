@@ -11,7 +11,15 @@ interface EventFanProps {
 /**
  * Event Fan
  *
- * Send your analytics/tracking events to multiple destinations
+ * Send your analytics/tracking events to multiple destinations.
+ *
+ * @example
+ * // Initialise
+ * const client = new EventFan({
+ *   destinations: [
+ *     new FacebookPixel("YOUR_PIXEL_ID")
+ *   ]
+ * })
  */
 export default class EventFan {
   private user?: IdentifyProps;
