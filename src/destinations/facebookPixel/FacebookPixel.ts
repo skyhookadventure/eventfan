@@ -3,6 +3,7 @@ import { IdentifyProps } from "../../types/IdentifyProps";
 import { TEvent } from "../../types/TrackEvent";
 import Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
+import loadScript from "../loadScript";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
 
@@ -33,8 +34,11 @@ export default class FacebookPixel implements Destination {
     this.fb("init", "PageView", traits);
   }
 
-  initialise(): void {
-    // TODO load the script
+  async initialise(): Promise<void> {
+    await loadScript(
+      "facebook-pixel-integration",
+      "https://connect.facebook.net/en_US/fbevents.js"
+    );
     this.fb("init", this.pixelID);
   }
 

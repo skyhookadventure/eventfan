@@ -1,7 +1,7 @@
 /**
  * Helper to load a script in the browser
  */
-export default async function scriptLoader(
+export default async function loadScript(
   id: string,
   url: string
 ): Promise<void> {
