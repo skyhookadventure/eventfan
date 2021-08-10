@@ -60,11 +60,14 @@ export default abstract class Destination {
    *
    * Note __no transformations of the event payload should be done here__ (e.g. changing property names) as that should be
    * done with the event mappings.
+   *
+   * @returns Promise that resolves once the underlying tracking call has been completed (allows the user to await a
+   * `track()` call and then do something once all underlying destinations have completed).
    */
   abstract track: <EventType extends TEvent>(
     event: EventType,
     userProps?: IdentifyProps
-  ) => void;
+  ) => Promise<void>;
 
   /**
    * Identify
