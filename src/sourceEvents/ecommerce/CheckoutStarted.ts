@@ -1,5 +1,5 @@
 import { Product } from "./shared/Product";
-import { TEvent } from "../../../types/TrackEvent";
+import { TEvent } from "../../types/TrackEvent";
 
 interface CheckoutStartedProps {
   /**

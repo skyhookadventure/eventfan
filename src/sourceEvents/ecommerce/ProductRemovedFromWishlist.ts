@@ -1,4 +1,4 @@
-import { TEvent } from "../../../types/TrackEvent";
+import { TEvent } from "../../types/TrackEvent";
 
 interface ProductRemovedFromWishlistProps {
   /**
