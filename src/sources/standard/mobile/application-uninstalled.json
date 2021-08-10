@@ -1,8 +1,0 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eventfan.io/schemas/sources/standard/mobile/application-uninstalled",
-  "title": "Application Uninstalled",
-  "description": "User uninstalls the application Often collected automatically!",
-  "type": "object",
-  "required": []
-}

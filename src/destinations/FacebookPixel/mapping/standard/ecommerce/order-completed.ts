@@ -1,4 +1,4 @@
-import { OrderCompleted } from "../../../../../sourceTypes/standard/ecommerce/order-completed";
+import { OrderCompleted } from "../../../../../sourceEvents/standard/ecommerce/order-completed";
 import { DestinationEvent } from "../../../../DestinationEvent";
 import { Purchase } from "../../../types/Purchase";
 import { ContentType } from "../../../types/shared/GenericFacebookEvent";
