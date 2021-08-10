@@ -1,7 +1,6 @@
-/**
- * Coupon was denied from a user’s shopping cart or order
- */
-export interface CouponDenied {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface CouponDeniedProps {
   /**
    * Cart ID associated with the product displayed
    */
@@ -23,3 +22,8 @@ export interface CouponDenied {
    */
   reason?: string;
 }
+
+/**
+ * Coupon was denied from a user’s shopping cart or order
+ */
+export type CouponDenied = TEvent<"Coupon Denied", CouponDeniedProps>;

@@ -1,7 +1,6 @@
-/**
- * User clicked on promotion
- */
-export interface PromotionClicked {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface PromotionClickedProps {
   /**
    * Description of promotion's creative
    */
@@ -19,3 +18,11 @@ export interface PromotionClicked {
    */
   promotion_position?: string;
 }
+
+/**
+ * User clicked on promotion
+ */
+export type PromotionClicked = TEvent<
+  "Promotion Clicked",
+  PromotionClickedProps
+>;

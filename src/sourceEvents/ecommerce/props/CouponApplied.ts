@@ -1,7 +1,6 @@
-/**
- * User removed a coupon from a cart or order
- */
-export interface CouponRemoved {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface CouponAppliedProps {
   /**
    * Cart ID associated with the product displayed
    */
@@ -23,3 +22,8 @@ export interface CouponRemoved {
    */
   order_id: string;
 }
+
+/**
+ * Coupon was applied on a user’s shopping cart or order
+ */
+export type CouponApplied = TEvent<"Coupon Applied", CouponAppliedProps>;

@@ -1,7 +1,6 @@
-/**
- * User added payment information
- */
-export interface PaymentInfoEntered {
+import { TEvent } from "../../../types/TrackEvent";
+
+export interface PaymentInfoEnteredProps {
   /**
    * Checkout transaction ID
    */
@@ -23,3 +22,11 @@ export interface PaymentInfoEntered {
    */
   step?: number;
 }
+
+/**
+ * User added payment information
+ */
+export type PaymentInfoEntered = TEvent<
+  "Payment Info Entered",
+  PaymentInfoEnteredProps
+>;

@@ -1,7 +1,6 @@
-/**
- * User added a product to the wish list
- */
-export interface ProductAddedToWishlist {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface ProductRemovedFromWishlistProps {
   /**
    * Brand of the product
    */
@@ -59,3 +58,11 @@ export interface ProductAddedToWishlist {
    */
   wishlist_name?: string;
 }
+
+/**
+ * User removed a product from the wish list
+ */
+export type ProductRemovedFromWishlist = TEvent<
+  "Product Removed From Wishlist",
+  ProductRemovedFromWishlistProps
+>;

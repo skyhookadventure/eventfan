@@ -1,15 +1,22 @@
-/**
- * Shared a product with one or more friends
- */
-export interface ProductShared {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface ProductViewedProps {
   /**
    * Brand of the product
    */
   brand?: string;
   /**
+   * Cart ID associated with the product displayed
+   */
+  cart_id?: string;
+  /**
    * Product category being viewed
    */
   category?: string;
+  /**
+   * Coupon code associated with the product
+   */
+  coupon?: string;
   /**
    * Image url of the product
    */
@@ -19,6 +26,10 @@ export interface ProductShared {
    */
   name?: string;
   /**
+   * Position of product in the list
+   */
+  position?: number;
+  /**
    * Price of the product
    */
   price: number;
@@ -27,17 +38,9 @@ export interface ProductShared {
    */
   product_id: string;
   /**
-   * Recipient of the sharing
+   * Quantity of the product
    */
-  recipient?: string;
-  /**
-   * Message that the sender sent
-   */
-  share_message?: string;
-  /**
-   * Method of sharing
-   */
-  share_via: string;
+  quantity?: number;
   /**
    * Sku of the product
    */
@@ -51,3 +54,8 @@ export interface ProductShared {
    */
   variant?: string;
 }
+
+/**
+ * User viewed a product details
+ */
+export type ProductViewed = TEvent<"Product Viewed", ProductViewedProps>;

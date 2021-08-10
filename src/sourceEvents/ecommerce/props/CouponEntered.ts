@@ -1,7 +1,6 @@
-/**
- * User entered a coupon on a shopping cart or order
- */
-export interface CouponEntered {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface CouponEnteredProps {
   /**
    * Cart ID associated with the product displayed
    */
@@ -19,3 +18,8 @@ export interface CouponEntered {
    */
   order_id: string;
 }
+
+/**
+ * User entered a coupon on a shopping cart or order
+ */
+export type CouponEntered = TEvent<"Coupon Entered", CouponEnteredProps>;

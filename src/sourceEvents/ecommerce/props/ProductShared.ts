@@ -1,23 +1,14 @@
-/**
- * User removed a product from their shopping cart
- */
-export interface ProductRemoved {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface ProductSharedProps {
   /**
    * Brand of the product
    */
   brand?: string;
   /**
-   * Cart ID associated with the product displayed
-   */
-  cart_id?: string;
-  /**
    * Product category being viewed
    */
   category?: string;
-  /**
-   * Coupon code associated with the product
-   */
-  coupon?: string;
   /**
    * Image url of the product
    */
@@ -27,10 +18,6 @@ export interface ProductRemoved {
    */
   name?: string;
   /**
-   * Position of product in the list
-   */
-  position?: number;
-  /**
    * Price of the product
    */
   price: number;
@@ -39,9 +26,17 @@ export interface ProductRemoved {
    */
   product_id: string;
   /**
-   * Quantity of the product
+   * Recipient of the sharing
    */
-  quantity?: number;
+  recipient?: string;
+  /**
+   * Message that the sender sent
+   */
+  share_message?: string;
+  /**
+   * Method of sharing
+   */
+  share_via: string;
   /**
    * Sku of the product
    */
@@ -55,3 +50,8 @@ export interface ProductRemoved {
    */
   variant?: string;
 }
+
+/**
+ * Shared a product with one or more friends
+ */
+export type ProductShared = TEvent<"Product Shared", ProductSharedProps>;

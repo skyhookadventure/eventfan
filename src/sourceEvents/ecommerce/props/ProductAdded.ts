@@ -1,7 +1,6 @@
-/**
- * User viewed a product details
- */
-export interface ProductViewed {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface ProductAddedProps {
   /**
    * Brand of the product
    */
@@ -55,3 +54,8 @@ export interface ProductViewed {
    */
   variant?: string;
 }
+
+/**
+ * User added a product to their shopping cart
+ */
+export type ProductAdded = TEvent<"Product Added", ProductAddedProps>;

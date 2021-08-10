@@ -1,11 +1,14 @@
-/**
- * User removed a product from the wish list
- */
-export interface ProductRemovedFromWishlist {
+import { TEvent } from "../../../types/TrackEvent";
+
+export interface ProductClickedProps {
   /**
    * Brand of the product
    */
   brand?: string;
+  /**
+   * Cart ID associated with the product displayed
+   */
+  cart_id?: string;
   /**
    * Product category being viewed
    */
@@ -50,12 +53,9 @@ export interface ProductRemovedFromWishlist {
    * Variant of the product
    */
   variant?: string;
-  /**
-   * Wishlist ID to which the product was added
-   */
-  wishlist_id: string;
-  /**
-   * Wishlist name to which the product was added
-   */
-  wishlist_name?: string;
 }
+
+/**
+ * User clicked on a product
+ */
+export type ProductClicked = TEvent<"Product Clicked", ProductClickedProps>;

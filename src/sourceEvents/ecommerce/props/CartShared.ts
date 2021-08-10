@@ -1,7 +1,7 @@
-/**
- * Shared the cart with one or more friends
- */
-export interface CartShared {
+import { TEvent } from "../../../types/TrackEvent";
+import { Product } from "./shared/Product";
+
+interface CartSharedProps {
   /**
    * Cart ID associated with the product displayed
    */
@@ -24,9 +24,7 @@ export interface CartShared {
   share_via: string;
 }
 
-export interface Product {
-  /**
-   * Product ID displayed in the list
-   */
-  product_id: string;
-}
+/**
+ * Shared the cart with one or more friends
+ */
+export type CartShared = TEvent<"Cart Shared", CartSharedProps>;

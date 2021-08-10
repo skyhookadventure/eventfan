@@ -6,7 +6,7 @@
  *
  * _Note this is named as TEvent to avoid clashing with the DOM type `TrackEvent`._
  */
-export type TEvent<Properties = any> = {
-  eventName: string;
+export type TEvent<EventName = string, Properties = any> = {
+  eventName: EventName;
   props: Properties;
 };

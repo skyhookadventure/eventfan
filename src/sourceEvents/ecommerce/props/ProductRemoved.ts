@@ -1,7 +1,6 @@
-/**
- * User clicked on a product
- */
-export interface ProductClicked {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface ProductRemovedProps {
   /**
    * Brand of the product
    */
@@ -55,3 +54,8 @@ export interface ProductClicked {
    */
   variant?: string;
 }
+
+/**
+ * User removed a product from their shopping cart
+ */
+export type ProductRemoved = TEvent<"Product Removed", ProductRemovedProps>;

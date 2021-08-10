@@ -1,7 +1,6 @@
-/**
- * User viewed a checkout step
- */
-export interface CheckoutStepViewed {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface CheckoutStepViewedProps {
   /**
    * Checkout transaction ID
    */
@@ -19,3 +18,11 @@ export interface CheckoutStepViewed {
    */
   step?: number;
 }
+
+/**
+ * User viewed a checkout step
+ */
+export type CheckoutStepViewed = TEvent<
+  "Checkout Step Viewed",
+  CheckoutStepViewedProps
+>;

@@ -1,7 +1,6 @@
-/**
- * User reviewed a product
- */
-export interface ProductReviewed {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface ProductReviewedProps {
   /**
    * Database ID of the product
    */
@@ -19,3 +18,8 @@ export interface ProductReviewed {
    */
   review_id?: string;
 }
+
+/**
+ * User reviewed a product
+ */
+export type ProductReviewed = TEvent<"Product Reviewed", ProductReviewedProps>;

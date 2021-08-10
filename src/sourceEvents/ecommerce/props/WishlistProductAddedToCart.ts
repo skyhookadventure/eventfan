@@ -1,7 +1,6 @@
-/**
- * User added a product to their shopping cart
- */
-export interface ProductAdded {
+import { TEvent } from "../../../types/TrackEvent";
+
+interface WishlistProductAddedToCartProps {
   /**
    * Brand of the product
    */
@@ -54,4 +53,20 @@ export interface ProductAdded {
    * Variant of the product
    */
   variant?: string;
+  /**
+   * Wishlist ID to which the product was added
+   */
+  wishlist_id: string;
+  /**
+   * Wishlist name to which the product was added
+   */
+  wishlist_name?: string;
 }
+
+/**
+ * User added a wishlist product to the cart
+ */
+export type WishlistProductAddedToCart = TEvent<
+  "Wishlist Product Added To Cart",
+  WishlistProductAddedToCartProps
+>;
