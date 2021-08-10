@@ -33,7 +33,10 @@ export default abstract class Destination {
    * Mappings can be overwritten by the user, to customise them.
    */
   public eventMappings: {
-    [eventName: string]: (trackEvent: TEvent, user?: IdentifyProps) => TEvent;
+    [eventName: string]: (
+      trackEvent: TEvent<any>,
+      user?: IdentifyProps
+    ) => TEvent;
   } = {};
 
   /**
@@ -48,7 +51,7 @@ export default abstract class Destination {
    *
    * Load the provider script if a browser-based plugin, or e.g. initialise an node module.
    */
-  abstract initialise: () => void;
+  abstract initialise: () => void | Promise<void>;
 
   /**
    * Is Loaded

@@ -3,6 +3,7 @@ import { IdentifyProps } from "../../types/IdentifyProps";
 import { TEvent } from "../../types/TrackEvent";
 import Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
+import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
 
 export default class FacebookPixel implements Destination {
@@ -10,7 +11,9 @@ export default class FacebookPixel implements Destination {
 
   constructor(private pixelID: string) {}
 
-  eventMappings = {};
+  eventMappings = {
+    "Order Completed": orderCompleted,
+  };
 
   identify(user: IdentifyProps): void {
     const traits: AdvancedMatching = {
