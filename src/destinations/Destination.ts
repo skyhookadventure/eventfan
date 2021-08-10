@@ -48,9 +48,11 @@ export default abstract class Destination {
    *
    * It is recommended that these are defined outside of the class file, in a `/eventMappings` directory and then
    * imported into your class.
+   *
+   * Mappings can be overwritten by the user, to customise them.
    */
   public eventMappings: {
-    [eventName: string]: (e: TEvent) => TEvent;
+    [eventName: string]: (trackEvent: TEvent, user?: IdentifyProps) => TEvent;
   } = {};
 
   /**
@@ -64,17 +66,14 @@ export default abstract class Destination {
    * @returns Promise that resolves once the underlying tracking call has been completed (allows the user to await a
    * `track()` call and then do something once all underlying destinations have completed).
    */
-  abstract track: <EventType extends TEvent>(
-    event: EventType,
-    userProps?: IdentifyProps
-  ) => Promise<void>;
+  abstract track: <EventType extends TEvent>(event: EventType) => Promise<void>;
 
   /**
    * Identify
    *
    * For destinations that have an `identify()` method this should be called here.
    */
-  abstract identify?: (props: IdentifyProps) => void;
+  abstract identify?: (user: IdentifyProps) => void;
 
   /**
    * Is Loaded
