@@ -1,8 +1,5 @@
 /**
- * # Skyhook Module Eslint
- *
- * This is the standard Skyhook module eslint config. __No changes should be made here__ unless absolutely necessary -
- * typically if you find a good change it should be used everywhere.
+ * Eslint config
  */
 module.exports = {
   env: {
@@ -31,6 +28,7 @@ module.exports = {
   // reduces the linting time dramatically and thus improves the developer experience.
   rules: {
     "@typescript-eslint/no-implied-eval": "off", // Disabled for performance
+    "@typescript-eslint/no-explicit-any": "off", // Disabled as many destinations require this
     "import/no-cycle": "off", // Disabled for performance
     "import/no-extraneous-dependencies": "off", // Disabled for performance
     // Console logging is only an issue on frontend (not backend) code due to imperfect browser support. For the backend

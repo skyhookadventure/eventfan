@@ -48,6 +48,5 @@ export default class FacebookPixel implements Destination {
 
   name = DestinationName.FACEBOOK_PIXEL;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   isLoaded: boolean = typeof window !== "undefined" && !!(window as any).fbq;
 }
