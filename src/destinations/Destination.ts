@@ -7,7 +7,7 @@ import { PageViewProps } from "../types/PageViewProps";
 import { TEvent } from "../types/TrackEvent";
 
 /**
- * Destination
+ * Destination Abstract Class (implement this)
  *
  * Implement this @abstract class whenever you want to create a new destination.
  *
@@ -18,25 +18,6 @@ import { TEvent } from "../types/TrackEvent";
  * }
  */
 export default abstract class Destination {
-  /**
-   * Destination name
-   *
-   * For new destinations, edit the underlying enum to add the name in.
-   */
-  abstract name: DestinationName;
-
-  /**
-   * Initialise
-   *
-   * Load the provider script if a browser-based plugin, or e.g. initialise an node module.
-   */
-  abstract initialise: () => void;
-
-  /**
-   * Call a page-view track method (f defined)
-   */
-  abstract page?: (props: PageViewProps) => void;
-
   /**
    * Event mappings
    *
@@ -56,6 +37,39 @@ export default abstract class Destination {
   } = {};
 
   /**
+   * Identify
+   *
+   * For destinations that have an `identify()` method this should be called here.
+   */
+  abstract identify?: (user: IdentifyProps) => void;
+
+  /**
+   * Initialise
+   *
+   * Load the provider script if a browser-based plugin, or e.g. initialise an node module.
+   */
+  abstract initialise: () => void;
+
+  /**
+   * Is Loaded
+   *
+   * Set to true as soon as the plugin is ready to accept identify/track/page calls.
+   */
+  abstract isLoaded: boolean = false;
+
+  /**
+   * Destination name
+   *
+   * For new destinations, edit the underlying enum to add the name in.
+   */
+  abstract name: DestinationName;
+
+  /**
+   * Call a page-view track method (f defined)
+   */
+  abstract page?: (props: PageViewProps) => void;
+
+  /**
    * Track
    *
    * Call the destination `track()` method, or specific track methods for specific event names.
@@ -67,20 +81,6 @@ export default abstract class Destination {
    * `track()` call and then do something once all underlying destinations have completed).
    */
   abstract track: <EventType extends TEvent>(event: EventType) => Promise<void>;
-
-  /**
-   * Identify
-   *
-   * For destinations that have an `identify()` method this should be called here.
-   */
-  abstract identify?: (user: IdentifyProps) => void;
-
-  /**
-   * Is Loaded
-   *
-   * Set to true as soon as the plugin is ready to accept identify/track/page calls.
-   */
-  abstract isLoaded: boolean = false;
 
   /**
    * If you need any environmental variables, set them with the constructor.
