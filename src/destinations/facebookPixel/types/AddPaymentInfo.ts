@@ -6,5 +6,10 @@ import { GenericFacebookEvent } from "./shared/GenericFacebookEvent";
  */
 export type AddPaymentInfo = Pick<
   GenericFacebookEvent,
-  "content_category" | "content_ids" | "contents" | "currency" | "value"
+  | "content_category"
+  | "content_ids"
+  | "contents"
+  | "currency"
+  | "eventID"
+  | "value"
 >;

@@ -43,6 +43,13 @@ export interface GenericFacebookEvent {
   currency?: string;
 
   /**
+   * De-duplication event ID
+   *
+   * Use this if you are also sending events on the backend with the Conversions API.
+   */
+  eventID?: string;
+
+  /**
    * Used with InitiateCheckout event. The number of items when checkout was initiated.
    */
   num_items?: number;

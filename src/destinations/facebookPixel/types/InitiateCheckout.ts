@@ -11,6 +11,7 @@ export type InitiateCheckout = Pick<
   | "content_ids"
   | "contents"
   | "currency"
+  | "eventID"
   | "num_items"
   | "value"
 > &

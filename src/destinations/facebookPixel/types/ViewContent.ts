@@ -14,6 +14,7 @@ export type ViewContent = Pick<
   | "content_type"
   | "contents"
   | "currency"
+  | "eventID"
   | "value"
 > &
   Destination;

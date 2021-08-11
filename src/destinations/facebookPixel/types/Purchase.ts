@@ -13,6 +13,7 @@ export type Purchase = Pick<
   | "content_name"
   | "content_type"
   | "contents"
+  | "eventID"
   | "num_items"
 > &
   Required<Pick<GenericFacebookEvent, "currency" | "value">> &

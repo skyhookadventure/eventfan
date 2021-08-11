@@ -10,6 +10,7 @@ export type Search = Pick<
   | "content_ids"
   | "contents"
   | "currency"
+  | "eventID"
   | "search_string"
   | "value"
 > &

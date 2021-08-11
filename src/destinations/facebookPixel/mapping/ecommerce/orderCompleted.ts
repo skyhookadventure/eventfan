@@ -16,6 +16,7 @@ export default function orderCompleted({
         quantity: product.quantity || 1, // Default quantity to 1
       })),
       currency: props.currency || "USD", // Default currency to USD
+      eventID: props.order_id, // Set the deduplication ID as the order ID
       // Value is required for this event to be accepted, but it will fail silently without
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       value: props.total!,
