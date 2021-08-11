@@ -47,6 +47,8 @@ export default class FacebookPixel implements Destination {
       "https://connect.facebook.net/en_US/fbevents.js"
     );
     this.fb("init", this.pixelID);
+    this.fb.disablePushState = true; // Disable automatic page tracking
+    this.isLoaded = true;
   }
 
   page(): void {
@@ -62,5 +64,5 @@ export default class FacebookPixel implements Destination {
 
   name = DestinationName.FACEBOOK_PIXEL;
 
-  isLoaded: boolean = typeof window !== "undefined" && !!(window as any).fbq;
+  isLoaded = false;
 }
