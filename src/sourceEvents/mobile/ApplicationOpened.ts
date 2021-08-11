@@ -1,7 +1,6 @@
-/**
- * User launches or foregrounds your mobile app after the first open Collected Automatically!
- */
-export interface ApplicationOpened {
+import { TEvent } from "../../types/TrackEvent";
+
+interface ApplicationOpenedProps {
   /**
    * Build number of the installed app
    */
@@ -22,3 +21,11 @@ export interface ApplicationOpened {
    */
   version?: string;
 }
+
+/**
+ * User launches or foregrounds your mobile app after the first open Collected Automatically!
+ */
+export type ApplicationOpened = TEvent<
+  "Application Opened",
+  ApplicationOpenedProps
+>;

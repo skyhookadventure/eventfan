@@ -1,7 +1,6 @@
-/**
- * User updates the app Collected automatically!
- */
-export interface ApplicationUpdated {
+import { TEvent } from "../../types/TrackEvent";
+
+interface ApplicationUpdatedProps {
   /**
    * Build number of the installed app
    */
@@ -19,3 +18,11 @@ export interface ApplicationUpdated {
    */
   version?: string;
 }
+
+/**
+ * User updates the app Collected automatically!
+ */
+export type ApplicationUpdated = TEvent<
+  "Application Updated",
+  ApplicationUpdatedProps
+>;
