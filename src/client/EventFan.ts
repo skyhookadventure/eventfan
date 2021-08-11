@@ -93,6 +93,7 @@ export default class EventFan {
    */
   constructor({ destinations }: ConstructorProps) {
     this.destinations = destinations;
+    this.destinations.forEach((destination) => destination.initialise());
   }
 
   /**
