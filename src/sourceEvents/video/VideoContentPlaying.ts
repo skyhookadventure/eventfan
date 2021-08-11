@@ -1,7 +1,6 @@
-/**
- * The video content starts playing
- */
-export interface VideoContentStarted {
+import { TEvent } from "../../types/TrackEvent";
+
+interface VideoContentPlayingProps {
   /**
    * ISO 8601 Date String for the original air date or published date.
    */
@@ -79,3 +78,12 @@ export interface VideoContentStarted {
    */
   total_length?: number;
 }
+
+/**
+ * Heartbeat every N (we recommend 10) seconds to track how far into the content the user is
+ * currently viewing.
+ */
+export type VideoContentPlaying = TEvent<
+  "Video Content Playing",
+  VideoContentPlayingProps
+>;

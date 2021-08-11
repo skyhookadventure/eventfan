@@ -1,7 +1,6 @@
-/**
- * The ad content starts playing
- */
-export interface VideoAdStarted {
+import { TEvent } from "../../types/TrackEvent";
+
+interface VideoAdStartedProps {
   /**
    * The unique ID of the ad asset.
    */
@@ -44,3 +43,8 @@ export interface VideoAdStarted {
    */
   total_ad_length?: number;
 }
+
+/**
+ * The ad content starts playing
+ */
+export type VideoAdStarted = TEvent<"Video Ad Started", VideoAdStartedProps>;

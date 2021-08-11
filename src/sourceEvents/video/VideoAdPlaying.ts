@@ -1,7 +1,6 @@
-/**
- * Heartbeat event fired every N seconds that the ad plays
- */
-export interface VideoAdPlaying {
+import { TEvent } from "../../types/TrackEvent";
+
+interface VideoAdPlayingProps {
   /**
    * The unique ID of the ad asset.
    */
@@ -44,3 +43,8 @@ export interface VideoAdPlaying {
    */
   total_ad_length?: number;
 }
+
+/**
+ * Heartbeat event fired every N seconds that the ad plays
+ */
+export type VideoAdPlaying = TEvent<"Video Ad Playing", VideoAdPlayingProps>;

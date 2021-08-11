@@ -1,8 +1,6 @@
-/**
- * Heartbeat every N (we recommend 10) seconds to track how far into the content the user is
- * currently viewing.
- */
-export interface VideoContentPlaying {
+import { TEvent } from "../../types/TrackEvent";
+
+interface VideoContentStartedProps {
   /**
    * ISO 8601 Date String for the original air date or published date.
    */
@@ -80,3 +78,11 @@ export interface VideoContentPlaying {
    */
   total_length?: number;
 }
+
+/**
+ * The video content starts playing
+ */
+export type VideoContentStarted = TEvent<
+  "Video Content Started",
+  VideoContentStartedProps
+>;

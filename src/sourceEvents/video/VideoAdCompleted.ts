@@ -1,7 +1,6 @@
-/**
- * The ad content completes playing
- */
-export interface VideoAdCompleted {
+import { TEvent } from "../../types/TrackEvent";
+
+interface VideoAdCompletedProps {
   /**
    * The unique ID of the ad asset.
    */
@@ -44,3 +43,11 @@ export interface VideoAdCompleted {
    */
   total_ad_length?: number;
 }
+
+/**
+ * The ad content completes playing
+ */
+export type VideoAdCompleted = TEvent<
+  "Video Ad Completed",
+  VideoAdCompletedProps
+>;

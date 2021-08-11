@@ -1,7 +1,6 @@
-/**
- * The video content finishes playing
- */
-export interface VideoContentCompleted {
+import { TEvent } from "../../types/TrackEvent";
+
+interface VideoContentCompletedProps {
   /**
    * ISO 8601 Date String for the original air date or published date.
    */
@@ -79,3 +78,11 @@ export interface VideoContentCompleted {
    */
   total_length?: number;
 }
+
+/**
+ * The video content finishes playing
+ */
+export type VideoContentCompleted = TEvent<
+  "Video Content Completed",
+  VideoContentCompletedProps
+>;

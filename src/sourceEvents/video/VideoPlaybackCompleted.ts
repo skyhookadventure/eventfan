@@ -1,7 +1,6 @@
-/**
- * Playback is complete and only when the session is finished
- */
-export interface VideoPlaybackCompleted {
+import { TEvent } from "../../types/TrackEvent";
+
+interface VideoPlaybackCompletedProps {
   /**
    * false if the user has any ad blockers
    */
@@ -55,3 +54,11 @@ export interface VideoPlaybackCompleted {
    */
   video_player?: string;
 }
+
+/**
+ * Playback is complete and only when the session is finished
+ */
+export type VideoPlaybackCompleted = TEvent<
+  "Video Playback Completed",
+  VideoPlaybackCompletedProps
+>;
