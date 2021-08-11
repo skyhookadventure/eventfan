@@ -62,7 +62,7 @@ type CustomEvent = TEvent<"Custom Event Name", {
 }>
 eventFan.track<CustomEvent>({
   eventName: "Custom Event Name", {
-    icCream: "vanilla"
+    iceCream: "vanilla"
   }
 })
 
