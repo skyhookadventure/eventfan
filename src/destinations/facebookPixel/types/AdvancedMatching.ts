@@ -11,8 +11,8 @@ export interface AdvancedMatching {
   external_id?: string;
   /** First name */
   fn?: string;
-  /** Gender */
-  ge?: "f" | "m";
+  /** Gender (`m` or `f`) */
+  ge?: string;
   /** Last name */
   ln?: string;
   /** Phone number */

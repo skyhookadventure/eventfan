@@ -7,6 +7,11 @@ import loadScript from "../loadScript";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
 
+/**
+ * Facebook Pixel Destination
+ *
+ * For use with __browser-side events only__.
+ */
 export default class FacebookPixel implements Destination {
   private fb = (window as any).fbq;
 
@@ -22,10 +27,12 @@ export default class FacebookPixel implements Destination {
       fn: user.firstName,
       ln: user.lastName,
       ct: user.address?.city,
-      //   db: user.birthday,
+      db: user.birthday
+        ? parseInt(user.birthday.toISOString().slice(0, 10).replace(/-/g, ""))
+        : undefined,
       external_id: user.id,
-      //   ge: user.gender,
-      //   ph: parseInt(user.phone?),
+      ge: user.gender,
+      ph: user.phone ? parseInt(user.phone) : undefined,
       st: user.address?.state,
       zp: user.address?.state,
     };
