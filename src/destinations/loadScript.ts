@@ -16,14 +16,14 @@ export default async function loadScript(
     scriptElement.async = true;
     scriptElement.type = "text/javascript";
     scriptElement.id = id;
-    document.body.appendChild(scriptElement);
-
     function handleLoad() {
       resolve();
     }
+    scriptElement.addEventListener("load", handleLoad);
+    document.body.appendChild(scriptElement);
+    console.log("appended");
 
     // Set event listener
-    scriptElement.addEventListener("load", handleLoad);
   });
 
   await isReady;
