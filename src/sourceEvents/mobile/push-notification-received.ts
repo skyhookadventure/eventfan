@@ -2,7 +2,14 @@
  * Push notification received by your app Collected automatically by iOS!
  */
 export interface PushNotificationReceived {
-  push_campaign?: any[] | boolean | number | number | null | PushCampaignObject | string;
+  push_campaign?:
+    | any[]
+    | boolean
+    | number
+    | number
+    | null
+    | PushCampaignObject
+    | string;
 }
 
 export interface PushCampaignObject {

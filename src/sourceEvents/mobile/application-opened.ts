@@ -10,7 +10,7 @@ export interface ApplicationOpened {
    * If application transitioned from “Background” to “Inactive” state prior to foregrounding
    * (as opposed to from “Not Running” state). Automatically collected on iOS only.
    */
-  from_background?:       boolean;
+  from_background?: boolean;
   referring_application?: string;
   /**
    * The value of UIApplicationLaunchOptionsURLKey from launchOptions (auto-collected on iOS
