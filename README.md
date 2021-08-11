@@ -123,3 +123,9 @@ class CustomDestination implements Destination {
   // ...
 }
 ```
+
+## Contributing
+
+Integration tests run using Cypress, so make sure you have that installed:
+
+https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements
