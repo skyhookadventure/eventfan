@@ -76,7 +76,7 @@ Either use the default mappings (similar to RudderStack/Segment), or write your 
 // Default "Order Completed" -> Facebook Pixel "Purchase" mapping
 export default function orderCompleted({
   props,
-}: OrderCompleted): TEvent<"Purchase", Purchase> {
+}: Ecommerce.OrderCompleted): TEvent<"Purchase", Purchase> {
   return {
     eventName: "Purchase",
     props: {
@@ -87,6 +87,9 @@ export default function orderCompleted({
         quantity: product.quantity || 1, // Default quantity to 1
       })),
       currency: props.currency || "USD", // Default currency to USD
+      eventID: props.order_id, // Set the deduplication ID as the order ID
+      // Value is required for this event to be accepted, but it will fail silently without
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       value: props.total!,
     },
   };
@@ -95,7 +98,7 @@ export default function orderCompleted({
 // Or write your own...
 export function customOrderCompleted({
   props,
-}: CustomOrderCompleted): TEvent<"Purchase", Purchase> {
+}: Ecommerce.OrderCompleted): TEvent<"Purchase", Purchase> {
   // E.g. start with the default mapping
   const defaults = FacebookPixel.orderCompleted({ props });
   return {
