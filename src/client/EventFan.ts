@@ -130,7 +130,7 @@ export default class EventFan {
     await this.callDestinationsOnceLoaded((destination: Destination) => {
       // Apply the event mapping if it exists
       const mappedEvent =
-        destination.eventMappings[trackEvent.eventName](
+        destination.eventMappings[trackEvent.eventName]?.(
           trackEvent,
           this.user
         ) || trackEvent;
