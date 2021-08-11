@@ -1,10 +1,15 @@
-import pWaitFor from "p-wait-for";
 import Destination from "../destinations/Destination";
 import { TEvent } from "../types/TrackEvent";
 import { IdentifyProps } from "../types/IdentifyProps";
 import { PageViewProps } from "../types/PageViewProps";
 
-interface EventFanProps {
+/**
+ * Constructor props
+ */
+interface ConstructorProps {
+  /**
+   * Destinations that you want to send events to.
+   */
   destinations: Destination[];
 }
 
@@ -22,53 +27,96 @@ interface EventFanProps {
  * })
  */
 export default class EventFan {
+  /**
+   * Call destinations once they have loaded
+   *
+   * Helper function to e.g. only call destination track methods once the destinations have loaded.
+   */
+  private async callDestinationsOnceLoaded(
+    callback: (destination: Destination) => Promise<void> | void
+  ) {
+    // Create an array of promises for each destination callback
+    const promises = this.destinations.map(async (destination: Destination) => {
+      // Wait until the destination plugin is initialised
+      const isReadyBeforeTimeout = new Promise<boolean>((resolve) => {
+        // Polling settings
+        const pollInterval = 250;
+        const timeout = 5000;
+        let retriesRemaining = timeout / pollInterval;
+
+        // Poll recursively until the destination is loaded (or we hit a timeout)
+        function poll() {
+          // If we reach the retries limit, stop
+          if (retriesRemaining === 0) {
+            resolve(false);
+          }
+
+          // Resolve if the destination is ready
+          if (destination.isLoaded) {
+            resolve(true);
+          }
+
+          // Otherwise decrease the retries remaining and retry
+          else {
+            retriesRemaining -= 1;
+            setTimeout(poll, pollInterval);
+          }
+        }
+        poll();
+      });
+
+      // Callback if the destination is ready (before the timeout)
+      if (await isReadyBeforeTimeout) {
+        await callback(destination);
+      }
+    });
+
+    // Return when all destination callbacks have returned
+    await Promise.all(promises);
+  }
+
+  /**
+   * Stores the user details when {@link identify} has been called
+   *
+   * This allows destination `track` methods to use user details within their payloads, even if identify was called some
+   * time ago.
+   */
   private user?: IdentifyProps;
 
+  /**
+   * Stores any destinations (e.g. Facebook Pixel) that have been added.
+   */
   private destinations: Destination[] = [];
 
-  constructor({ destinations }: EventFanProps) {
+  /**
+   * Constructor
+   */
+  constructor({ destinations }: ConstructorProps) {
     this.destinations = destinations;
   }
 
   /**
    * Identify a user
+   *
+   * The identify call lets you identify a visiting user and associate them to their actions. It also lets you record
+   * the traits about them like their name, email address, etc.
    */
-  identify(user: IdentifyProps): void {
+  async identify(user: IdentifyProps): Promise<void> {
     // Store the user details for future `track()` calls
     this.user = user;
 
-    this.destinations.forEach(async (destination: Destination) => {
-      // If the destination doesn't have an identify method, return
-      if (!destination.identify) return;
-
-      // Wait until the destination plugin is initialised
-      await pWaitFor(() => destination.isLoaded, {
-        interval: 100,
-        timeout: 5000,
-      });
-
-      // Identify the user with the destination
-      destination.identify(user);
-    });
+    await this.callDestinationsOnceLoaded((destination: Destination) =>
+      destination.identify?.(user)
+    );
   }
 
   /**
    * Track a page view
    */
-  page(props: PageViewProps): void {
-    this.destinations.forEach(async (destination: Destination) => {
-      // If the destination doesn't have an page method, return
-      if (!destination.page) return;
-
-      // Wait until the destination plugin is initialised
-      await pWaitFor(() => destination.isLoaded, {
-        interval: 100,
-        timeout: 5000,
-      });
-
-      // Identify the user with the destination
-      destination.page(props);
-    });
+  async page(props: PageViewProps): Promise<void> {
+    await this.callDestinationsOnceLoaded((destination: Destination) =>
+      destination.page?.(props)
+    );
   }
 
   /**
@@ -78,29 +126,17 @@ export default class EventFan {
    *
    * @returns Promise that resolves once all tracking operations have completed with the underlying destination scripts.
    */
-  async track<EventType extends TEvent>(
-    trackEvent: EventType
-  ): Promise<void[]> {
-    const destinationTrackCallsCompleted = this.destinations.map(
-      async (destination: Destination) => {
-        // Wait until the destination plugin is initialised
-        await pWaitFor(() => destination.isLoaded, {
-          interval: 100,
-          timeout: 5000,
-        });
+  async track<EventType extends TEvent>(trackEvent: EventType): Promise<void> {
+    await this.callDestinationsOnceLoaded((destination: Destination) => {
+      // Apply the event mapping if it exists
+      const mappedEvent =
+        destination.eventMappings[trackEvent.eventName](
+          trackEvent,
+          this.user
+        ) || trackEvent;
 
-        // Apply the event mapping if it exists
-        const mappedEvent =
-          destination.eventMappings[trackEvent.eventName](
-            trackEvent,
-            this.user
-          ) || trackEvent;
-
-        // Send
-        await destination.track(mappedEvent);
-      }
-    );
-
-    return Promise.all(destinationTrackCallsCompleted);
+      // Send
+      return destination.track(mappedEvent);
+    });
   }
 }
