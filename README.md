@@ -68,7 +68,7 @@ eventFan.track<CustomEvent>({
 
 ```
 
-### 2. Map events to destination event (Facebook Ads, Google Analytics..), with sensible defaults
+### 2. Map events to destination events (Facebook Ads, Google Analytics..), with sensible defaults
 
 Either use the default mappings (similar to RudderStack/Segment), or write your own:
 
