@@ -1,11 +1,11 @@
-import { OrderCompleted } from "../../../../sourceEvents/ecommerce/OrderCompleted";
+import { Ecommerce } from "../../../../sourceEvents/Events";
 import { TEvent } from "../../../../types/TrackEvent";
 import { Purchase } from "../../types/Purchase";
 import { ContentType } from "../../types/shared/GenericFacebookEvent";
 
 export default function orderCompleted({
   props,
-}: OrderCompleted): TEvent<"Purchase", Purchase> {
+}: Ecommerce.OrderCompleted): TEvent<"Purchase", Purchase> {
   return {
     eventName: "Purchase",
     props: {
