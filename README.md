@@ -7,25 +7,34 @@ Send tracking/analytics events to multiple destinations (Google Analytics, Faceb
 
 ## Quick Start
 
-```typescript
-import EventFan, { FacebookPixel, Ecommerce } from "event-fan";
+Initialise your client:
 
-// Initialise your client
+```typescript
+import EventFan, { FacebookPixel } from "event-fan";
+
 const eventFan = new EventFan({
   destinations: [
     // Any destinations you want here
     new FacebookPixel("your-facebook-key"),
   ],
 });
+```
 
-// Identify if a user is logged in
+Identify a user when they log in:
+
+```typescript
 eventFan.identify({
   first_name: "First name",
 });
+```
 
-// Track an event
-// Uses a standard (typed) format
-// The properties will automatically be mapped to the corresponding destination formats
+Track events, using either the Segment/Rudderstack Specification types (included), or with your own types (created with
+`TEvent<name, properties>`). With standard events the properties are automatically converted to the correct format for
+each destination (in this case Facebook Pixel's `Purchase` event for example):
+
+```typescript
+import { Ecommerce } from "event-fan";
+
 eventFan.track<Ecommerce.OrderCompleted>({
   eventName: "Order Completed",
   props: {
@@ -40,26 +49,13 @@ eventFan.track<Ecommerce.OrderCompleted>({
 ### 1. Emit Type-Safe Events
 
 Use the included event types (e.g. "Order Completed") from the
-RudderStack/Segment specifications, or create your own custom typings.
+RudderStack/Segment specifications, or create your own custom typings:
 
 ```typescript
-// Example standard event
-eventFan.track<Ecommerce.OrderCompleted>({
-  eventName: "Order Completed",
-  props: {
-    order_id: "order_UUID",
-    products: [{
-        product_id: "product_UUID",
-        // ...
-    }]
-    // ...
-  }
-})
-
-// Example custom event
 type CustomEvent = TEvent<"Custom Event Name", {
   iceCream: string;
 }>
+
 eventFan.track<CustomEvent>({
   eventName: "Custom Event Name", {
     iceCream: "vanilla"
@@ -73,37 +69,15 @@ eventFan.track<CustomEvent>({
 Either use the default mappings (similar to RudderStack/Segment), or write your own:
 
 ```typescript
-// Default "Order Completed" -> Facebook Pixel "Purchase" mapping
-export default function orderCompleted({
-  props,
-}: Ecommerce.OrderCompleted): TEvent<"Purchase", Purchase> {
-  return {
-    eventName: "Purchase",
-    props: {
-      content_ids: props.products.map((product) => product.product_id),
-      content_type: ContentType.PRODUCT,
-      contents: props.products.map((product) => ({
-        id: product.product_id,
-        quantity: product.quantity || 1, // Default quantity to 1
-      })),
-      currency: props.currency || "USD", // Default currency to USD
-      eventID: props.order_id, // Set the deduplication ID as the order ID
-      // Value is required for this event to be accepted, but it will fail silently without
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      value: props.total!,
-    },
-  };
-}
-
-// Or write your own...
 export function customOrderCompleted({
   props,
 }: Ecommerce.OrderCompleted): TEvent<"Purchase", Purchase> {
   // E.g. start with the default mapping
   const defaults = FacebookPixel.orderCompleted({ props });
+
+  // And change the Facebook pixel content type to always be a travel destination
   return {
-    ...props,
-    // And change the content type to always be a travel destination
+    ...defaults,
     content_type: FacebookPixel.ContentType.DESTINATION,
   };
 }
