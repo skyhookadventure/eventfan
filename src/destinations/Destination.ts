@@ -58,7 +58,7 @@ export default abstract class Destination {
    *
    * Set to true as soon as the plugin is ready to accept identify/track/page calls.
    */
-  abstract isLoaded: boolean = false;
+  isLoaded = false;
 
   /**
    * Destination name
