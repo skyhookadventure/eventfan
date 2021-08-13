@@ -15,12 +15,12 @@
     "codegen": "ts-node ./src/sourceTypes/codegen.ts"
   },
   "devDependencies": {
+    "@playwright/test": "^1.13.1",
     "@testing-library/dom": "^8.1.0",
     "@types/jest": "^27.0.0",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.1",
     "change-case": "^4.1.2",
-    "cypress": "^8.2.0",
     "esbuild": "^0.12.19",
     "esbuild-jest": "^0.5.0",
     "eslint": "^7.16.0",
@@ -29,6 +29,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-prettier": "^3.1.2",
     "jest": "^27.0.6",
+    "playwright": "^1.13.1",
     "prettier": "^2.0.4",
     "quicktype-core": "^6.0.70",
     "recursive-readdir-sync": "^1.0.6",

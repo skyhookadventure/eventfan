@@ -100,6 +100,11 @@ class CustomDestination implements Destination {
 
 ## Contributing
 
-Integration tests run using Cypress, so make sure you have that installed:
+### Setup
 
-https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements
+The only requirement is [playwright](https://playwright.dev/docs/intro) for cross-browser testing. Install the test
+browsers separately with:
+
+```bash
+npx playwright install
+```
