@@ -37,5 +37,6 @@ module.exports = {
     // Using new side effects is a key design pattern of aws-cdk and used heavily for our infrastructure
     "no-new": "off",
     radix: "off", // Disabled for performance
+    "prettier/prettier": ["error", { printWidth: 80 }],
   },
 };
