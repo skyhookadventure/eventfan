@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { DestinationName } from "./DestinationName";
-import { IdentifyProps } from "../types/IdentifyProps";
+import { User } from "../types/IdentifyProps";
 import { PageViewProps } from "../types/PageViewProps";
 import { TEvent } from "../types/TrackEvent";
 
@@ -33,10 +33,7 @@ export default abstract class Destination {
    * Mappings can be overwritten by the user, to customise them.
    */
   public eventMappings: {
-    [eventName: string]: (
-      trackEvent: TEvent<any>,
-      user?: IdentifyProps
-    ) => TEvent;
+    [eventName: string]: (trackEvent: TEvent<any>, user?: User) => TEvent;
   } = {};
 
   /**
@@ -44,7 +41,7 @@ export default abstract class Destination {
    *
    * For destinations that have an `identify()` method this should be called here.
    */
-  abstract identify?: (user: IdentifyProps) => void;
+  abstract identify?: (user: User) => void;
 
   /**
    * Initialise

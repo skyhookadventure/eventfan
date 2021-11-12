@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-classes-per-file */
 import EventFan from "../EventFan";
 import Destination from "../../destinations/Destination";
 import { DestinationName } from "../../destinations/DestinationName";
 import { PageViewProps } from "../../types/PageViewProps";
-import { IdentifyProps } from "../../types/IdentifyProps";
+import { IdentifyTraits } from "../../types/IdentifyProps";
 import { TEvent } from "../../types/TrackEvent";
 
 /**
@@ -15,7 +16,7 @@ class MockDestination implements Destination {
   // Add a single event mapping to test
   eventMappings = {
     "Order Completed": () => {
-      return { eventName: "ModifiedEventName", props: { modified: true } };
+      return { name: "ModifiedEventName", properties: { modified: true } };
     },
   };
 
@@ -32,11 +33,17 @@ class MockDestination implements Destination {
   track = jest.fn();
 }
 
-it("initialises without errors", () => {
-  new EventFan({ destinations: [] });
+describe("constructor", () => {
+  it("initialises without errors (no destinations)", () => {
+    new EventFan();
+  });
+
+  it("initialises without errors (mock destination)", () => {
+    new EventFan({ destinations: [new MockDestination()] });
+  });
 });
 
-describe("identify", () => {
+/** describe("identify", () => {
   it("forwards the call to each destination", async () => {
     const destination = new MockDestination();
     const eventFan = new EventFan({ destinations: [destination] });
@@ -60,7 +67,7 @@ describe("identify", () => {
 
     const destination = new MockDestinationDelayLoading();
     const eventFan = new EventFan({ destinations: [destination] });
-    const mockUser: IdentifyProps = {
+    const mockUser: IdentifyTraits = {
       email: "test@gmail.com",
       firstName: "First Name",
     };
@@ -81,37 +88,43 @@ describe("page", () => {
     await eventFan.page(mockPage);
     expect(destination.page).toHaveBeenCalledWith(mockPage);
   });
-});
+}); */
 
 describe("track", () => {
-  it("forwards the call to each destination", async () => {
+  const mockTrack: TEvent = {
+    name: "Test Event",
+    properties: {
+      iceCream: "vanilla",
+    },
+  };
+
+  it("Adds the event to history", async () => {
+    const eventFan = new EventFan();
+    await eventFan.track(mockTrack.name, mockTrack.properties);
+
+    // Access the private history property (dynamically to avoid type errors)
+    // eslint-disable-next-line @typescript-eslint/dot-notation
+    const privateHistory = eventFan["eventHistory"];
+
+    expect(privateHistory[0].track!.name).toBe(mockTrack.name);
+    expect(privateHistory[0].track!.properties).toBe(mockTrack.properties);
+    expect(privateHistory[0].track!.options?.originalTimestamp).toBeTruthy();
+  });
+
+  it("forwards the call to each loaded destination", async () => {
     const destination = new MockDestination();
     const eventFan = new EventFan({ destinations: [destination] });
-    const mockTrack: TEvent = {
-      eventName: "Test Event",
-      props: {
-        iceCream: "vanilla",
-      },
-    };
-    await eventFan.track(mockTrack);
+    await eventFan.track(mockTrack.name, mockTrack.properties);
     expect(destination.track).toHaveBeenCalledWith(mockTrack);
   });
 
   it("applies event mappings if they exist on each destination", async () => {
     const destination = new MockDestination();
     const eventFan = new EventFan({ destinations: [destination] });
-    const mockTrack: TEvent = {
-      eventName: "Order Completed",
-      props: {
-        iceCream: "vanilla",
-      },
-    };
-    await eventFan.track(mockTrack);
+    await eventFan.track("Order Completed", mockTrack.properties);
     expect(destination.track).toHaveBeenCalledWith({
-      eventName: "ModifiedEventName",
-      props: {
-        modified: true,
-      },
+      name: "ModifiedEventName",
+      properties: { modified: true },
     });
   });
 });

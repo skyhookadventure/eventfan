@@ -1,6 +1,6 @@
 import Destination from "../destinations/Destination";
 import { TEvent } from "../types/TrackEvent";
-import { IdentifyProps } from "../types/IdentifyProps";
+import { IdentifyTraits, User } from "../types/IdentifyProps";
 import { PageViewProps } from "../types/PageViewProps";
 
 /**
@@ -28,71 +28,36 @@ interface ConstructorProps {
  */
 export default class EventFan {
   /**
-   * Call destinations once they have loaded
+   * User details
    *
-   * Helper function to e.g. only call destination track methods once the destinations have loaded.
+   * Created/updated when {@link identify} has been called
    */
-  private async callDestinationsOnceLoaded(
-    callback: (destination: Destination) => Promise<void> | void
-  ) {
-    // Create an array of promises for each destination callback
-    const promises = this.destinations.map(async (destination: Destination) => {
-      // Wait until the destination plugin is initialised
-      const isReadyBeforeTimeout = new Promise<boolean>((resolve) => {
-        // Polling settings
-        const pollInterval = 250;
-        const timeout = 5000;
-        let retriesRemaining = timeout / pollInterval;
-
-        // Poll recursively until the destination is loaded (or we hit a timeout)
-        function poll() {
-          // If we reach the retries limit, stop
-          if (retriesRemaining === 0) {
-            resolve(false);
-          }
-
-          // Resolve if the destination is ready
-          if (destination.isLoaded) {
-            resolve(true);
-          }
-
-          // Otherwise decrease the retries remaining and retry
-          else {
-            retriesRemaining -= 1;
-            setTimeout(poll, pollInterval);
-          }
-        }
-        poll();
-      });
-
-      // Callback if the destination is ready (before the timeout)
-      if (await isReadyBeforeTimeout) {
-        await callback(destination);
-      }
-    });
-
-    // Return when all destination callbacks have returned
-    await Promise.all(promises);
-  }
+  private user?: User;
 
   /**
-   * Stores the user details when {@link identify} has been called
-   *
-   * This allows destination `track` methods to use user details within their payloads, even if identify was called some
-   * time ago.
-   */
-  private user?: IdentifyProps;
-
-  /**
-   * Stores any destinations (e.g. Facebook Pixel) that have been added.
+   * Destinations (e.g. Facebook Pixel)
    */
   private destinations: Destination[] = [];
 
   /**
+   * Loaded destinations only
+   */
+  private get loadedDestinations() {
+    return this.destinations.filter((dest) => dest.isLoaded === true);
+  }
+
+  /**
+   * Event history
+   *
+   * Used for replaying of events, e.g. if a destination is loaded after a `.track()` call has already been made.
+   */
+  private eventHistory: Array<{ track?: TEvent; page?: PageViewProps }> = [];
+
+  /**
    * Constructor
    */
-  constructor({ destinations }: ConstructorProps) {
-    this.destinations = destinations;
+  constructor(props?: ConstructorProps) {
+    this.destinations = props?.destinations || [];
     this.destinations.forEach((destination) => destination.initialise());
   }
 
@@ -102,12 +67,21 @@ export default class EventFan {
    * The identify call lets you identify a visiting user and associate them to their actions. It also lets you record
    * the traits about them like their name, email address, etc.
    */
-  async identify(user: IdentifyProps): Promise<void> {
-    // Store the user details for future `track()` calls
+  async identify(
+    userId: User["userId"],
+    traits?: User["traits"]
+  ): Promise<void> {
+    // Format as a single object (destinations use this format)
+    const user: User = { userId, traits };
+
+    // Store the user details
     this.user = user;
 
-    await this.callDestinationsOnceLoaded((destination: Destination) =>
-      destination.identify?.(user)
+    // Call each destination's identify method
+    await Promise.all(
+      this.loadedDestinations.map((destination: Destination) =>
+        destination.identify?.(user)
+      )
     );
   }
 
@@ -115,8 +89,14 @@ export default class EventFan {
    * Track a page view
    */
   async page(props: PageViewProps): Promise<void> {
-    await this.callDestinationsOnceLoaded((destination: Destination) =>
-      destination.page?.(props)
+    // Add to the events history (for replays)
+    this.eventHistory.push({ page: props });
+
+    // Use the destinations
+    await Promise.all(
+      this.loadedDestinations.map((destination: Destination) =>
+        destination.page?.(props)
+      )
     );
   }
 
@@ -127,17 +107,35 @@ export default class EventFan {
    *
    * @returns Promise that resolves once all tracking operations have completed with the underlying destination scripts.
    */
-  async track<EventType extends TEvent>(trackEvent: EventType): Promise<void> {
-    await this.callDestinationsOnceLoaded((destination: Destination) => {
-      // Apply the event mapping if it exists
-      const mappedEvent =
-        destination.eventMappings[trackEvent.eventName]?.(
-          trackEvent,
-          this.user
-        ) || trackEvent;
+  async track<EventType extends TEvent>(
+    name: EventType["name"],
+    properties?: EventType["properties"],
+    options?: EventType["options"]
+  ): Promise<void> {
+    // Format as a single object (destinations use this format)
+    const trackEvent: TEvent = { name, properties, options };
 
-      // Send
-      return destination.track(mappedEvent);
+    // Add to the events history (for replays)
+    this.eventHistory.push({
+      track: {
+        ...trackEvent,
+        // Set the original timestamp if not set
+        options: { originalTimestamp: new Date(), ...trackEvent.options },
+      },
     });
+
+    // Use the destinations
+    await Promise.all(
+      // Only loaded destinations (note when a destination is loaded it replays missed events)
+      this.loadedDestinations.map((destination: Destination) => {
+        // Apply the event mapping if it exists on this destination
+        const mappedEvent =
+          destination.eventMappings[trackEvent.name]?.(trackEvent, this.user) ||
+          trackEvent;
+
+        // Send
+        return destination.track(mappedEvent);
+      })
+    );
   }
 }
