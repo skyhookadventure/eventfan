@@ -10,30 +10,48 @@ export interface PageViewProps {
    * 	content publishers that rely heavily on pageview tracking. This is not automatically collected.
    */
   keywords?: string[];
+
   /**
    * Name of the page. This is reserved for future use.
    */
   name?: string;
+
+  /**
+   * The category of the page. Useful for cases like ecommerce where many pages might live under a single category.
+   * Note: if you pass only one string to page it is assumed to be name. You must include a name to send a category.
+   */
+  category?: string;
+
   /**
    * Path portion of the URL of the page. Equivalent to canonical path which defaults to location.pathname from the DOM
    * API.
    */
   path: string;
+
   /**
    * Full URL of the previous page. Equivalent to document.referrer from the DOM API.
    */
   referrer?: string;
+
   /**
    * Query string portion of the URL of the page. Equivalent to location.search from the DOM API.
    */
   search?: string;
+
   /**
    * Title of the page. Equivalent to document.title from the DOM API.
    */
   title: string;
+
   /**
    * Full URL of the page. First we look for the canonical url. If the canonical url is not provided, we use
    * location.href from the DOM API.
    */
   url: string;
+}
+
+export interface Page {
+  name?: string;
+  properties?: PageViewProps;
+  options?: { originalTimestamp: Date };
 }

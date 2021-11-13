@@ -4,11 +4,11 @@ import { Purchase } from "../../types/Purchase";
 import { ContentType } from "../../types/shared/GenericFacebookEvent";
 
 export default function orderCompleted({
-  props,
+  properties: props,
 }: Ecommerce.OrderCompleted): TEvent<"Purchase", Purchase> {
   return {
-    eventName: "Purchase",
-    props: {
+    name: "Purchase",
+    properties: {
       content_ids: props.products.map((product) => product.product_id),
       content_type: ContentType.PRODUCT,
       contents: props.products.map((product) => ({

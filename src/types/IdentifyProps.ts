@@ -4,7 +4,7 @@
  * Similar to the Segment/RudderStack properties at:
  * https://segment.com/docs/connections/spec/identify/#traits
  */
-export interface IdentifyProps {
+export interface IdentifyTraits {
   address?: {
     city?: string;
     country?: string;
@@ -34,4 +34,10 @@ export interface IdentifyProps {
   title?: string;
   username?: string;
   website?: string;
+}
+
+export interface User {
+  userId: string;
+  traits?: IdentifyTraits;
+  options?: { originalTimestamp: Date };
 }

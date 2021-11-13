@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Track Event
  *
@@ -7,6 +6,7 @@
  * _Note this is named as TEvent to avoid clashing with the DOM type `TrackEvent`._
  */
 export type TEvent<EventName = string, Properties = any> = {
-  eventName: EventName;
-  props: Properties;
+  name: EventName;
+  properties: Properties;
+  options?: { originalTimestamp: Date };
 };

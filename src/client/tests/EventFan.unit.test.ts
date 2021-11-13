@@ -43,52 +43,48 @@ describe("constructor", () => {
   });
 });
 
-/** describe("identify", () => {
+describe("identify", () => {
   it("forwards the call to each destination", async () => {
     const destination = new MockDestination();
     const eventFan = new EventFan({ destinations: [destination] });
     const mockUser = { email: "test@gmail.com", firstName: "First Name" };
-    await eventFan.identify(mockUser);
-    expect(destination.identify).toHaveBeenCalledWith(mockUser);
-  });
-
-  it("waits until the destination is loaded before calling it", async () => {
-    class MockDestinationDelayLoading extends MockDestination {
-      isLoaded = false;
-
-      constructor() {
-        super();
-        // Set isLoaded after a short delay
-        setTimeout(() => {
-          this.isLoaded = true;
-        }, 190);
-      }
-    }
-
-    const destination = new MockDestinationDelayLoading();
-    const eventFan = new EventFan({ destinations: [destination] });
-    const mockUser: IdentifyTraits = {
-      email: "test@gmail.com",
-      firstName: "First Name",
-    };
-    await eventFan.identify(mockUser);
+    await eventFan.identify("userID", mockUser);
     expect(destination.identify).toHaveBeenCalledWith(mockUser);
   });
 });
 
 describe("page", () => {
+  const mockPage: PageViewProps = {
+    path: "/path",
+    title: "title",
+    url: "https://www.example.com/path",
+  };
+
+  it("adds the event to history", async () => {
+    const eventFan = new EventFan();
+    await eventFan.page(mockPage.title, mockPage);
+
+    // Access the private history property (dynamically to avoid type errors)
+    // eslint-disable-next-line @typescript-eslint/dot-notation
+    const privateHistory = eventFan["eventHistory"];
+
+    expect(privateHistory[0].page!.name).toBe(mockPage.name);
+    expect(privateHistory[0].track!.properties).toBe(mockPage);
+    expect(privateHistory[0].track!.options?.originalTimestamp).toBeTruthy();
+  });
+
   it("forwards the call to each destination", async () => {
     const destination = new MockDestination();
     const eventFan = new EventFan({ destinations: [destination] });
-    const mockPage: PageViewProps = {
-      path: "/path",
-      title: "title",
-      url: "https://www.example.com/path",
-    };
-    await eventFan.page(mockPage);
-    expect(destination.page).toHaveBeenCalledWith(mockPage);
+
+    await eventFan.page(mockPage.title, mockPage);
+    expect(destination.page).toHaveBeenCalledWith({
+      name: mockPage.title,
+      properties: mockPage,
+      options: undefined,
+    });
   });
-}); */
+});
 
 describe("track", () => {
   const mockTrack: TEvent = {
@@ -98,7 +94,7 @@ describe("track", () => {
     },
   };
 
-  it("Adds the event to history", async () => {
+  it("adds the event to history", async () => {
     const eventFan = new EventFan();
     await eventFan.track(mockTrack.name, mockTrack.properties);
 

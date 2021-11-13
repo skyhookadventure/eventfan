@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { DestinationName } from "./DestinationName";
 import { User } from "../types/IdentifyProps";
-import { PageViewProps } from "../types/PageViewProps";
+import { Page } from "../types/PageViewProps";
 import { TEvent } from "../types/TrackEvent";
 
 /**
@@ -67,7 +66,7 @@ export default abstract class Destination {
   /**
    * Call a page-view track method (f defined)
    */
-  abstract page?: (props: PageViewProps) => void;
+  abstract page?: (props: Page) => void;
 
   /**
    * Track

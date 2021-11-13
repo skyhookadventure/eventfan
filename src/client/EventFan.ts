@@ -1,7 +1,7 @@
 import Destination from "../destinations/Destination";
 import { TEvent } from "../types/TrackEvent";
-import { IdentifyTraits, User } from "../types/IdentifyProps";
-import { PageViewProps } from "../types/PageViewProps";
+import { User } from "../types/IdentifyProps";
+import { Page } from "../types/PageViewProps";
 
 /**
  * Constructor props
@@ -51,7 +51,7 @@ export default class EventFan {
    *
    * Used for replaying of events, e.g. if a destination is loaded after a `.track()` call has already been made.
    */
-  private eventHistory: Array<{ track?: TEvent; page?: PageViewProps }> = [];
+  private eventHistory: Array<{ track?: TEvent; page?: Page }> = [];
 
   /**
    * Constructor
@@ -66,13 +66,17 @@ export default class EventFan {
    *
    * The identify call lets you identify a visiting user and associate them to their actions. It also lets you record
    * the traits about them like their name, email address, etc.
+   *
    */
   async identify(
     userId: User["userId"],
-    traits?: User["traits"]
+    traits?: User["traits"],
+    options?: User["options"],
+    /** @deprecated Use async/await instead */
+    callback?: () => void
   ): Promise<void> {
     // Format as a single object (destinations use this format)
-    const user: User = { userId, traits };
+    const user: User = { userId, traits, options };
 
     // Store the user details
     this.user = user;
@@ -83,21 +87,54 @@ export default class EventFan {
         destination.identify?.(user)
       )
     );
+
+    // Call the callback (deprecated)
+    callback?.();
   }
 
   /**
    * Track a page view
+   *
+   * __If migrating from RudderStack SDK V1__ note that category is now within the properties object.
    */
-  async page(props: PageViewProps): Promise<void> {
+  async page(
+    name: Page["name"] = document?.title,
+    properties: Partial<Page["properties"]> = {},
+    options?: Page["options"],
+    /** @deprecated Use async/await instead */
+    callback?: () => void
+  ): Promise<void> {
+    // Format as a single object (destinations use this format)
+    const page: Page = {
+      name,
+      properties: {
+        // Set defaults from browser
+        title: name,
+        url: window.location.href,
+        path: window.location.pathname,
+        ...properties,
+      },
+      options,
+    };
+
     // Add to the events history (for replays)
-    this.eventHistory.push({ page: props });
+    this.eventHistory.push({
+      page: {
+        ...page,
+        // Set the original timestamp if not set
+        options: { originalTimestamp: new Date(), ...page.options },
+      },
+    });
 
     // Use the destinations
     await Promise.all(
       this.loadedDestinations.map((destination: Destination) =>
-        destination.page?.(props)
+        destination.page?.(page)
       )
     );
+
+    // Call the callback (deprecated)
+    callback?.();
   }
 
   /**
@@ -110,7 +147,9 @@ export default class EventFan {
   async track<EventType extends TEvent>(
     name: EventType["name"],
     properties?: EventType["properties"],
-    options?: EventType["options"]
+    options?: EventType["options"],
+    /** @deprecated Use async/await instead */
+    callback?: () => void
   ): Promise<void> {
     // Format as a single object (destinations use this format)
     const trackEvent: TEvent = { name, properties, options };
@@ -137,5 +176,8 @@ export default class EventFan {
         return destination.track(mappedEvent);
       })
     );
+
+    // Call the callback (deprecated)
+    callback?.();
   }
 }

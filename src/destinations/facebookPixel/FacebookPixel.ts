@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IdentifyProps } from "../../types/IdentifyProps";
+import { User } from "../../types/IdentifyProps";
 import { TEvent } from "../../types/TrackEvent";
 import Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
@@ -21,24 +21,26 @@ export default class FacebookPixel implements Destination {
     "Order Completed": orderCompleted,
   };
 
-  identify(user: IdentifyProps): void {
-    const traits: AdvancedMatching = {
-      country: user.address?.country?.toLowerCase(),
-      fn: user.firstName,
-      ln: user.lastName,
-      ct: user.address?.city,
-      db: user.birthday
-        ? parseInt(user.birthday.toISOString().slice(0, 10).replace(/-/g, ""))
+  identify(user: User): void {
+    if (!user.traits) return;
+    const { traits } = user;
+    const advancedMatchingParameters: AdvancedMatching = {
+      country: traits.address?.country?.toLowerCase(),
+      fn: traits.firstName,
+      ln: traits.lastName,
+      ct: traits.address?.city,
+      db: traits.birthday
+        ? parseInt(traits.birthday.toISOString().slice(0, 10).replace(/-/g, ""))
         : undefined,
-      external_id: user.id,
-      ge: user.gender,
-      ph: user.phone ? parseInt(user.phone) : undefined,
-      st: user.address?.state,
-      zp: user.address?.state,
+      external_id: traits.id,
+      ge: traits.gender,
+      ph: traits.phone ? parseInt(traits.phone) : undefined,
+      st: traits.address?.state,
+      zp: traits.address?.state,
     };
 
     // Re-initialise with advanced matching parameters
-    this.fb("init", "PageView", traits);
+    this.fb("init", "PageView", advancedMatchingParameters);
   }
 
   async initialise(): Promise<void> {
@@ -56,7 +58,7 @@ export default class FacebookPixel implements Destination {
   }
 
   track(event: TEvent): Promise<void> {
-    this.fb("track", event.eventName, event.props);
+    this.fb("track", event.name, event.properties);
 
     // Resolve immediately as Facebook Pixel has no way of firing a callback once complete
     return Promise.resolve();
