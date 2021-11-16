@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { User } from "../../types/IdentifyProps";
+import { Gender, User } from "../../types/User";
 import { TEvent } from "../../types/TrackEvent";
 import Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
 import loadScript from "../../utils/loadScript";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
+import { FBQ } from "./types/FBQ";
 
 /**
  * Facebook Pixel Config
@@ -19,9 +20,11 @@ export interface FacebookPixelConfig {
  * Facebook Pixel Destination
  *
  * For use with __browser-side events only__.
+ *
+ * https://developers.facebook.com/docs/facebook-pixel/reference
  */
 export default class FacebookPixel implements Destination {
-  private fb = (window as any).fbq;
+  private fb = (window as any).fbq as FBQ;
 
   constructor(private config: FacebookPixelConfig) {}
 
@@ -29,26 +32,39 @@ export default class FacebookPixel implements Destination {
     "Order Completed": orderCompleted,
   };
 
+  /**
+   * Identify
+   *
+   * Note that Facebook hashes these values, so there are some special requirements (e.g. most
+   * strings must be in lower case).
+   * https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching/
+   */
   identify(user: User): void {
-    if (!user.traits) return;
     const { traits } = user;
+
+    // Set Facebook gender format
+    let gender: AdvancedMatching["ge"];
+    if (traits.gender === Gender.MALE) gender = "m";
+    if (traits.gender === Gender.FEMALE) gender = "f";
+
     const advancedMatchingParameters: AdvancedMatching = {
       country: traits.address?.country?.toLowerCase(),
-      fn: traits.firstName,
-      ln: traits.lastName,
-      ct: traits.address?.city,
+      ct: traits.address?.city?.toLowerCase()?.replace(/\s/g, ""),
       db: traits.birthday
-        ? parseInt(traits.birthday.toISOString().slice(0, 10).replace(/-/g, ""))
+        ? parseInt(traits.birthday.replace(/-/g, ""))
         : undefined,
+      em: traits.email?.toLowerCase(),
       external_id: traits.id,
-      ge: traits.gender,
+      fn: traits.firstName?.toLowerCase(),
+      ge: gender,
+      ln: traits.lastName?.toLowerCase(),
       ph: traits.phone ? parseInt(traits.phone) : undefined,
-      st: traits.address?.state,
-      zp: traits.address?.state,
+      st: traits.address?.state?.toLowerCase(),
+      zp: traits.address?.postalCode,
     };
 
     // Re-initialise with advanced matching parameters
-    this.fb("init", "PageView", advancedMatchingParameters);
+    this.fb("init", this.config.pixelId, advancedMatchingParameters);
   }
 
   async initialise(): Promise<void> {
@@ -56,8 +72,8 @@ export default class FacebookPixel implements Destination {
       "facebook-pixel-integration",
       "https://connect.facebook.net/en_US/fbevents.js"
     );
-    this.fb("init", this.config.pixelId);
     this.fb.disablePushState = true; // Disable automatic page tracking
+    this.fb("init", this.config.pixelId);
     this.isLoaded = true;
   }
 

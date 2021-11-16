@@ -27,8 +27,11 @@ export interface GenericFacebookEvent {
    * IDs being passed in content_ids or contents parameter are IDs of products then the value
    * should be product. If product group IDs are being passed, then the value should be
    * product_group.
+   *
+   * Note that whilst the documentation doesn't explain this, it's common practice to set additional content types as
+   * of an array rather than instead of e.g. PRODUCT (to enable specific re-marketing functionality).
    */
-  content_type?: ContentType;
+  content_type?: ContentType | ContentType[];
 
   /**
    * An array of JSON objects that contains the quantity and the International Article Number

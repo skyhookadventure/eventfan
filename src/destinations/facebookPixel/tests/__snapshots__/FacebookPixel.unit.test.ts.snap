@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`identify formats the advance matching parameters in a way that matches the snapshot 1`] = `
+Array [
+  "init",
+  "pixelId",
+  Object {
+    "country": "gb",
+    "ct": "city",
+    "db": 19900101,
+    "em": "test@gmail.com",
+    "external_id": "userID",
+    "fn": "firstname",
+    "ge": "m",
+    "ln": "lastname",
+    "ph": 447111111111,
+    "st": "london",
+    "zp": "SW11 111",
+  },
+]
+`;
+
+exports[`page calls the correct facebook track method 1`] = `
+Array [
+  "track",
+  "PageView",
+]
+`;
+
+exports[`track calls the facebook track method with parameters matching the snapshot 1`] = `
+Array [
+  "track",
+  "Test Event",
+  Object {
+    "iceCream": "vanilla",
+  },
+]
+`;

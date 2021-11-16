@@ -16,7 +16,8 @@ export interface IdentifyTraits {
   };
   age?: number;
   avatar?: string;
-  birthday?: Date;
+  /** UTC Date as YYYY-MM-DD */
+  birthday?: string;
   company?: {
     name?: string;
     id?: string | number;

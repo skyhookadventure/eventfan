@@ -12,7 +12,7 @@ export interface AdvancedMatching {
   /** First name */
   fn?: string;
   /** Gender (`m` or `f`) */
-  ge?: string;
+  ge?: "m" | "f";
   /** Last name */
   ln?: string;
   /** Phone number */
