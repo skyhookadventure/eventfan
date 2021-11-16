@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import Destination from "../destinations/Destination";
 import { TEvent } from "../types/TrackEvent";
 import { User } from "../types/IdentifyProps";
@@ -10,21 +11,13 @@ interface ConstructorProps {
   /**
    * Destinations that you want to send events to.
    */
-  destinations: Destination[];
+  destinations?: Destination[];
 }
 
 /**
  * Event Fan
  *
  * Send your analytics/tracking events to multiple destinations.
- *
- * @example
- * // Initialise
- * const client = new EventFan({
- *   destinations: [
- *     new FacebookPixel("YOUR_PIXEL_ID")
- *   ]
- * })
  */
 export default class EventFan {
   /**
@@ -42,7 +35,7 @@ export default class EventFan {
   /**
    * Loaded destinations only
    */
-  private get loadedDestinations() {
+  private get loadedDestinations(): Destination[] {
     return this.destinations.filter((dest) => dest.isLoaded === true);
   }
 
@@ -56,9 +49,44 @@ export default class EventFan {
   /**
    * Constructor
    */
-  constructor(props?: ConstructorProps) {
-    this.destinations = props?.destinations || [];
-    this.destinations.forEach((destination) => destination.initialise());
+  constructor(props: ConstructorProps = {}) {
+    const destinationsToAdd = props.destinations || [];
+
+    for (const dest of destinationsToAdd) {
+      this.addDestination(dest);
+    }
+  }
+
+  /**
+   * Add a destination
+   *
+   * Adds a destination, initialises it and then replays history before initialisation.
+   */
+  async addDestination(destination: Destination): Promise<void> {
+    this.destinations.push(destination);
+    await destination.initialise();
+    await this.replayHistory(destination);
+  }
+
+  /**
+   * Replay history for a destination
+   */
+  private async replayHistory(destination: Destination): Promise<void> {
+    // Identify
+    if (this.user) {
+      await destination.identify?.(this.user);
+    }
+
+    // Replay all page/track calls in order
+    for (const historicalEvent of this.eventHistory) {
+      if (historicalEvent.page) {
+        await destination.page?.(historicalEvent.page);
+      }
+
+      if (historicalEvent.track) {
+        await destination.track(historicalEvent.track);
+      }
+    }
   }
 
   /**
@@ -98,7 +126,7 @@ export default class EventFan {
    * __If migrating from RudderStack SDK V1__ note that category is now within the properties object.
    */
   async page(
-    name: Page["name"] = document?.title,
+    name: Page["name"] = document.title,
     properties: Partial<Page["properties"]> = {},
     options?: Page["options"],
     /** @deprecated Use async/await instead */

@@ -31,7 +31,7 @@ export default abstract class Destination {
    *
    * Mappings can be overwritten by the user, to customise them.
    */
-  public eventMappings: {
+  public eventMappings?: {
     [eventName: string]: (trackEvent: TEvent<any>, user?: User) => TEvent;
   } = {};
 
@@ -64,7 +64,7 @@ export default abstract class Destination {
   abstract name: DestinationName;
 
   /**
-   * Call a page-view track method (f defined)
+   * Call a page-view track method (if defined)
    */
   abstract page?: (props: Page) => void;
 
