@@ -38,13 +38,6 @@
     "versiony-cli": "^1.3.0"
   },
   "jest": {
-    "testMatch": [
-      "**/*.test.ts"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": "esbuild-jest"
-    },
-    "testEnvironment": "jsdom",
     "coverageThreshold": {
       "global": {
         "branches": 100,
@@ -52,6 +45,18 @@
         "lines": 100,
         "statements": 100
       }
+    },
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/*.test.ts"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": [
+        "esbuild-jest",
+        {
+          "sourcemap": true
+        }
+      ]
     }
   },
   "private": true
