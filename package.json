@@ -12,31 +12,32 @@
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
     "bump": "./node_modules/.bin/versiony package.json --patch",
-    "codegen": "ts-node ./src/sourceTypes/codegen.ts"
+    "codegen": "ts-node ./src/sourceTypes/codegen.ts",
+    "playwright": "playwright test .spec.test.ts"
   },
   "devDependencies": {
-    "@playwright/test": "^1.13.1",
-    "@testing-library/dom": "^8.1.0",
-    "@types/jest": "^27.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.29.1",
-    "@typescript-eslint/parser": "^4.29.1",
+    "@playwright/test": "^1.16.3",
+    "@testing-library/dom": "^8.11.1",
+    "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "change-case": "^4.1.2",
-    "esbuild": "^0.12.19",
+    "esbuild": "^0.13.14",
     "esbuild-jest": "^0.5.0",
-    "eslint": "^7.16.0",
-    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-typescript": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
     "glob": "^7.2.0",
-    "jest": "^27.0.6",
-    "playwright": "^1.13.1",
+    "jest": "^27.3.1",
+    "playwright": "^1.16.3",
     "postal-address-field-names": "^1.0.3",
-    "prettier": "^2.0.4",
+    "prettier": "^2.4.1",
     "quicktype-core": "^6.0.70",
     "recursive-readdir-sync": "^1.0.6",
-    "ts-node": "^10.2.0",
-    "typescript": "~4.3.5",
+    "ts-node": "^10.4.0",
+    "typescript": "~4.4.4",
     "versiony-cli": "^1.3.0"
   },
   "jest": {
@@ -50,7 +51,8 @@
     },
     "testEnvironment": "jsdom",
     "testMatch": [
-      "**/*.test.ts"
+      "**/*unit.test.ts",
+      "**/*int.test.ts"
     ],
     "transform": {
       "^.+\\.tsx?$": [
