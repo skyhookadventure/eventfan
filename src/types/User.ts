@@ -42,7 +42,7 @@ export interface IdentifyTraits {
 export interface User {
   userId: string;
   traits: IdentifyTraits;
-  options?: { originalTimestamp: Date };
+  options?: { originalTimestamp?: Date };
 }
 
 export enum Gender {

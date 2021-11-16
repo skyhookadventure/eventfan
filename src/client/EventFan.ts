@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 /* eslint-disable no-restricted-syntax */
 import Destination from "../destinations/Destination";
 import { TEvent } from "../types/TrackEvent";

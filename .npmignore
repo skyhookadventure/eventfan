@@ -1,4 +1,5 @@
-src/
+src
+distBrowser
 .cdk.staging
 cdk.out
 coverage
