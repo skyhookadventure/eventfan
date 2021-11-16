@@ -14,5 +14,10 @@ export interface FBQ {
 
   (eventType: "track", eventName: string, properties?: any): void;
 
+  callMethod: (...params: any) => void;
   disablePushState: boolean;
+  loaded: boolean;
+  push: FBQ;
+  queue: Array<any>;
+  version: string;
 }

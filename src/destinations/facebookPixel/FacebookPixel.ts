@@ -25,7 +25,7 @@ export interface FacebookPixelConfig {
  * https://developers.facebook.com/docs/facebook-pixel/reference
  */
 export default class FacebookPixel implements Destination {
-  private fb = (window as any).fbq as FBQ;
+  private fb: FBQ = (window as any).fbq as FBQ;
 
   constructor(protected config: FacebookPixelConfig) {}
 
@@ -69,12 +69,34 @@ export default class FacebookPixel implements Destination {
   }
 
   async initialise(): Promise<void> {
+    // Run initial FB Pixel Setup (this is taken from the code setup tool on the FB Events Manager)
+    if (!(window as any).fbq) {
+      (window as any).fbq = function pixelHandler(...setupArgs) {
+        if (this.fb.callMethod) {
+          this.fb.callMethod.call(this.fb, ...setupArgs);
+        } else {
+          this.fb.queue.push(setupArgs);
+        }
+      };
+      this.fb = (window as any).fbq;
+      // eslint-disable-next-line no-underscore-dangle
+      (window as any)._fbq = this.fb;
+      this.fb.push = this.fb;
+      this.fb.loaded = !0;
+      this.fb.queue = [];
+    }
+
+    // Load the script
     await loadScript(
       "facebook-pixel-integration",
       "https://connect.facebook.net/en_US/fbevents.js"
     );
-    this.fb.disablePushState = true; // Disable automatic page tracking
+
+    // Disable automatic page tracking
+    this.fb.disablePushState = true;
     this.fb("init", this.config.pixelId);
+
+    // Set the destination as loaded
     this.isLoaded = true;
   }
 

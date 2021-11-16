@@ -29,7 +29,7 @@ export default async function loadScript(
     scriptElement.addEventListener("load", () => resolve());
 
     // Append the script to the body
-    document.body.appendChild(scriptElement);
+    document.head.appendChild(scriptElement);
   });
 
   await isReady;
