@@ -31,6 +31,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off", // Disabled as many destinations require this
     "import/no-cycle": "off", // Disabled for performance
     "import/no-extraneous-dependencies": "off", // Disabled for performance
+    "no-await-in-loop": "off", // Allow await in loops (sometime useful to track events in order)
     // Console logging is only an issue on frontend (not backend) code due to imperfect browser support. For the backend
     // it's actually recommended as a quick way of getting logs from lambdas to Cloudwatch.
     "no-console": "off",
