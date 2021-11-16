@@ -8,11 +8,14 @@ import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
 import { FBQ } from "./types/FBQ";
 import { ContentType } from "./types/shared/GenericFacebookEvent";
+import productAdded from "./mapping/ecommerce/productAdded";
+import productViewed from "./mapping/ecommerce/productViewed";
 
 /**
  * Facebook Pixel Config
  */
 export interface FacebookPixelConfig {
+  advancedMapping?: boolean;
   categoryToContent?: Array<{ from: string; to: ContentType }>;
   pixelId: string;
 }
@@ -31,6 +34,8 @@ export default class FacebookPixel implements Destination {
 
   eventMappings = {
     "Order Completed": orderCompleted,
+    "Product Added": productAdded,
+    "Product Viewed": productViewed,
   };
 
   /**
@@ -41,6 +46,9 @@ export default class FacebookPixel implements Destination {
    * https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching/
    */
   identify(user: User): void {
+    // Don't run if advancedMapping is disabled
+    if (this.config.advancedMapping === false) return;
+
     const { traits } = user;
 
     // Set Facebook gender format
