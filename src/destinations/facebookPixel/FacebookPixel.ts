@@ -3,9 +3,17 @@ import { User } from "../../types/IdentifyProps";
 import { TEvent } from "../../types/TrackEvent";
 import Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
-import loadScript from "../loadScript";
+import loadScript from "../../utils/loadScript";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
+
+/**
+ * Facebook Pixel Config
+ */
+export interface FacebookPixelConfig {
+  categoryToContent?: Array<{ from: string; to: string }>;
+  pixelId: string;
+}
 
 /**
  * Facebook Pixel Destination
@@ -15,7 +23,7 @@ import { AdvancedMatching } from "./types/AdvancedMatching";
 export default class FacebookPixel implements Destination {
   private fb = (window as any).fbq;
 
-  constructor(private pixelID: string) {}
+  constructor(private config: FacebookPixelConfig) {}
 
   eventMappings = {
     "Order Completed": orderCompleted,
@@ -48,7 +56,7 @@ export default class FacebookPixel implements Destination {
       "facebook-pixel-integration",
       "https://connect.facebook.net/en_US/fbevents.js"
     );
-    this.fb("init", this.pixelID);
+    this.fb("init", this.config.pixelId);
     this.fb.disablePushState = true; // Disable automatic page tracking
     this.isLoaded = true;
   }
