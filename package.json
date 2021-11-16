@@ -15,7 +15,7 @@
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
     "bump": "./node_modules/.bin/versiony package.json --patch",
     "codegen": "ts-node ./src/sourceTypes/codegen.ts",
-    "playwright": "playwright test .spec.test.ts --disable-web-security"
+    "playwright": "playwright test .spec.test.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.16.3",
