@@ -1,3 +1,5 @@
+import { CountryCodes } from "postal-address-field-names";
+
 /**
  * Identify Event Properties
  *
@@ -7,7 +9,7 @@
 export interface IdentifyTraits {
   address?: {
     city?: string;
-    country?: string;
+    country?: CountryCodes;
     postalCode?: string;
     state?: string;
     street?: string;
@@ -26,7 +28,7 @@ export interface IdentifyTraits {
   description?: string;
   email?: string;
   firstName?: string;
-  gender?: string;
+  gender?: Gender;
   id?: string;
   lastName?: string;
   name?: string;
@@ -38,6 +40,12 @@ export interface IdentifyTraits {
 
 export interface User {
   userId: string;
-  traits?: IdentifyTraits;
+  traits: IdentifyTraits;
   options?: { originalTimestamp: Date };
+}
+
+export enum Gender {
+  MALE = "MALE",
+  FEMALE = "FEMALE",
+  OTHER = "OTHER",
 }

@@ -1,4 +1,4 @@
-import { User } from "../types/IdentifyProps";
+import { User } from "../types/User";
 
 const mockUser: User = {
   options: undefined,

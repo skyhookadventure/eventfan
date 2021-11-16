@@ -30,6 +30,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "jest": "^27.0.6",
     "playwright": "^1.13.1",
+    "postal-address-field-names": "^1.0.3",
     "prettier": "^2.0.4",
     "quicktype-core": "^6.0.70",
     "recursive-readdir-sync": "^1.0.6",

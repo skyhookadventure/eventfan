@@ -4406,6 +4406,11 @@ posix-character-classes@^0.1.0:
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
+postal-address-field-names@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/postal-address-field-names/-/postal-address-field-names-1.0.3.tgz#2fb2695d66286c4acc08b53e61d58c90b8338a91"
+  integrity sha512-IuEVpLpgL44e/IVSWnH5yXQEJmKeklaMiIF6WbyElrq7e/Vwy0YeImQ2Hz10ynridXlP8drUUghDtIkRqqbQZA==
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"

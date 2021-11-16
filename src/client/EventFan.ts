@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import Destination from "../destinations/Destination";
 import { TEvent } from "../types/TrackEvent";
-import { User } from "../types/IdentifyProps";
+import { User } from "../types/User";
 import { Page } from "../types/PageViewProps";
 
 /**
@@ -98,13 +98,18 @@ export default class EventFan {
    */
   async identify(
     userId: User["userId"],
-    traits?: User["traits"],
+    traits: User["traits"] = {},
     options?: User["options"],
     /** @deprecated Use async/await instead */
     callback?: () => void
   ): Promise<void> {
     // Format as a single object (destinations use this format)
-    const user: User = { userId, traits, options };
+    const user: User = {
+      userId,
+      // Default the id as userId if set
+      traits: { id: userId, ...traits },
+      options,
+    };
 
     // Store the user details
     this.user = user;
