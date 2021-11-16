@@ -1,6 +1,17 @@
 /* eslint-disable @typescript-eslint/dot-notation */
-import { mockTrack, mockUser } from "../../..";
+import { mockTrack, mockUser } from "../../../mocks";
+import { DestinationName } from "../../DestinationName";
 import FacebookPixel from "../FacebookPixel";
+
+it("has the correct destination name", () => {
+  const fb = new FacebookPixel({ pixelId: "pixelId" });
+  expect(fb.name).toBe(DestinationName.FACEBOOK_PIXEL);
+});
+
+it("starts as not loaded", () => {
+  const fb = new FacebookPixel({ pixelId: "pixelId" });
+  expect(fb.isLoaded).toBeFalsy();
+});
 
 describe("identify", () => {
   it("formats the advance matching parameters in a way that matches the snapshot", async () => {

@@ -7,12 +7,13 @@ import loadScript from "../../utils/loadScript";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
 import { FBQ } from "./types/FBQ";
+import { ContentType } from "./types/shared/GenericFacebookEvent";
 
 /**
  * Facebook Pixel Config
  */
 export interface FacebookPixelConfig {
-  categoryToContent?: Array<{ from: string; to: string }>;
+  categoryToContent?: Array<{ from: string; to: ContentType }>;
   pixelId: string;
 }
 
@@ -26,7 +27,7 @@ export interface FacebookPixelConfig {
 export default class FacebookPixel implements Destination {
   private fb = (window as any).fbq as FBQ;
 
-  constructor(private config: FacebookPixelConfig) {}
+  constructor(protected config: FacebookPixelConfig) {}
 
   eventMappings = {
     "Order Completed": orderCompleted,
