@@ -197,8 +197,10 @@ export default class EventFan {
       this.loadedDestinations.map((destination: Destination) => {
         // Apply the event mapping if it exists on this destination
         const mappedEvent =
-          destination.eventMappings[trackEvent.name]?.(trackEvent, this.user) ||
-          trackEvent;
+          destination.eventMappings?.[trackEvent.name]?.(
+            trackEvent,
+            this.user
+          ) || trackEvent;
 
         // Send
         return destination.track(mappedEvent);
