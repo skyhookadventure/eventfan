@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "tsc",
+    "dev": "ts-node ./src/e2e/browser/server",
     "buildBrowser": "ts-node ./src/esbuild.ts",
     "watch": "tsc -w --resolveJsonModule",
     "test": "./node_modules/.bin/jest",
@@ -14,7 +15,7 @@
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
     "bump": "./node_modules/.bin/versiony package.json --patch",
     "codegen": "ts-node ./src/sourceTypes/codegen.ts",
-    "playwright": "playwright test .spec.test.ts"
+    "playwright": "playwright test .spec.test.ts --disable-web-security"
   },
   "devDependencies": {
     "@playwright/test": "^1.16.3",
@@ -33,6 +34,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "fs-extra": "^10.0.0",
     "jest": "^27.3.1",
+    "live-server": "^1.2.1",
     "playwright": "^1.16.3",
     "postal-address-field-names": "^1.0.3",
     "prettier": "^2.4.1",
