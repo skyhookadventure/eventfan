@@ -155,7 +155,9 @@ describe("track", () => {
 
   it("forwards the call to each loaded destination", async () => {
     const destination = new MockDestination();
-    const eventFan = new EventFan({ destinations: [destination] });
+    const eventFan = new EventFan({
+      destinations: [destination, new MinimalMockDestination()],
+    });
     await eventFan.track(mockTrack.name, mockTrack.properties);
     expect(destination.track).toHaveBeenCalledWith(mockTrack);
   });
