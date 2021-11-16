@@ -15,7 +15,7 @@ import EventFan, { FacebookPixel } from "event-fan";
 const eventFan = new EventFan({
   destinations: [
     // Any destinations you want here
-    new FacebookPixel("your-facebook-key"),
+    new FacebookPixel({ pixelId: "your-facebook-pixel-id" }),
   ],
 });
 ```
@@ -35,13 +35,12 @@ each destination (in this case Facebook Pixel's `Purchase` event for example):
 ```typescript
 import { Ecommerce } from "event-fan";
 
-eventFan.track<Ecommerce.OrderCompleted>({
-  eventName: "Order Completed",
+eventFan.track<Ecommerce.OrderCompleted>("Order Completed",
   props: {
     order_id: "order_UUID",
     // ...
-  },
-});
+  }
+);
 ```
 
 ## Key features
@@ -52,16 +51,16 @@ Use the included event types (e.g. "Order Completed") from the
 RudderStack/Segment specifications, or create your own custom typings:
 
 ```typescript
-type CustomEvent = TEvent<"Custom Event Name", {
-  iceCream: string;
-}>
-
-eventFan.track<CustomEvent>({
-  eventName: "Custom Event Name", {
-    iceCream: "vanilla"
+type CustomEvent = TEvent<
+  "Custom Event Name",
+  {
+    iceCream: string;
   }
-})
+>;
 
+eventFan.track<CustomEvent>("Custom Event Name", {
+  iceCream: "vanilla",
+});
 ```
 
 ### 2. Map events to destination events (Facebook Ads, Google Analytics..), with sensible defaults
