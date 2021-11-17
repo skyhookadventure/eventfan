@@ -3,11 +3,19 @@
 [![Built with
 typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
 
-Send tracking/analytics events to multiple destinations (Google Analytics, Facebook, Rudderstack...), with TypeScript.
+Send tracking events (e.g. order completed) to multiple destinations (Google Analytics, Facebook...), with the correct
+formatting applied automatically.
+
+Loads fast on the browser - the core lib is c. 4kb (minified) and destinations (e.g. Facebook Pixel) can be loaded
+asynchronously. Setup for zero-config tree shaking by default (removes unused code/destinations), with your existing bundler (e.g. Webpack/Esbuild).
+
+Built for reliability with unit test coverage, e2e tests on popular browsers and type safety.
 
 ## Quick Start
 
-Initialise your client:
+### Initialise Client & Destinations
+
+Initialise just once in your application:
 
 ```typescript
 import EventFan, { FacebookPixel } from "event-fan";
@@ -20,35 +28,56 @@ const eventFan = new EventFan({
 });
 ```
 
+### Track page loads
+
+By default it will use the page `<Title/>` and url:
+
+```typescript
+eventFan.page();
+```
+
+### Identify users
+
 Identify a user when they log in:
 
 ```typescript
-eventFan.identify({
-  first_name: "First name",
+eventFan.identify("userID", {
+  first_name: "Jane",
+  last_name: "Doe",
+  email: "jane@example.com",
+  // ...
 });
 ```
 
-Track events, using either the Segment/Rudderstack Specification types (included), or with your own types (created with
+### Track events
+
+Track events, using 50+ Segment/Rudderstack Specification types (included), or with your own types (created with
 `TEvent<name, properties>`). With standard events the properties are automatically converted to the correct format for
 each destination (in this case Facebook Pixel's `Purchase` event for example):
 
 ```typescript
 import { Ecommerce } from "event-fan";
 
-eventFan.track<Ecommerce.OrderCompleted>("Order Completed",
-  props: {
-    order_id: "order_UUID",
-    // ...
-  }
-);
+eventFan.track<Ecommerce.OrderCompleted>("Order Completed", {
+  order_id: "order_UUID",
+  // ...
+});
 ```
 
-## Key features
+For pure JavaScript users, just omit the typing:
 
-### 1. Emit Type-Safe Events
+```javascript
+eventFan.track("Order Completed", {
+  order_id: "order_UUID",
+  // ...
+});
+```
 
-Use the included event types (e.g. "Order Completed") from the
-RudderStack/Segment specifications, or create your own custom typings:
+## Customise
+
+### Create your own event types
+
+To add custom events, extend the `TEvent` type:
 
 ```typescript
 type CustomEvent = TEvent<
@@ -63,7 +92,7 @@ eventFan.track<CustomEvent>("Custom Event Name", {
 });
 ```
 
-### 2. Map events to destination events (Facebook Ads, Google Analytics..), with sensible defaults
+### Customise how events are mapped (converted) for destinations (Facebook Ads, Google Analytics..)
 
 Either use the default mappings (similar to RudderStack/Segment), or write your own:
 
@@ -80,10 +109,14 @@ export function customOrderCompleted({
     content_type: FacebookPixel.ContentType.DESTINATION,
   };
 }
+
+// Add to your client
+const facebookPixel = new FacebookPixel({ pixelId: "123" });
 facebookPixel.mapping["Order Completed"] = customOrderCompleted;
+await eventFan.addDestination(facebookPixel);
 ```
 
-### 3. Extend with new destinations
+### Extend with new destinations
 
 Have a new destination you want to add? Simply implement the `Destination` class:
 
@@ -97,13 +130,14 @@ class CustomDestination implements Destination {
 }
 ```
 
+Note that there is a helpful `loadScript` util exported, that you may want to use if you are loading third party scripts
+from a url.
+
 ## Contributing
 
-### Setup
+### Development environment
 
-The only requirement is [playwright](https://playwright.dev/docs/intro) for cross-browser testing. Install the test
-browsers separately with:
+You can run `yarn dev` to open up a browser (with hot reloading) that shows your destination in action.
 
-```bash
-npx playwright install
-```
+Thorough unit tests should be written for changes, as well as at least one E2E test to make sure it loads across all
+major browsers.
