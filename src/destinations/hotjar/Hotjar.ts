@@ -38,9 +38,9 @@ export default class Hotjar implements Destination {
     // Run initial Hotjar Setup
     // https://help.hotjar.com/hc/en-us/articles/115009336727-Manually-Adding-the-Tracking-Code
     if (!this.hj) {
-      window.hj = (...args) => {
+      window.hj = ((...args: any[]) => {
         (window.hj!.q = window.hj?.q || []).push(args);
-      };
+      }) as any;
       this.hj = window.hj!;
     }
 

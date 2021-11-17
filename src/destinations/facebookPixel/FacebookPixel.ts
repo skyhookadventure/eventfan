@@ -87,7 +87,7 @@ export default class FacebookPixel implements Destination {
   async initialise(): Promise<void> {
     // Run initial FB Pixel Setup (this is taken from the code setup tool on the FB Events Manager)
     if (!window.fbq) {
-      (window as any).fbq = function pixelHandler(...setupArgs) {
+      (window as any).fbq = function pixelHandler(...setupArgs: any[]) {
         if (this.fb.callMethod) {
           this.fb.callMethod.call(this.fb, ...setupArgs);
         } else {
