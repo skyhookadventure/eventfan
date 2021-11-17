@@ -5,6 +5,15 @@ import { TEvent } from "../../types/TrackEvent";
 import { User } from "../../types/User";
 import Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
+import orderCompleted from "./mapping/ecommerce/orderCompleted";
+import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
+import productAdded from "./mapping/ecommerce/productAdded";
+import productViewed from "./mapping/ecommerce/productViewed";
+
+/**
+ * Export mapping functions so they can be customised
+ */
+export { productAdded, productViewed, orderCompleted, checkoutStarted };
 
 /**
  * Gtag Config
@@ -22,6 +31,13 @@ export default class GA4 implements Destination {
   private gtag: Gtag = window.gtag as Gtag;
 
   constructor(protected config: GA4Config) {}
+
+  eventMappings = {
+    "Order Completed": orderCompleted,
+    "Product Added": productAdded,
+    "Product Viewed": productViewed,
+    "Checkout Started": checkoutStarted,
+  };
 
   /**
    * Identify

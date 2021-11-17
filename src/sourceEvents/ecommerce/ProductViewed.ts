@@ -18,6 +18,10 @@ interface ProductViewedProps {
    */
   coupon?: string;
   /**
+   * Added currency as well, as it is needed by e.g. Gtag
+   */
+  currency?: string;
+  /**
    * Image url of the product
    */
   image_url?: string;

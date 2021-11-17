@@ -51,7 +51,12 @@ export interface AddToCart {
 
 export type AddToWishlist = AddToCart;
 
-export type BeginCheckout = AddToCart;
+export type BeginCheckout = {
+  currency: string;
+  value: number;
+  coupon?: string;
+  items: Item[];
+};
 
 export interface EarnVirtualCurrency {
   virtual_currency_name?: string;
