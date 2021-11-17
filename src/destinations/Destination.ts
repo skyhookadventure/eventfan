@@ -32,7 +32,7 @@ export default abstract class Destination {
    * Mappings can be overwritten by the user, to customise them.
    */
   public eventMappings?: {
-    [eventName: string]: (trackEvent: TEvent<any>, user?: User) => TEvent;
+    [name: string]: (trackEvent: TEvent<any, any>, user?: User) => TEvent;
   } = {};
 
   /**
@@ -54,7 +54,7 @@ export default abstract class Destination {
    *
    * Set to true as soon as the plugin is ready to accept identify/track/page calls.
    */
-  isLoaded = false;
+  public isLoaded = false;
 
   /**
    * Destination name

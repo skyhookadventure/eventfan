@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Gender, User } from "../../types/User";
 import { TEvent } from "../../types/TrackEvent";
@@ -34,7 +35,7 @@ export interface FacebookPixelConfig {
  * https://developers.facebook.com/docs/facebook-pixel/reference
  */
 export default class FacebookPixel implements Destination {
-  private fb: FBQ = (window as any).fbq as FBQ;
+  private fb: FBQ = window.fbq as FBQ;
 
   constructor(protected config: FacebookPixelConfig) {}
 
@@ -85,7 +86,7 @@ export default class FacebookPixel implements Destination {
 
   async initialise(): Promise<void> {
     // Run initial FB Pixel Setup (this is taken from the code setup tool on the FB Events Manager)
-    if (!(window as any).fbq) {
+    if (!window.fbq) {
       (window as any).fbq = function pixelHandler(...setupArgs) {
         if (this.fb.callMethod) {
           this.fb.callMethod.call(this.fb, ...setupArgs);
@@ -93,9 +94,9 @@ export default class FacebookPixel implements Destination {
           this.fb.queue.push(setupArgs);
         }
       };
-      this.fb = (window as any).fbq;
+      this.fb = window.fbq!;
       // eslint-disable-next-line no-underscore-dangle
-      (window as any)._fbq = this.fb;
+      window._fbq = this.fb;
       this.fb.push = this.fb;
       this.fb.loaded = !0;
       this.fb.queue = [];
