@@ -18,7 +18,7 @@ function buildBrowserBundle() {
   // Build
   esbuild.build({
     bundle: true,
-    entryPoints: ["./src/client/EventFan.ts"],
+    entryPoints: ["./src/index.ts"],
     format: "iife",
     globalName: "EventFan",
     minify: true,
