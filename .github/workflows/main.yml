@@ -49,7 +49,7 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Background Server
-        uses: BerniWittmann/background-server-action@v1.0.4
+        uses: BerniWittmann/background-server-action@v1.0.1
         with:
           command: yarn playwright
           start: yarn dev
