@@ -70,6 +70,25 @@ describe("addDestination", () => {
     const destination = new MinimalMockDestination();
     await eventFan.addDestination(destination);
   });
+
+  it("handles errors gracefully", async () => {
+    const mockLog = jest.fn();
+    jest.spyOn(console, "log").mockImplementation(mockLog);
+
+    const eventFan = new EventFan();
+    const destination = new MinimalMockDestination();
+    destination.initialise = (() => {
+      throw new Error("Error message.");
+    }) as any;
+    await eventFan.addDestination(destination);
+
+    expect(mockLog.mock.calls[0]).toMatchInlineSnapshot(`
+      Array [
+        "Failed to load destination MOCK_DESTINATION",
+        "Error message.",
+      ]
+    `);
+  });
 });
 
 describe("identify", () => {

@@ -65,8 +65,15 @@ export default class EventFan {
    */
   async addDestination(destination: Destination): Promise<void> {
     this.destinations.push(destination);
-    await destination.initialise();
-    await this.replayHistory(destination);
+
+    try {
+      await destination.initialise();
+      await this.replayHistory(destination);
+    } catch (e: any) {
+      // Initialisation can fail for many reasons (most likely http errors). If this happens we simply log here, and as
+      // the destination `isLoaded` property will still be false it won't be called again.
+      console.log(`Failed to load destination ${destination.name}`, e?.message);
+    }
   }
 
   /**
