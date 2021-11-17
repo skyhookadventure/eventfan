@@ -10,10 +10,9 @@ describe("getContentTypes", () => {
   });
 
   it("applies the mapping when specified", () => {
-    const res = getContentTypes(
-      { products: [{ product_id: "id", category: "Trip" }] },
-      { categoryToContent: [{ from: "Trip", to: ContentType.DESTINATION }] }
-    );
+    const res = getContentTypes("Trip", {
+      categoryToContent: [{ from: "Trip", to: ContentType.DESTINATION }],
+    });
     expect(res).toEqual([ContentType.PRODUCT, ContentType.DESTINATION]);
   });
 });
@@ -26,26 +25,26 @@ describe("orderCompleted", () => {
     );
 
     expect(res).toMatchInlineSnapshot(`
-Object {
-  "name": "Purchase",
-  "properties": Object {
-    "content_ids": Array [
-      "productID",
-    ],
-    "content_type": Array [
-      "product",
-    ],
-    "contents": Array [
       Object {
-        "id": "productID",
-        "quantity": 2,
-      },
-    ],
-    "currency": "GBP",
-    "eventID": "orderID",
-    "value": 200,
-  },
-}
-`);
+        "name": "Purchase",
+        "properties": Object {
+          "content_ids": Array [
+            "productID",
+          ],
+          "content_type": Array [
+            "product",
+          ],
+          "contents": Array [
+            Object {
+              "id": "productID",
+              "quantity": 1,
+            },
+          ],
+          "currency": "GBP",
+          "eventID": "orderID",
+          "value": 200,
+        },
+      }
+    `);
   });
 });
