@@ -71,5 +71,8 @@
     }
   },
   "private": true,
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "posthog-js": "^1.16.4"
+  }
 }

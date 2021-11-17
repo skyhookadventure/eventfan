@@ -1,6 +1,7 @@
 import EventFan, { FacebookPixel } from "../../index";
 import Hotjar from "../../destinations/hotjar/Hotjar";
 import GA4 from "../../destinations/ga4/GA4";
+import Posthog from "../../destinations/posthog/Posthog";
 
 /**
  * Create a client with real destinations
@@ -15,6 +16,11 @@ async function addEventFan() {
   );
   await eventFan.addDestination(new Hotjar({ siteID: "2705682" }));
   await eventFan.addDestination(new GA4({ measurementId: "GTM-TNBDGJR" }));
+  await eventFan.addDestination(
+    new Posthog({
+      teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
+    })
+  );
 
   // Trigger a page track
   eventFan.page();
