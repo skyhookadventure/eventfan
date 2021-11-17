@@ -10,19 +10,49 @@ on:
 
 jobs:
   test:
-    name: Lint and test
+    name: Unit/integration tests & linting
+    timeout-minutes: 3
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.working-directory }}/node_modules
+          key: ${{ env.working-directory }}-${{ hashFiles(format('{0}/yarn.lock', env.working-directory)) }}
+          restore-keys: ${{ env.working-directory }}
       - name: Install
         run: yarn install
       - name: Test
         run: yarn test
       - name: Lint
         run: yarn lint
+
+  e2e:
+    name: Browser end-to-end tests
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.working-directory }}/node_modules
+          key: ${{ env.working-directory }}-${{ hashFiles(format('{0}/yarn.lock', env.working-directory)) }}
+          restore-keys: ${{ env.working-directory }}
+      - name: Install
+        run: yarn install
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Run E2E Tests
+        uses: BerniWittmann/background-server-action@latest
+        with:
+          command: yarn run playwright
+          start: yarn dev
 
   # publish-npm:
   #   if: github.event_name == 'push' # Push/merge only, not on PR
