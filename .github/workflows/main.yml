@@ -48,11 +48,11 @@ jobs:
         run: yarn install
       - name: Install Playwright
         run: npx playwright install --with-deps
-      - name: Run E2E Tests
-        uses: BerniWittmann/background-server-action@latest
-        with:
-          command: yarn run playwright
-          start: yarn dev
+      # - name: Run E2E Tests
+      #   uses: BerniWittmann/background-server-action@latest
+      #   with:
+      #     command: yarn run playwright
+      #     start: yarn dev
 
   # publish-npm:
   #   if: github.event_name == 'push' # Push/merge only, not on PR
