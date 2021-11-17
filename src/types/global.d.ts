@@ -1,5 +1,5 @@
-import { Gtag } from "gtag.js";
 import { FBQ } from "../destinations/facebookPixel/types/FBQ";
+import { Gtag } from "../destinations/ga4/types/GtagWindow";
 import {
   HotjarWindow,
   HotjarWindowSettings,
@@ -21,6 +21,8 @@ declare global {
     /** GA4 */
     dataLayer: Array<any>;
     gtag: Gtag;
+    /** Posthog */
+    posthog: any;
   }
 }
 

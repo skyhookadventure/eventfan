@@ -1,4 +1,3 @@
-import { Gtag } from "gtag.js";
 import { loadScript } from "../../index";
 import { Page } from "../../types/PageViewProps";
 import { TEvent } from "../../types/TrackEvent";
@@ -9,6 +8,7 @@ import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
 import productAdded from "./mapping/ecommerce/productAdded";
 import productViewed from "./mapping/ecommerce/productViewed";
+import { Gtag } from "./types/GtagWindow";
 
 /**
  * Export mapping functions so they can be customised
