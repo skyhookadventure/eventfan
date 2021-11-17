@@ -4,14 +4,14 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "lib": ["es2018", "dom"],
-    "module": "esnext",
+    "module": "ES6",
     "noImplicitAny": false,
     "outDir": "dist",
-    "resolveJsonModule": true,
     "rootDir": "src",
     "strict": true,
     "target": "ES2020",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node"
   },
   "include": [".eslintrc.js", "./src/**/*"]
 }
