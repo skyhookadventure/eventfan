@@ -1,11 +1,11 @@
-import { mockOrderCompleted } from "../../../../../mocks";
+import { mockOrderCompleted } from "../../../../../mocks/index";
 import FacebookPixel from "../../../FacebookPixel";
 import { ContentType } from "../../../types/shared/GenericFacebookEvent";
 import orderCompleted, { getContentTypes } from "../orderCompleted";
 
 describe("getContentTypes", () => {
   it("defaults to product, with no items", () => {
-    const res = getContentTypes({}, {});
+    const res = getContentTypes(undefined, {});
     expect(res).toEqual([ContentType.PRODUCT]);
   });
 

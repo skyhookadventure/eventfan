@@ -1,4 +1,4 @@
-import { Ecommerce } from "../../../..";
+import { Ecommerce } from "../../../../index";
 import { TEvent } from "../../../../types/TrackEvent";
 import FacebookPixel from "../../FacebookPixel";
 import { ViewContent } from "../../types/ViewContent";

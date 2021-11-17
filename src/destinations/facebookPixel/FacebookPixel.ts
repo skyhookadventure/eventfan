@@ -10,6 +10,12 @@ import { FBQ } from "./types/FBQ";
 import { ContentType } from "./types/shared/GenericFacebookEvent";
 import productAdded from "./mapping/ecommerce/productAdded";
 import productViewed from "./mapping/ecommerce/productViewed";
+import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
+
+/**
+ * Export mapping functions so they can be customised
+ */
+export { productAdded, productViewed, orderCompleted, checkoutStarted };
 
 /**
  * Facebook Pixel Config
@@ -36,6 +42,7 @@ export default class FacebookPixel implements Destination {
     "Order Completed": orderCompleted,
     "Product Added": productAdded,
     "Product Viewed": productViewed,
+    "Checkout Started": checkoutStarted,
   };
 
   /**
