@@ -1,3 +1,4 @@
+import { Gtag } from "gtag.js";
 import { FBQ } from "../destinations/facebookPixel/types/FBQ";
 import {
   HotjarWindow,
@@ -17,6 +18,9 @@ declare global {
     /** Hotjar */
     hj?: HotjarWindow;
     _hjSettings: HotjarWindowSettings;
+    /** GA4 */
+    dataLayer: Array<any>;
+    gtag: Gtag;
   }
 }
 
