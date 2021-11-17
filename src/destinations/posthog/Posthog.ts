@@ -16,6 +16,9 @@ export interface PosthogConfig {
  * Posthog Destination
  */
 export default class Posthog implements Destination {
+  // Expose for use outside of EventFan (e.g. for feature flags)
+  public posthog = posthog;
+
   constructor(protected config: PosthogConfig) {}
 
   identify(user: User): void {
@@ -29,7 +32,7 @@ export default class Posthog implements Destination {
       capture_pageview: false, // We do this with `.page()`
     });
 
-    // Set to the window (so it can be used globally as well and tested)
+    // Set to the window (so it can be used globally as well e.g. for feature flags, and tested more easily)
     (window as any).posthog = posthog;
 
     // Set the destination as loaded
