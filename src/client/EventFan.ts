@@ -92,7 +92,7 @@ export default class EventFan {
       }
 
       if (historicalEvent.track) {
-        await destination.track(historicalEvent.track);
+        await destination.track?.(historicalEvent.track);
       }
     }
   }
@@ -216,7 +216,7 @@ export default class EventFan {
           ) || trackEvent;
 
         // Send
-        return destination.track(mappedEvent);
+        return destination.track?.(mappedEvent);
       })
     );
 

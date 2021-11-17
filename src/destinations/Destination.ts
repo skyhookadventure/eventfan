@@ -79,7 +79,9 @@ export default abstract class Destination {
    * @returns Promise that resolves once the underlying tracking call has been completed (allows the user to await a
    * `track()` call and then do something once all underlying destinations have completed).
    */
-  abstract track: <EventType extends TEvent>(event: EventType) => Promise<void>;
+  abstract track?: <EventType extends TEvent>(
+    event: EventType
+  ) => Promise<void>;
 
   /**
    * If you need any environmental variables, set them with the constructor.
