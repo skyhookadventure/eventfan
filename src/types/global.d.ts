@@ -1,4 +1,8 @@
 import { FBQ } from "../destinations/facebookPixel/types/FBQ";
+import {
+  HotjarWindow,
+  HotjarWindowSettings,
+} from "../destinations/hotjar/types/HotjarWindow";
 
 /**
  * Global Augmentations
@@ -9,8 +13,10 @@ declare global {
   interface Window {
     /** Facebook Pixel */
     fbq?: FBQ;
-    /** Facebook Pixel (legacy) */
     _fbq?: FBQ;
+    /** Hotjar */
+    hj?: HotjarWindow;
+    _hjSettings: HotjarWindowSettings;
   }
 }
 
