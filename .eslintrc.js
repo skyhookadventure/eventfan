@@ -40,5 +40,6 @@ module.exports = {
     "no-new": "off",
     radix: "off", // Disabled for performance
     "prettier/prettier": ["error", { printWidth: 80 }],
+    "import/extensions": "off",
   },
 };
