@@ -12,7 +12,7 @@
     "watch": "tsc -w --resolveJsonModule",
     "test": "./node_modules/.bin/jest",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
-    "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
+    "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
     "bump": "./node_modules/.bin/versiony package.json --patch",
     "codegen": "ts-node ./src/sourceTypes/codegen.ts",
     "playwright": "playwright test .spec.test.ts"

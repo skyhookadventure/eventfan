@@ -65,7 +65,6 @@ export default class GA4 implements Destination {
       window.gtag = (...args: any[]) => {
         window.dataLayer.push(args);
       };
-      gtag("js", new Date());
       this.gtag = window.gtag;
     }
 
@@ -76,6 +75,7 @@ export default class GA4 implements Destination {
     );
 
     // Set the measurement ID & config
+    this.gtag("js", new Date());
     this.gtag("config", this.config.measurementId, {
       // Default send page view to false (so it can be done with `.page()`)
       send_page_view: false,

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Ecommerce } from "../../../index";
-import { TEvent } from "../../../types/TrackEvent";
-import { Purchase } from "../types/events";
+import { Ecommerce } from "../../../../index";
+import { TEvent } from "../../../../types/TrackEvent";
+import { Purchase } from "../../types/events";
 import { formatProduct } from "./checkoutStarted";
 
 export default function orderCompleted({

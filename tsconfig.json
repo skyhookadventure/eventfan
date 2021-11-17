@@ -5,11 +5,8 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "outDir": "dist",
-    "rootDir": "src",
-    "moduleResolution": "node"
+    "outDir": "dist"
   },
-  "include": [".eslintrc.js", "./src/**/*"]
+  "include": ["./src/**/*"]
 }
