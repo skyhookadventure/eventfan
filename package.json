@@ -12,7 +12,6 @@
     "dev": "yarn vite --config ./src/e2e/react/vite.config.js",
     "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
     "playwright": "playwright test .spec.test.ts",
-    "prepack": "yarn build",
     "react": "yarn vite --config ./src/e2e/react/vite.config.js",
     "test": "./node_modules/.bin/jest",
     "vanilla": "yarn ts-node ./src/e2e/vanilla/server.ts"

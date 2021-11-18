@@ -30,7 +30,7 @@ jobs:
       - name: Lint
         run: yarn lint
 
-  e2e:
+  endToEnd:
     name: Browser end-to-end tests
     timeout-minutes: 3
     runs-on: ubuntu-latest
@@ -53,6 +53,42 @@ jobs:
         with:
           command: yarn playwright
           start: yarn dev
+
+  release:
+    if: github.event_name == 'push' # Push/merge only, not on PR
+    name: Release
+    needs:
+      - test
+      - endToEnd
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.working-directory }}/node_modules
+          key: ${{ env.working-directory }}-${{ hashFiles(format('{0}/yarn.lock', env.working-directory)) }}
+          restore-keys: ${{ env.working-directory }}
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Zip Node
+        uses: papeloto/action-zip@v1
+        with:
+          files: /
+          dest: dist/node.zip
+          recursive: true
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/node.zip
+            dist/browser/index.js
+          tag_name: latest
 
   # publish-npm:
   #   if: github.event_name == 'push' # Push/merge only, not on PR

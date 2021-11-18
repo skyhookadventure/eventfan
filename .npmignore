@@ -9,3 +9,4 @@ tsconfig.json
 yarn.lock
 dist/browser
 dist/node/e2e
+src
