@@ -6,15 +6,13 @@
   "author": "Alan Cooney <alan@skyhookadventure.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "tsc",
-    "dev": "SKIP_PREFLIGHT_CHECK=true ENTRY=/e2e/react react-scripts start",
-    "buildBrowser": "ts-node ./src/esbuild.ts",
+    "build": "tsc && node ./esbuild.js",
+    "dev": "vite",
     "test": "./node_modules/.bin/jest",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
     "bump": "./node_modules/.bin/versiony package.json --patch",
-    "playwright": "playwright test .spec.test.ts",
-    "react": "vite --root ~/repos/eventfan/src/e2e/react"
+    "playwright": "playwright test .spec.test.ts"
   },
   "main": "dist/index.js",
   "devDependencies": {
@@ -44,6 +42,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^5.0.0",
     "fs-extra": "^10.0.0",
+    "glob": "^7.2.0",
     "jest": "^27.3.1",
     "live-server": "^1.2.1",
     "playwright": "^1.16.3",
@@ -55,6 +54,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
     "recursive-readdir-sync": "^1.0.6",
+    "tiny-glob": "^0.2.9",
     "ts-node": "^10.4.0",
     "typescript": "~4.4.4",
     "versiony-cli": "^1.3.0",
