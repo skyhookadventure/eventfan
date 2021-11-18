@@ -1,13 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import react, {
-  createContext,
-  ReactNode,
-  useMemo,
-  useContext,
-  useEffect,
-} from "react";
+import React, { createContext, ReactNode, useMemo, useContext } from "react";
 import EventFan, { EventFanConfig } from "../client/EventFan";
-import { TEvent } from "../types/TrackEvent";
 
 export const EventFanContext = createContext<EventFan | undefined>(undefined);
 
@@ -57,32 +50,13 @@ export function EventFanProvider(props: {
 export function useEventFan() {
   // Assume EventFan is already setup (with `EventFanContext.Provider`)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return useContext(EventFanContext)!;
-}
+  const client = useContext(EventFanContext)!;
 
-/**
- * EventFan Track Hook
- *
- * Useful when you already have the event properties (i.e. they are passed down from a parent component) and you want to
- * send a single track call.
- *
- * @example
- * // Track checkout started
- * useTrack({
- *   name: "Checkout Started",
- *   properties: {
- *     value: 100.00
- *   }
- * })
- */
-export function useTrack(event: TEvent) {
-  const eventFan = useContext(EventFanContext);
-
-  useEffect(() => {
-    if (eventFan) {
-      eventFan.track(event.name, event.properties, event.options);
-    }
-    // Note event name/properties/options must not change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [eventFan]);
+  // Bind the methods so they are lexically scoped to the class
+  return {
+    addDestination: client.addDestination.bind(client),
+    identify: client.identify.bind(client),
+    page: client.page.bind(client),
+    track: client.track.bind(client),
+  };
 }
