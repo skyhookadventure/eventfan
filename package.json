@@ -8,6 +8,8 @@
   "scripts": {
     "build": "tsc && node ./esbuild.js",
     "dev": "yarn vite --config ./src/e2e/react/vite.config.js",
+    "react": "yarn vite --config ./src/e2e/react/vite.config.js",
+    "vanilla": "yarn ts-node ./src/e2e/vanilla/server.ts",
     "test": "./node_modules/.bin/jest",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
