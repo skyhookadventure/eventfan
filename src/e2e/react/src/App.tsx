@@ -1,7 +1,13 @@
 import { Container } from "react-bootstrap";
 import { useEffect } from "react";
-import { EventFanProvider, useEventFan } from "../../../react/index";
-import { FacebookPixel } from "../../..";
+import {
+  FacebookPixel,
+  GA4,
+  Hotjar,
+  Posthog,
+  EventFanProvider,
+  useEventFan,
+} from "../../..";
 
 function Page() {
   const { page } = useEventFan();
@@ -18,7 +24,14 @@ function App() {
     <div>
       <EventFanProvider
         config={{
-          destinations: [new FacebookPixel({ pixelId: "243635977408985" })],
+          destinations: [
+            new FacebookPixel({ pixelId: "243635977408985" }),
+            new GA4({ measurementId: "GTM-TNBDGJR" }),
+            new Hotjar({ siteID: "2705682" }),
+            new Posthog({
+              teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
+            }),
+          ],
         }}
       >
         <Container>
