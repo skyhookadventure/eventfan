@@ -14,9 +14,10 @@
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
     "bump": "./node_modules/.bin/versiony package.json --patch",
-    "playwright": "playwright test .spec.test.ts"
+    "playwright": "playwright test .spec.test.ts",
+    "prepack": "yarn build"
   },
-  "main": "dist/index.js",
+  "main": "dist/node/index.js",
   "devDependencies": {
     "@playwright/test": "^1.16.3",
     "@testing-library/dom": "^8.11.1",
