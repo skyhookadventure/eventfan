@@ -4,7 +4,6 @@ import { Gender, User } from "../../types/User";
 import { TEvent } from "../../types/TrackEvent";
 import Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
-import loadScript from "../../utils/loadScript";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
 import { FBQ } from "./types/FBQ";
@@ -100,13 +99,17 @@ export default class FacebookPixel implements Destination {
       this.fb.push = this.fb;
       this.fb.loaded = !0;
       this.fb.queue = [];
+
+      const t = document.createElement("script");
+      t.async = !0;
+      t.src = "https://connect.facebook.net/en_US/fbevents.js";
+      const s = document.getElementsByTagName("script")[0];
+      s!.parentNode!.insertBefore(t, s);
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     }
 
-    // Load the script
-    await loadScript(
-      "facebook-pixel-integration",
-      "https://connect.facebook.net/en_US/fbevents.js"
-    );
+    this.fb = window.fbq!;
 
     // Disable automatic page tracking
     this.fb.disablePushState = true;
