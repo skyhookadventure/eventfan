@@ -1,6 +1,11 @@
-src
-distBrowser
-.cdk.staging
-cdk.out
+.github
 coverage
+node_modules
+eslintrc.js
+.gitignore
+.npmignore
+esbuild.js
+tsconfig.json
 yarn.lock
+dist/browser
+dist/node/e2e
