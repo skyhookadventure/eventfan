@@ -82,7 +82,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            dist/node.zip
+            dist/node.tgz
             dist/browser/index.js
           tag_name: latest
 
