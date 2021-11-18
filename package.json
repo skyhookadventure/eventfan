@@ -1,21 +1,20 @@
 {
   "name": "eventfan",
   "version": "1.0.0",
-  "description": "Send tracking/analytics events to multiple destinations (Google Analytics, Facebook, Rudderstack...)Send tracking/analytics events to multiple destinations (Google Analytics, Facebook, Rudderstack...)",
+  "description": "Send tracking/analytics events to multiple destinations (Google Analytics, Facebook...).",
   "repository": "https://github.com/alan-cooney/eventfan.git",
   "author": "Alan Cooney <alan@skyhookadventure.com>",
   "license": "UNLICENSED",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node ./src/e2e/browser/server",
+    "dev": "SKIP_PREFLIGHT_CHECK=true ENTRY=/e2e/react react-scripts start",
     "buildBrowser": "ts-node ./src/esbuild.ts",
-    "watch": "tsc -w --resolveJsonModule",
     "test": "./node_modules/.bin/jest",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
     "bump": "./node_modules/.bin/versiony package.json --patch",
-    "codegen": "ts-node ./src/sourceTypes/codegen.ts",
-    "playwright": "playwright test .spec.test.ts"
+    "playwright": "playwright test .spec.test.ts",
+    "react": "vite --root ~/repos/eventfan/src/e2e/react"
   },
   "main": "dist/index.js",
   "devDependencies": {
@@ -23,8 +22,12 @@
     "@testing-library/dom": "^8.11.1",
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.7",
+    "@types/react": "^17.0.35",
+    "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "@vitejs/plugin-react": "^1.0.9",
     "change-case": "^4.1.2",
     "esbuild": "^0.13.14",
     "esbuild-jest": "^0.5.0",
@@ -41,10 +44,14 @@
     "postal-address-field-names": "^1.0.3",
     "prettier": "^2.4.1",
     "quicktype-core": "^6.0.70",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
     "recursive-readdir-sync": "^1.0.6",
     "ts-node": "^10.4.0",
     "typescript": "~4.4.4",
-    "versiony-cli": "^1.3.0"
+    "versiony-cli": "^1.3.0",
+    "vite": "^2.6.14"
   },
   "jest": {
     "coverageThreshold": {
