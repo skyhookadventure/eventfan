@@ -78,13 +78,14 @@ jobs:
         run: yarn build
       - name: Zip Node
         run: "tar -czvf ./dist/node.tgz --exclude .github --exclude coverage --exclude dist/browser  --exclude node_modules --exclude .git --exclude src --exclude .eslintrc.js --exclude esbuild.js ./"
+      - name: Zip Browser
+        run: "tar -czvf ./dist/browser.tgz ./dist/browser"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
             dist/node.tgz
-            dist/browser/index.js
-          tag_name: latest
+            dist/browser.tgz
 
   # publish-npm:
   #   if: github.event_name == 'push' # Push/merge only, not on PR
