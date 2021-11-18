@@ -1,45 +1,33 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Container } from "react-bootstrap";
+import { useEffect } from "react";
+import { EventFanProvider, useEventFan } from "../../../react/index";
+import { FacebookPixel } from "../../..";
 
-function App() {
-  const [count, setCount] = useState(0)
+function Page() {
+  const { page } = useEventFan();
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+  useEffect(() => {
+    page();
+  });
+
+  return null;
 }
 
-export default App
+function App() {
+  return (
+    <div>
+      <EventFanProvider
+        config={{
+          destinations: [new FacebookPixel({ pixelId: "243635977408985" })],
+        }}
+      >
+        <Container>
+          <h1>EventFan React Test</h1>
+          <Page />
+        </Container>
+      </EventFanProvider>
+    </div>
+  );
+}
+
+export default App;

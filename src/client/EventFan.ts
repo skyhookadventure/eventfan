@@ -8,7 +8,7 @@ import { Page } from "../types/PageViewProps";
 /**
  * Constructor props
  */
-interface ConstructorProps {
+export interface EventFanConfig {
   /**
    * Destinations that you want to send events to.
    */
@@ -50,7 +50,7 @@ export default class EventFan {
   /**
    * Constructor
    */
-  constructor(props: ConstructorProps = {}) {
+  constructor(props: EventFanConfig = {}) {
     const destinationsToAdd = props.destinations || [];
 
     for (const dest of destinationsToAdd) {

@@ -2,12 +2,15 @@
 
 [![Built with
 typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
+[![Supports react](https://badgen.net/badge/supports/react/green)](https://reactjs.org/)
 
 Send tracking events (e.g. order completed) to multiple destinations (Google Analytics, Facebook...), with the correct
 formatting applied automatically.
 
 Loads fast on the browser - the core lib is c. 4kb (minified) and destinations (e.g. Facebook Pixel) can be loaded
 asynchronously. Setup for zero-config tree shaking by default (removes unused code/destinations), with your existing bundler (e.g. Webpack/Esbuild).
+
+Includes React components.
 
 Built for reliability with unit test coverage, e2e tests on popular browsers and type safety.
 
@@ -26,6 +29,34 @@ const eventFan = new EventFan({
     new FacebookPixel({ pixelId: "your-facebook-pixel-id" }),
   ],
 });
+```
+
+#### React
+
+Alternatively for React, wrap your app with the provider component:
+
+```typescript
+export default function App() {
+   return (
+     <EventFanProvider config={{
+       destinations: [
+         new FacebookPixel({ pixelId: "your-facebook-pixel-id" })
+       ]
+     }}>
+       <h1>Your app</h1>
+     </EventFanProvider>
+ }
+```
+
+You can then access the methods below with the `useEventFan` hook:
+
+```typescript
+const { track, page, identify } = useEventFan();
+useEffect(() => {
+  track("Checkout Started", {
+    value: 100.0,
+  });
+}, []);
 ```
 
 ### Track page loads
