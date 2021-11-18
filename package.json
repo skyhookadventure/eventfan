@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "tsc && node ./esbuild.js",
-    "dev": "vite",
+    "dev": "yarn vite --config ./src/e2e/react/vite.config.js",
     "test": "./node_modules/.bin/jest",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
