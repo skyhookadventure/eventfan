@@ -7,15 +7,15 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "tsc && node ./esbuild.js",
-    "dev": "yarn vite --config ./src/e2e/react/vite.config.js",
-    "react": "yarn vite --config ./src/e2e/react/vite.config.js",
-    "vanilla": "yarn ts-node ./src/e2e/vanilla/server.ts",
-    "test": "./node_modules/.bin/jest",
-    "coverage": "./node_modules/.bin/jest --collect-coverage",
-    "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
     "bump": "./node_modules/.bin/versiony package.json --patch",
+    "coverage": "./node_modules/.bin/jest --collect-coverage",
+    "dev": "yarn vite --config ./src/e2e/react/vite.config.js",
+    "lint": "./node_modules/.bin/eslint . --ext .ts,.tsx --ignore-path .gitignore",
     "playwright": "playwright test .spec.test.ts",
-    "prepack": "yarn build"
+    "prepack": "yarn build",
+    "react": "yarn vite --config ./src/e2e/react/vite.config.js",
+    "test": "./node_modules/.bin/jest",
+    "vanilla": "yarn ts-node ./src/e2e/vanilla/server.ts"
   },
   "main": "dist/node/index.js",
   "devDependencies": {
