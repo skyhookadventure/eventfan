@@ -18,3 +18,6 @@ export { Ecommerce, Mobile, SAAS, Video } from "./sourceEvents/Events";
 
 // Mocks for testing
 export * as mocks from "./mocks";
+
+// React
+export { EventFanProvider, useEventFan, useTrack } from "./react";
