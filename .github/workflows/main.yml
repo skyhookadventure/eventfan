@@ -77,11 +77,7 @@ jobs:
       - name: Build
         run: yarn build
       - name: Zip Node
-        uses: papeloto/action-zip@v1
-        with:
-          files: /
-          dest: dist/node.zip
-          recursive: true
+        run: "tar -czvf ./dist/node.tgz --exclude .github --exclude coverage --exclude dist/browser  --exclude node_modules --exclude .git --exclude src --exclude .eslintrc.js --exclude esbuild.js ./"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
