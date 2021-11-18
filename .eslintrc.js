@@ -6,6 +6,11 @@ module.exports = {
     node: true,
     jest: true,
   },
+  settings: {
+    react: {
+      version: "latest"
+    }
+  },
   extends: [
     // Airbnb Typescript eslint from https://www.npmjs.com/package/eslint-config-airbnb-typescript
     "airbnb-base",
@@ -15,6 +20,12 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     // Prettier added using default settings from https://github.com/prettier/eslint-plugin-prettier
     "plugin:prettier/recommended",
+    // React
+    'plugin:react/recommended',
+    "plugin:react/jsx-runtime",
+    'plugin:react-hooks/recommended',
+    'plugin:testing-library/react',
+    'plugin:jest-dom/recommended',
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -41,5 +52,6 @@ module.exports = {
     radix: "off", // Disabled for performance
     "prettier/prettier": ["error", { printWidth: 80 }],
     "import/extensions": "off",
+    "react/react-in-jsx-scope": "off" // Not needed with Vite
   },
 };

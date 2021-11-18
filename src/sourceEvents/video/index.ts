@@ -1,7 +1,7 @@
-export { VideoAdCompleted } from "./VideoAdCompleted";
-export { VideoAdPlaying } from "./VideoAdPlaying";
-export { VideoAdStarted } from "./VideoAdStarted";
-export { VideoContentCompleted } from "./VideoContentCompleted";
-export { VideoContentPlaying } from "./VideoContentPlaying";
-export { VideoContentStarted } from "./VideoContentStarted";
-export { VideoPlaybackCompleted } from "./VideoPlaybackCompleted";
+export type { VideoAdCompleted } from "./VideoAdCompleted";
+export type { VideoAdPlaying } from "./VideoAdPlaying";
+export type { VideoAdStarted } from "./VideoAdStarted";
+export type { VideoContentCompleted } from "./VideoContentCompleted";
+export type { VideoContentPlaying } from "./VideoContentPlaying";
+export type { VideoContentStarted } from "./VideoContentStarted";
+export type { VideoPlaybackCompleted } from "./VideoPlaybackCompleted";
