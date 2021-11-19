@@ -82,18 +82,18 @@ jobs:
       # Note this should be moved to npmjs in the future
       - name: Zip Node
         run: >
-          tar -czvf ./packages/node.tgz
-            --exclude .eslintrc.js 
-            --exclude .git 
-            --exclude .github 
-            --exclude .gitignore
-            --exclude coverage 
-            --exclude dist/browser 
-            --exclude dist/node/e2e 
-            --exclude esbuild.js 
-            --exclude node_modules 
-            --exclude packages 
-            --exclude src 
+          tar -czvf ./packages/node.tgz \
+            --exclude .eslintrc.js \
+            --exclude .git \
+            --exclude .github \
+            --exclude .gitignore \
+            --exclude coverage \
+            --exclude dist/browser \
+            --exclude dist/node/e2e \
+            --exclude esbuild.js \
+            --exclude node_modules \
+            --exclude packages \
+            --exclude src \
             ./
       - name: Zip Browser
         run: tar -czvf ./packages/browser.tgz ./dist/browser

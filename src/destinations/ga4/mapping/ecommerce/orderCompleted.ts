@@ -12,7 +12,7 @@ export default function orderCompleted({
     properties: {
       currency: properties.currency || "USD",
       transaction_id: properties.order_id,
-      value: properties.total!,
+      value: properties.total || properties.revenue,
       coupon: properties.coupon,
       shipping: properties.shipping,
       tax: properties.tax,

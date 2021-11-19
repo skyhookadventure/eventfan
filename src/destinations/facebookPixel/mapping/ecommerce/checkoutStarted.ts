@@ -17,9 +17,7 @@ export default function checkoutStarted(
       })),
       currency: properties.currency || "USD", // Default currency to USD
       eventID: properties.order_id, // Set the deduplication ID as the order ID
-      // Value is required for this event to be accepted, but it will fail silently without
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      value: properties.total!,
+      value: properties.total || properties.revenue,
     },
   };
 }

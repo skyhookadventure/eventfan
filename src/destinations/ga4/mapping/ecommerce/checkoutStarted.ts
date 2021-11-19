@@ -21,7 +21,7 @@ export default function checkoutStarted({
     name: "begin_checkout",
     properties: {
       currency: properties.currency || "USD",
-      value: properties.total!,
+      value: properties.total || properties.revenue,
       coupon: properties.coupon,
       items: properties.products.map(formatProduct),
     },
