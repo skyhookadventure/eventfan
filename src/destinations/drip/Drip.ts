@@ -72,7 +72,6 @@ export default class Drip implements Destination {
    */
   async initialise(): Promise<void> {
     // Load the script
-    console.log(`//tag.getdrip.com/${this.config.accountId}.js`);
     await loadScript(
       "event-fan-drip",
       `//tag.getdrip.com/${this.config.accountId}.js`
