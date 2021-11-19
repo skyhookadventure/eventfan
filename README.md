@@ -168,6 +168,38 @@ class CustomDestination implements Destination {
 Note that there is a helpful `loadScript` util exported, that you may want to use if you are loading third party scripts
 from a url.
 
+## Testing
+
+To test in your application, we recommend using mocks & spys for unit tests, and then connecting to real staging destinations
+for end-to-end tests.
+
+### Unit testing example
+
+```typescript
+const mockTrack = jest.fn();
+jest.spyOn(eventFanInstance, "track").mockImplementation(mockTrack);
+
+// Do something, then...
+
+expect(mockTrack).toHaveBeenCalledWith({
+  // Expected Call
+});
+```
+
+Note that in react you'll need to spy on useEventFan as follows:
+
+```typescript
+import * as EventFan from "eventfan";
+
+// Within your test:
+const mockTrack = jest.fn();
+jest.spyOn(EventFan, "useEventFan").mockReturnValue({ track: mockTrack });
+```
+
+### End to End Tests
+
+We recommend looking in `/src/e2e/` for examples of end-to-end tests.
+
 ## Contributing
 
 ### Adding a destination
