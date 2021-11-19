@@ -166,9 +166,22 @@ from a url.
 
 ## Contributing
 
-### Development environment
+### Adding a destination
 
-You can run `yarn dev` to open up a browser (with hot reloading) that shows your destination in action.
+1. Codegen the basics by running this from the destinations directory:
 
-Thorough unit tests should be written for changes, as well as at least one E2E test to make sure it loads across all
-major browsers.
+```bash
+cd /src/destinations
+npx hygen generator new [destinationName]
+```
+
+2. Add the destination name to `/src/destinations/DestinationName.ts`
+
+3. Create the initialise, identify, page and track methods in your destination. You can run `yarn dev` whilst doing this
+   to see the impact in a real browser, with hot reloading (note you need to update `/e2e/react` to add the destination
+   to do this). Make sure to add full unit testing and at least one e2e test as well.
+
+### Adding an event mapping
+
+These are added within `/src/destinations/[destination]/mapping`. Make sure to add corresponding TypeScript types and a
+unit test.
