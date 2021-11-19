@@ -81,8 +81,8 @@ jobs:
       # Zip up everything for the node package
       # Note this should be moved to npmjs in the future
       - name: Zip Node
-        run: |
-          tar -czvf ./packages/node.tgz 
+        run: >
+          tar -czvf ./packages/node.tgz
             --exclude .eslintrc.js 
             --exclude .git 
             --exclude .github 
