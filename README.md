@@ -25,10 +25,13 @@ import EventFan, { FacebookPixel } from "event-fan";
 
 const eventFan = new EventFan({
   destinations: [
-    // Any destinations you want here
+    // Any destinations you want to load directly
     new FacebookPixel({ pixelId: "your-facebook-pixel-id" }),
   ],
 });
+
+// Load all your destinations from RudderStack
+eventFan.load("YOUR_WRITE_KEY");
 ```
 
 #### React
@@ -38,11 +41,12 @@ Alternatively for React, wrap your app with the provider component:
 ```typescript
 export default function App() {
    return (
-     <EventFanProvider config={{
-       destinations: [
+     <EventFanProvider
+       destinations={[
          new FacebookPixel({ pixelId: "your-facebook-pixel-id" })
-       ]
-     }}>
+       ]}
+       rudderStack={{ writeKey: "YOUR_WRITE_KEY" }}
+      >
        <h1>Your app</h1>
      </EventFanProvider>
  }
