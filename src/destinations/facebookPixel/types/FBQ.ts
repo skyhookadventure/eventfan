@@ -20,4 +20,5 @@ export interface FBQ {
   push: FBQ;
   queue: Array<any>;
   version: string;
+  getState: () => { pixels: Array<{ id: string }> };
 }

@@ -19,7 +19,7 @@ declare global {
     hj?: HotjarWindow;
     _hjSettings: HotjarWindowSettings;
     /** GA4 */
-    dataLayer: Array<any>;
+    dataLayer: Array<Array<string, string, object>>;
     gtag: Gtag;
     /** Posthog */
     posthog: any;
