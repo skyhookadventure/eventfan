@@ -1,3 +1,4 @@
+import { DripWindowObject } from "../destinations/drip/types/DripJsAPI";
 import { FBQ } from "../destinations/facebookPixel/types/FBQ";
 import { Gtag } from "../destinations/ga4/types/GtagWindow";
 import {
@@ -23,6 +24,9 @@ declare global {
     gtag: Gtag;
     /** Posthog */
     posthog: any;
+    /** Drip */
+    _dcq: Array<any>;
+    _dcs: DripWindowObject;
   }
 }
 

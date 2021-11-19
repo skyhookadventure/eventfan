@@ -8,6 +8,7 @@ import {
   EventFanProvider,
   useEventFan,
   Ecommerce,
+  Drip,
 } from "../../..";
 
 /**
@@ -73,6 +74,7 @@ function App() {
     <div>
       <EventFanProvider
         destinations={[
+          new Drip({ accountId: "7500000" }), // Drip doesn't have a sandbox so use a dummy accountId
           new FacebookPixel({ pixelId: "243635977408985" }),
           new GA4({ measurementId: "GTM-TNBDGJR" }),
           new Hotjar({ siteID: "2705682" }),
