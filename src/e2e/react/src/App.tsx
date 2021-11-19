@@ -7,8 +7,12 @@ import {
   Posthog,
   EventFanProvider,
   useEventFan,
+  Ecommerce,
 } from "../../..";
 
+/**
+ * Emit a sample page call
+ */
 function Page() {
   const { page } = useEventFan();
 
@@ -19,6 +23,51 @@ function Page() {
   return null;
 }
 
+/**
+ * Emit a sample identify call
+ */
+function Identify() {
+  const { identify } = useEventFan();
+
+  useEffect(() => {
+    identify("userID", {
+      firstName: "Fname",
+      lastName: "Lname",
+      email: "test@example.com",
+    });
+  });
+
+  return null;
+}
+
+/**
+ * Emit a sample track call
+ */
+function Track() {
+  const { track } = useEventFan();
+
+  useEffect(() => {
+    track<Ecommerce.OrderCompleted>("Order Completed", {
+      order_id: "orderID",
+      revenue: 100.0,
+      products: [
+        {
+          product_id: "productID",
+          quantity: 1,
+        },
+      ],
+      currency: "GBP",
+    });
+  });
+
+  return null;
+}
+
+/**
+ * Test React App
+ *
+ * Should add all destinations, using testing credentials, and run some sample calls.
+ */
 function App() {
   return (
     <div>
@@ -37,6 +86,8 @@ function App() {
         <Container>
           <h1>EventFan React Test</h1>
           <Page />
+          <Identify />
+          <Track />
         </Container>
       </EventFanProvider>
     </div>
