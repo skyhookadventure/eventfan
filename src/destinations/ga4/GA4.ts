@@ -45,7 +45,7 @@ export default class GA4 implements Destination {
    * These must also be set in e.g. Google Analytics if they are to be used
    * https://developers.google.com/analytics/devguides/collection/ga4/user-properties
    */
-  identify(user: User): void {
+  async identify(user: User): Promise<void> {
     if (this.config.sendUserId === false) return;
 
     // Set the user ID
@@ -89,7 +89,7 @@ export default class GA4 implements Destination {
    * Page view
    * https://developers.google.com/analytics/devguides/collection/ga4/page-view
    */
-  async page(page: Page) {
+  async page(page: Page): Promise<void> {
     if (this.config.blockPageViewEvent === false) return;
 
     this.gtag("event", "page_view", {
@@ -102,7 +102,7 @@ export default class GA4 implements Destination {
    * Track
    * https://developers.google.com/analytics/devguides/collection/ga4/events
    */
-  async track(event: TEvent) {
+  async track(event: TEvent): Promise<void> {
     this.gtag("event", event.name, event.properties);
   }
 

@@ -52,7 +52,7 @@ export default class FacebookPixel implements Destination {
    * strings must be in lower case).
    * https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching/
    */
-  identify(user: User): void {
+  async identify(user: User): Promise<void> {
     // Don't run if advancedMapping is disabled
     if (this.config.advancedMapping === false) return;
 
@@ -119,15 +119,12 @@ export default class FacebookPixel implements Destination {
     this.isLoaded = true;
   }
 
-  page(): void {
+  async page(): Promise<void> {
     this.fb("track", "PageView");
   }
 
-  track(event: TEvent): Promise<void> {
+  async track(event: TEvent): Promise<void> {
     this.fb("track", event.name, event.properties);
-
-    // Resolve immediately as Facebook Pixel has no way of firing a callback once complete
-    return Promise.resolve();
   }
 
   name = DestinationName.FACEBOOK_PIXEL;

@@ -40,7 +40,7 @@ export default abstract class Destination {
    *
    * For destinations that have an `identify()` method this should be called here.
    */
-  abstract identify?: (user: User) => void;
+  abstract identify?: (user: User) => Promise<void>;
 
   /**
    * Initialise
@@ -66,7 +66,7 @@ export default abstract class Destination {
   /**
    * Call a page-view track method (if defined)
    */
-  abstract page?: (props: Page) => void;
+  abstract page?: (props: Page) => Promise<void>;
 
   /**
    * Track

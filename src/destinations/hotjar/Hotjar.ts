@@ -30,7 +30,7 @@ export default class Hotjar implements Destination {
    * Note Hotjar does not mind what format the traits are sent in.
    * https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference
    */
-  identify(user: User): void {
+  async identify(user: User): Promise<void> {
     this.hj("identify", user.userId, user.traits);
   }
 

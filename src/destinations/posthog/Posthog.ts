@@ -21,7 +21,7 @@ export default class Posthog implements Destination {
 
   constructor(protected config: PosthogConfig) {}
 
-  identify(user: User): void {
+  async identify(user: User): Promise<void> {
     posthog.identify(user.userId, user.traits);
   }
 

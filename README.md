@@ -153,7 +153,7 @@ Have a new destination you want to add? Simply implement the `Destination` class
 
 ```typescript
 class CustomDestination implements Destination {
-  initialise(): void {
+  initialise(): Promise<void> {
     destinationNodeModule.initialise(this.eventKey);
   }
 
