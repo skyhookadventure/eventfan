@@ -64,6 +64,12 @@ export default class EventFan {
    * Adds a destination, initialises it and then replays history before initialisation.
    */
   async addDestination(destination: Destination): Promise<void> {
+    // Enforce idempotency (do not add a destination twice)
+    const alreadyExists = this.destinations.find(
+      (existingDestination) => existingDestination.name === destination.name
+    );
+    if (alreadyExists) return;
+
     this.destinations.push(destination);
 
     try {
@@ -92,7 +98,14 @@ export default class EventFan {
       }
 
       if (historicalEvent.track) {
-        await destination.track?.(historicalEvent.track);
+        // Apply the event mapping if it exists on this destination
+        const mappedEvent =
+          destination.eventMappings?.[historicalEvent.track.name]?.(
+            historicalEvent.track,
+            this.user
+          ) || historicalEvent.track;
+
+        await destination.track?.(mappedEvent);
       }
     }
   }

@@ -55,6 +55,17 @@ describe("addDestination", () => {
     expect(destination.identify).toHaveBeenCalledWith(mockUser);
   });
 
+  it("replays the tracking events including mappings", async () => {
+    const eventFan = new EventFan();
+    await eventFan.track("Order Completed", mockTrack.properties);
+    const destination = new MockDestination();
+    await eventFan.addDestination(destination);
+    expect(destination.track).toHaveBeenCalledWith({
+      name: "ModifiedEventName",
+      properties: { modified: true },
+    });
+  });
+
   it("replays page events", async () => {
     const eventFan = new EventFan();
     await eventFan.page(mockPage.properties!.title, mockPage);
@@ -88,6 +99,14 @@ describe("addDestination", () => {
         "Error message.",
       ]
     `);
+  });
+
+  it("enforces idempotency (does not add a destination twice)", async () => {
+    const eventFan = new EventFan();
+    const destination = new MinimalMockDestination();
+    await eventFan.addDestination(destination);
+    await eventFan.addDestination(destination); // Add again
+    expect(eventFan["destinations"]).toHaveLength(1);
   });
 });
 
