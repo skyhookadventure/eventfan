@@ -4,6 +4,8 @@ import Destination from "../destinations/Destination";
 import { TEvent } from "../types/TrackEvent";
 import { User } from "../types/User";
 import { Page } from "../types/PageViewProps";
+import type { RudderStack } from "../types/RudderStack";
+import { DestinationName } from "../destinations/DestinationName";
 
 /**
  * Constructor props
@@ -80,6 +82,77 @@ export default class EventFan {
       // the destination `isLoaded` property will still be false it won't be called again.
       console.log(`Failed to load destination ${destination.name}`, e?.message);
     }
+  }
+
+  /**
+   * Load rudderstack Config
+   *
+   * Asynchronously loads all destinations within the RudderStack config that are enabled
+   */
+  async load(
+    writeKey: string,
+    url = "https://api.rudderlabs.com/sourceConfig/"
+  ) {
+    const response = await fetch(url, {
+      headers: { Authorization: `Basic ${btoa(`${writeKey}:`)}` },
+    });
+    const settings = (await response.json()) as RudderStack;
+    const { destinations } = settings.source;
+
+    // Load each destination asynchronously, with dynamic imports
+    // We use dynamic imports here to avoid a large initial bundle that would otherwise include all destinations
+    await Promise.all(
+      destinations.map(async (destinationSettings) => {
+        // Don't add if the destination is disabled
+        if (destinationSettings.enabled !== true) return;
+
+        // Dynamically import by name
+        switch (destinationSettings.destinationDefinition.name) {
+          case DestinationName.DRIP:
+            import("../destinations/drip/Drip").then(({ default: Drip }) => {
+              this.addDestination(new Drip(destinationSettings.config));
+            });
+            break;
+
+          case DestinationName.FACEBOOK_PIXEL:
+            import("../destinations/facebookPixel/FacebookPixel").then(
+              ({ default: FacebookPixel }) => {
+                this.addDestination(
+                  new FacebookPixel(destinationSettings.config)
+                );
+              }
+            );
+            break;
+
+          case DestinationName.GA4:
+            import("../destinations/ga4/GA4").then(({ default: GA4 }) => {
+              this.addDestination(new GA4(destinationSettings.config));
+            });
+            break;
+
+          case DestinationName.HOTJAR:
+            import("../destinations/hotjar/Hotjar").then(
+              ({ default: Hotjar }) => {
+                this.addDestination(new Hotjar(destinationSettings.config));
+              }
+            );
+            break;
+
+          case DestinationName.POSTHOG:
+            import("../destinations/posthog/Posthog").then(
+              ({ default: Posthog }) => {
+                this.addDestination(new Posthog(destinationSettings.config));
+              }
+            );
+            break;
+
+          default:
+            console.log(
+              `EventFan does not support ${destinationSettings.name} yet.`
+            );
+        }
+      })
+    );
   }
 
   /**

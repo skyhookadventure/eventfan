@@ -8,7 +8,7 @@ Send tracking events (e.g. order completed) to multiple destinations (Google Ana
 formatting applied automatically.
 
 Loads fast on the browser - the core lib is c. 4kb (minified) and destinations (e.g. Facebook Pixel) can be loaded
-asynchronously. Setup for zero-config tree shaking by default (removes unused code/destinations), with your existing bundler (e.g. Webpack/Esbuild).
+asynchronously. Setup for zero-config tree shaking by default (removes unused code/destinations), with your existing bundler (e.g. Webpack/SWC).
 
 Includes React components.
 
@@ -180,6 +180,8 @@ npx hygen generator new [destinationName]
 3. Create the initialise, identify, page and track methods in your destination. You can run `yarn dev` whilst doing this
    to see the impact in a real browser, with hot reloading (note you need to update `/e2e/react` to add the destination
    to do this). Make sure to add full unit testing and at least one e2e test as well.
+
+4. Add the destination to the EventFan client as a dynamic import (on the load method).
 
 ### Adding an event mapping
 

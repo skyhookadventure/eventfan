@@ -9,6 +9,11 @@ const eventFan = new EventFan();
 
 export const EventFanContext = createContext<EventFan>(eventFan);
 
+export interface RudderStackConfig {
+  writeKey: string;
+  url?: string;
+}
+
 /**
  * EventFan Provider
  *
@@ -26,7 +31,16 @@ export const EventFanContext = createContext<EventFan>(eventFan);
 export function EventFanProvider(props: {
   children: ReactNode;
   destinations?: EventFanConfig["destinations"];
+  rudderStack?: RudderStackConfig;
 }) {
+  // Load RudderStack config if set
+  useEffect(() => {
+    if (props.rudderStack?.url) {
+      eventFan.load(props.rudderStack.url, props.rudderStack.writeKey);
+    }
+  }, [props.rudderStack]);
+
+  // Load destinations where set
   useEffect(() => {
     props.destinations?.forEach((destination) => {
       // Note that EventFan enforces idempotency (not adding a destination twice) so we don't need to here
@@ -63,6 +77,7 @@ export function useEventFan() {
   return {
     addDestination: client.addDestination.bind(client),
     identify: client.identify.bind(client),
+    load: client.load.bind(client),
     page: client.page.bind(client),
     track: client.track.bind(client),
   };
