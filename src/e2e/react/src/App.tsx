@@ -72,21 +72,19 @@ function App() {
   return (
     <div>
       <EventFanProvider
-        config={{
-          destinations: [
-            new FacebookPixel({ pixelId: "243635977408985" }),
-            new GA4({ measurementId: "GTM-TNBDGJR" }),
-            new Hotjar({ siteID: "2705682" }),
-            new Posthog({
-              teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
-            }),
-          ],
-        }}
+        destinations={[
+          new FacebookPixel({ pixelId: "243635977408985" }),
+          new GA4({ measurementId: "GTM-TNBDGJR" }),
+          new Hotjar({ siteID: "2705682" }),
+          new Posthog({
+            teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
+          }),
+        ]}
       >
         <Container>
           <h1>EventFan React Test</h1>
-          <Page />
           <Identify />
+          <Page />
           <Track />
         </Container>
       </EventFanProvider>

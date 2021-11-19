@@ -1,8 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { createContext, ReactNode, useMemo, useContext } from "react";
+import React, { createContext, ReactNode, useEffect, useContext } from "react";
 import EventFan, { EventFanConfig } from "../client/EventFan";
 
-export const EventFanContext = createContext<EventFan | undefined>(undefined);
+// Initialise EventFan immediately
+// Note that React doesn't always guarantee a central App file is loaded first (e.g. Next js doesn't do this) so we need
+// to load eventFan first and then update it with the destinations once they are provided. This is fine as EventFan will
+// replay history to the destinations as soon as they are added.
+const eventFan = new EventFan();
+
+export const EventFanContext = createContext<EventFan>(eventFan);
 
 /**
  * EventFan Provider
@@ -20,12 +25,14 @@ export const EventFanContext = createContext<EventFan | undefined>(undefined);
  */
 export function EventFanProvider(props: {
   children: ReactNode;
-  config?: EventFanConfig;
+  destinations?: EventFanConfig["destinations"];
 }) {
-  const eventFan = useMemo<EventFan>(
-    () => new EventFan(props.config),
-    [props.config]
-  );
+  useEffect(() => {
+    props.destinations?.forEach((destination) => {
+      // Note that EventFan enforces idempotency (not adding a destination twice) so we don't need to here
+      eventFan.addDestination(destination);
+    });
+  }, [props.destinations]);
 
   return (
     <EventFanContext.Provider value={eventFan}>
