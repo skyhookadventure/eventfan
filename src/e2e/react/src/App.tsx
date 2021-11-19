@@ -82,6 +82,9 @@ function App() {
             teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
           }),
         ]}
+        rudderStack={{
+          writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn",
+        }}
       >
         <Container>
           <h1>EventFan React Test</h1>

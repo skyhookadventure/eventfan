@@ -35,8 +35,8 @@ export function EventFanProvider(props: {
 }) {
   // Load RudderStack config if set
   useEffect(() => {
-    if (props.rudderStack?.url) {
-      eventFan.load(props.rudderStack.url, props.rudderStack.writeKey);
+    if (props.rudderStack?.writeKey) {
+      eventFan.load(props.rudderStack.writeKey, props.rudderStack.url);
     }
   }, [props.rudderStack]);
 

@@ -85,7 +85,8 @@
     "testMatch": [
       "**/*unit.test.ts",
       "**/*unit.test.tsx",
-      "**/*int.test.ts"
+      "**/*int.test.ts",
+      "**/*int.test.tsx"
     ],
     "transform": {
       "^.+\\.(t|j)sx?$": [

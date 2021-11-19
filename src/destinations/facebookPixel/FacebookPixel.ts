@@ -11,6 +11,7 @@ import { ContentType } from "./types/shared/GenericFacebookEvent";
 import productAdded from "./mapping/ecommerce/productAdded";
 import productViewed from "./mapping/ecommerce/productViewed";
 import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
+import { loadScript } from "../..";
 
 /**
  * Export mapping functions so they can be customised
@@ -99,15 +100,12 @@ export default class FacebookPixel implements Destination {
       this.fb.push = this.fb;
       this.fb.loaded = !0;
       this.fb.queue = [];
-
-      const t = document.createElement("script");
-      t.async = !0;
-      t.src = "https://connect.facebook.net/en_US/fbevents.js";
-      const s = document.getElementsByTagName("script")[0];
-      s!.parentNode!.insertBefore(t, s);
-
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     }
+
+    await loadScript(
+      "event-fan-facebook-pixel",
+      "https://connect.facebook.net/en_US/fbevents.js"
+    );
 
     this.fb = window.fbq!;
 
