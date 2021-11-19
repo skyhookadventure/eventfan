@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
-import { mockTrack, mockUser } from "../../../mocks";
+import { mockOrderCompleted, mockTrack, mockUser } from "../../../mocks";
 import { DestinationName } from "../../DestinationName";
 import FacebookPixel from "../FacebookPixel";
+import { ContentType } from "../types/shared/GenericFacebookEvent";
 
 it("has the correct destination name", () => {
   const fb = new FacebookPixel({ pixelId: "pixelId" });
@@ -11,6 +12,21 @@ it("has the correct destination name", () => {
 it("starts as not loaded", () => {
   const fb = new FacebookPixel({ pixelId: "pixelId" });
   expect(fb.isLoaded).toBeFalsy();
+});
+
+describe("eventMappings", () => {
+  it("binds the config to the event mapping methods", () => {
+    const fb = new FacebookPixel({
+      pixelId: "pixelId",
+      categoryToContent: [{ from: "Trip", to: ContentType.DESTINATION }],
+    });
+
+    const res = fb.eventMappings["Order Completed"](mockOrderCompleted);
+    expect(res.properties.content_type).toEqual([
+      ContentType.PRODUCT,
+      ContentType.DESTINATION,
+    ]);
+  });
 });
 
 describe("identify", () => {

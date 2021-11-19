@@ -40,10 +40,10 @@ export default class FacebookPixel implements Destination {
   constructor(protected config: FacebookPixelConfig) {}
 
   eventMappings = {
-    "Order Completed": orderCompleted,
-    "Product Added": productAdded,
-    "Product Viewed": productViewed,
-    "Checkout Started": checkoutStarted,
+    "Order Completed": orderCompleted.bind(this),
+    "Product Added": productAdded.bind(this),
+    "Product Viewed": productViewed.bind(this),
+    "Checkout Started": checkoutStarted.bind(this),
   };
 
   /**
