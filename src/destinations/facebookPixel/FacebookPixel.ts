@@ -1,22 +1,31 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Gender, User } from "../../types/User";
-import { TEvent } from "../../types/TrackEvent";
-import Destination from "../Destination";
-import { DestinationName } from "../DestinationName";
-import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import { AdvancedMatching } from "./types/AdvancedMatching";
-import { FBQ } from "./types/FBQ";
 import { ContentType } from "./types/shared/GenericFacebookEvent";
-import productAdded from "./mapping/ecommerce/productAdded";
-import productViewed from "./mapping/ecommerce/productViewed";
-import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
+import { DestinationName } from "../DestinationName";
+import { FBQ } from "./types/FBQ";
+import { Gender, User } from "../../types/User";
 import { loadScript } from "../..";
+import { TEvent } from "../../types/TrackEvent";
+import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
+import Destination from "../Destination";
+import orderCompleted from "./mapping/ecommerce/orderCompleted";
+import productAdded from "./mapping/ecommerce/productAdded";
+import productListViewed from "./mapping/ecommerce/productListViewed";
+import productsSearched from "./mapping/ecommerce/productsSearched";
+import productViewed from "./mapping/ecommerce/productViewed";
 
 /**
  * Export mapping functions so they can be customised
  */
-export { productAdded, productViewed, orderCompleted, checkoutStarted };
+export {
+  checkoutStarted,
+  orderCompleted,
+  productAdded,
+  productListViewed,
+  productsSearched,
+  productViewed,
+};
 
 /**
  * Facebook Pixel Config
@@ -39,11 +48,14 @@ export default class FacebookPixel implements Destination {
 
   constructor(protected config: FacebookPixelConfig) {}
 
+  // Note we bind `this` to all methods that require access to `this.config`
   eventMappings = {
     "Order Completed": orderCompleted.bind(this),
     "Product Added": productAdded.bind(this),
     "Product Viewed": productViewed.bind(this),
     "Checkout Started": checkoutStarted.bind(this),
+    "Product List Viewed": productListViewed.bind(this),
+    "Products Searched": productsSearched,
   };
 
   /**
