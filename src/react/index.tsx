@@ -73,7 +73,7 @@ export function useEventFan() {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const client = useContext(EventFanContext)!;
 
-  // Bind the methods so they are lexically scoped to the class
+  // Bind the methods so they still work when destructured (otherwise `this` context on the instance would be lost)
   return {
     addDestination: client.addDestination.bind(client),
     identify: client.identify.bind(client),
