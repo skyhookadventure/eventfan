@@ -1,5 +1,5 @@
 ---
-to: <%= h.changeCase.lower(name) %>/<%= h.changeCase.title(name) %>.ts
+to: <%= h.changeCase.lower(name) %>/<%= h.changeCase.pascal(name) %>.ts
 ---
 import { User } from "../../types/User";
 import Destination from "../Destination";
@@ -7,24 +7,24 @@ import { DestinationName } from "../DestinationName";
 import loadScript from "../../utils/loadScript";
 
 /**
- * <%= h.changeCase.title(name) %> Config
+ * <%= h.changeCase.pascal(name) %> Config
  */
-export interface <%= h.changeCase.title(name) %>Config {
+export interface <%= h.changeCase.pascal(name) %>Config {
   // Add your config here
 }
 
 /**
- * <%= h.changeCase.title(name) %> Destination
+ * <%= h.changeCase.pascal(name) %> Destination
  */
-export default class <%= h.changeCase.title(name) %> implements Destination {
+export default class <%= h.changeCase.pascal(name) %> implements Destination {
   private <%= h.changeCase.lower(name) %> = {}; // Change to third party lib ref (often `window.something`)
 
-  constructor(protected config: <%= h.changeCase.title(name) %>Config) {}
+  constructor(protected config: <%= h.changeCase.pascal(name) %>Config) {}
 
   /**
    * Identify
    */
-  identify(user: User): void {
+  async identify(user: User): Promise<void> {
     // Update
     this.<%= h.changeCase.lower(name) %>("identify", user.userId, user.traits);
   }

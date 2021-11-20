@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Container } from "react-bootstrap";
-import { useEffect, ReactNode } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useEffect } from "react";
 import {
   FacebookPixel,
   GA4,
@@ -14,19 +12,30 @@ import {
 } from "../../..";
 
 /**
+ * Emit a sample page call
+ */
+function Page() {
+  const { page } = useEventFan();
+
+  useEffect(() => {
+    page();
+  });
+
+  return null;
+}
+
+/**
  * Emit a sample identify call
  */
 function Identify() {
-  const eventFan = useEventFan();
+  const { identify } = useEventFan();
 
   useEffect(() => {
-    // identify("userID", {
-    //   firstName: "Fname",
-    //   lastName: "Lname",
-    //   email: "test@example.com",
-    // });
-    const { page } = eventFan;
-    page();
+    identify("userID", {
+      firstName: "Fname",
+      lastName: "Lname",
+      email: "test@example.com",
+    });
   });
 
   return null;
@@ -55,56 +64,6 @@ function Track() {
   return null;
 }
 
-function HomePage() {
-  const { page } = useEventFan();
-
-  useEffect(() => {
-    document.title = "Home";
-    page();
-  }, []);
-
-  return (
-    <>
-      <h1>Home Page</h1>
-      <Track />
-    </>
-  );
-}
-
-function AboutPage() {
-  const { page } = useEventFan();
-
-  useEffect(() => {
-    document.title = "About";
-    page();
-  }, []);
-
-  return <h1>About Page</h1>;
-}
-
-export function Pages() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </div>
-    </Router>
-  );
-}
-
 /**
  * Test React App
  *
@@ -130,7 +89,8 @@ function App() {
         <Container>
           <h1>EventFan React Test</h1>
           <Identify />
-          {/* <Pages /> */}
+          <Page />
+          <Track />
         </Container>
       </EventFanProvider>
     </div>
