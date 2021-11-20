@@ -57,6 +57,12 @@ interface ProductAddedToWishlistProps {
    * Wishlist name to which the product was added
    */
   wishlist_name?: string;
+  /**
+   * Currency code associated with product
+   *
+   * Not within the official Segment spec but useful.
+   */
+  currency?: string;
 }
 
 /**

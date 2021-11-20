@@ -7,7 +7,10 @@ import { User } from "../../types/User";
 import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
 import Destination from "../Destination";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
+import paymentInfoEntered from "./mapping/ecommerce/paymentInfoEntered";
 import productAdded from "./mapping/ecommerce/productAdded";
+import productAddedToWishlist from "./mapping/ecommerce/productAddedToWishlist";
+import productListViewed from "./mapping/ecommerce/productListViewed";
 import productsSearched from "./mapping/ecommerce/productsSearched";
 import productViewed from "./mapping/ecommerce/productViewed";
 
@@ -17,7 +20,10 @@ import productViewed from "./mapping/ecommerce/productViewed";
 export {
   checkoutStarted,
   orderCompleted,
+  paymentInfoEntered,
   productAdded,
+  productAddedToWishlist,
+  productListViewed,
   productsSearched,
   productViewed,
 };
@@ -40,10 +46,13 @@ export default class GA4 implements Destination {
   constructor(protected config: GA4Config) {}
 
   eventMappings = {
-    "Order Completed": orderCompleted,
-    "Product Added": productAdded,
-    "Product Viewed": productViewed,
     "Checkout Started": checkoutStarted,
+    "Order Completed": orderCompleted,
+    "Payment Info Entered": paymentInfoEntered,
+    "Product Added": productAdded,
+    "Product Added To Wishlist": productAddedToWishlist,
+    "Product List Viewed": productListViewed,
+    "Product Viewed": productViewed,
     "Products Searched": productsSearched,
   };
 

@@ -8,6 +8,7 @@ import {
   OrderRefunded,
   PaymentInfoEntered,
   ProductAdded,
+  ProductAddedToWishlist,
   ProductClicked,
   ProductListViewed,
   ProductRemoved,
@@ -99,6 +100,15 @@ export const mockPaymentInfoEntered: PaymentInfoEntered = {
 export const mockProductAdded: ProductAdded = {
   name: "Product Added",
   properties: mockProduct,
+};
+
+export const mockProductAddedToWishlist: ProductAddedToWishlist = {
+  name: "Product Added To Wishlist",
+  properties: {
+    ...mockProduct,
+    wishlist_id: "wishlistID",
+    wishlist_name: "name",
+  },
 };
 
 export const mockProductClicked: ProductClicked = {
