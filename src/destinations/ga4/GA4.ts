@@ -1,19 +1,26 @@
+import { DestinationName } from "../DestinationName";
+import { Gtag } from "./types/GtagWindow";
 import { loadScript } from "../../index";
 import { Page } from "../../types/PageViewProps";
 import { TEvent } from "../../types/TrackEvent";
 import { User } from "../../types/User";
-import Destination from "../Destination";
-import { DestinationName } from "../DestinationName";
-import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
+import Destination from "../Destination";
+import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import productAdded from "./mapping/ecommerce/productAdded";
+import productsSearched from "./mapping/ecommerce/productsSearched";
 import productViewed from "./mapping/ecommerce/productViewed";
-import { Gtag } from "./types/GtagWindow";
 
 /**
  * Export mapping functions so they can be customised
  */
-export { productAdded, productViewed, orderCompleted, checkoutStarted };
+export {
+  checkoutStarted,
+  orderCompleted,
+  productAdded,
+  productsSearched,
+  productViewed,
+};
 
 /**
  * Gtag Config
@@ -37,6 +44,7 @@ export default class GA4 implements Destination {
     "Product Added": productAdded,
     "Product Viewed": productViewed,
     "Checkout Started": checkoutStarted,
+    "Products Searched": productsSearched,
   };
 
   /**
