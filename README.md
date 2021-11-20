@@ -226,7 +226,7 @@ npx hygen generator new [destinationName]
 
 3. Create the initialise, identify, page and track methods in your destination. You can run `yarn dev` whilst doing this
    to see the impact in a real browser, with hot reloading (note you need to update `/e2e/react` to add the destination
-   to do this). Make sure to add full unit testing and at least one e2e test as well.
+   staging credentials to do this). Make sure to add full unit testing and at least one e2e test.
 
 4. Add the destination to the EventFan client as a dynamic import (on the load method).
 
