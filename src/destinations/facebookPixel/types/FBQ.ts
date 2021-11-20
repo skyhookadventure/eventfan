@@ -16,6 +16,7 @@ export interface FBQ {
 
   callMethod: (...params: any) => void;
   disablePushState: boolean;
+  allowDuplicatePageViews: boolean;
   loaded: boolean;
   push: FBQ;
   queue: Array<any>;
