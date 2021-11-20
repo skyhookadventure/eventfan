@@ -7,14 +7,24 @@ typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](htt
 Send tracking events (e.g. order completed) to multiple destinations (Google Analytics, Facebook...), with the correct
 formatting applied automatically.
 
-Loads fast on the browser - the core lib is c. 4kb (minified) and destinations (e.g. Facebook Pixel) can be loaded
-asynchronously. Setup for zero-config tree shaking by default (removes unused code/destinations), with your existing bundler (e.g. Webpack/SWC).
+## Key Features
 
-Includes React components.
-
-Built for reliability with unit test coverage, e2e tests on popular browsers and type safety.
+- Tiny & fast (4kb) core lib. Then just load the destinations (e.g. Google Analytics) that you use.
+- Great developer experience - send events (e.g. `page`/`track`/`identify`) immediately and EventFan will replay them for
+  each destination as soon as they finish loading.
+- Supports React and pure JavaScript (on the browser).
+- TypeScript types included.
+- Easy to extend.
+- High reliability with unit/integration/e2e testing. Handles network errors with destinations (e.g. failing to load a
+  third party script) gracefully.
 
 ## Quick Start
+
+Npmjs release will be available shortly - for now:
+
+```bash
+yarn add https://github.com/alan-cooney/eventfan/releases/download/latest/node.tgz
+```
 
 ### Initialise Client & Destinations
 
@@ -31,7 +41,7 @@ const eventFan = new EventFan({
 });
 
 // Load all your destinations from RudderStack
-eventFan.load("YOUR_WRITE_KEY");
+eventFan.load("YOUR_WRITE_KEY", "OPTIONAL_RUDDER_URL");
 ```
 
 #### React
@@ -52,12 +62,13 @@ export default function App() {
  }
 ```
 
-You can then access the methods below with the `useEventFan` hook:
+For React you can then access the methods (detailed below) with the `useEventFan` hook:
 
 ```typescript
 const { track, page, identify } = useEventFan();
+
 useEffect(() => {
-  track("Checkout Started", {
+  track<Ecommerce.CheckoutStarted>("Checkout Started", {
     value: 100.0,
   });
 }, []);
@@ -65,7 +76,7 @@ useEffect(() => {
 
 ### Track page loads
 
-By default it will use the page `<Title/>` and url:
+You must first page calls on each page view. By default it will use the page `<Title/>` and url, unless you specify these:
 
 ```typescript
 eventFan.page();
@@ -88,7 +99,7 @@ eventFan.identify("userID", {
 
 Track events, using 50+ Segment/Rudderstack Specification types (included), or with your own types (created with
 `TEvent<name, properties>`). With standard events the properties are automatically converted to the correct format for
-each destination (in this case Facebook Pixel's `Purchase` event for example):
+each destination (e.g. in this case Facebook Pixel's `Purchase` event):
 
 ```typescript
 import { Ecommerce } from "event-fan";
@@ -138,7 +149,7 @@ export function customOrderCompleted({
   // E.g. start with the default mapping
   const defaults = FacebookPixel.orderCompleted({ props });
 
-  // And change the Facebook pixel content type to always be a travel destination
+  // And change some properties (in this case `content_type`)
   return {
     ...defaults,
     content_type: FacebookPixel.ContentType.DESTINATION,
