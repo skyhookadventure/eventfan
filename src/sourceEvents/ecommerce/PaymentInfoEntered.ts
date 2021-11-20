@@ -1,4 +1,5 @@
 import { TEvent } from "../../types/TrackEvent";
+import { Product } from "./shared/Product";
 
 export interface PaymentInfoEnteredProps {
   /**
@@ -21,6 +22,24 @@ export interface PaymentInfoEnteredProps {
    * Number representing a step in the checkout process
    */
   step?: number;
+  /**
+   * Revenue ($) associated with the transaction
+   *
+   * Not within the official Segment spec but useful.
+   */
+  revenue?: number;
+  /**
+   * Currency code associated with the transaction
+   *
+   * Not within the official Segment spec but useful.
+   */
+  currency?: string;
+  /**
+   * Products displayed in the product list
+   *
+   * Not within the official Segment spec but useful.
+   */
+  products?: Product[];
 }
 
 /**
