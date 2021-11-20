@@ -35,7 +35,7 @@ export const mockProductAdded: ProductAdded = {
   properties: mockProductViewed.properties,
 };
 
-export const mockProductSearched: ProductsSearched = {
+export const mockProductsSearched: ProductsSearched = {
   name: "Products Searched",
   properties: {
     query: "Query string",
