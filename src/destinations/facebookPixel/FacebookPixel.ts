@@ -101,31 +101,30 @@ export default class FacebookPixel implements Destination {
 
   async initialise(): Promise<void> {
     // Run initial FB Pixel Setup (this is taken from the code setup tool on the FB Events Manager)
-    if (!window.fbq) {
-      (window as any).fbq = function pixelHandler(...setupArgs: any[]) {
-        if (this.fb.callMethod) {
-          this.fb.callMethod.call(this.fb, ...setupArgs);
-        } else {
-          this.fb.queue.push(setupArgs);
-        }
-      };
-      this.fb = window.fbq!;
-      // eslint-disable-next-line no-underscore-dangle
-      window._fbq = this.fb;
-      this.fb.push = this.fb;
-      this.fb.loaded = !0;
-      this.fb.queue = [];
-    }
+    (window as any).fbq = function pixelHandler(...setupArgs: any[]) {
+      if (this.fb.callMethod) {
+        this.fb.callMethod.call(this.fb, ...setupArgs);
+      } else {
+        this.fb.queue.push(setupArgs);
+      }
+    };
+    this.fb = window.fbq!;
+    // eslint-disable-next-line no-underscore-dangle
+    window._fbq = this.fb;
+    this.fb.push = this.fb;
+    this.fb.loaded = !0;
+    this.fb.queue = [];
 
     await loadScript(
       "event-fan-facebook-pixel",
       "https://connect.facebook.net/en_US/fbevents.js"
     );
 
-    this.fb = window.fbq!;
-
-    // Disable automatic page tracking
+    // To enable manual (rather than automatic) page views, both these settings need to be enabled
     this.fb.disablePushState = true;
+    this.fb.allowDuplicatePageViews = true;
+
+    // Initialise with the pixel ID
     this.fb("init", this.config.pixelId);
 
     // Set the destination as loaded
