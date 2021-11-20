@@ -1,22 +1,15 @@
-import { mockCheckoutStarted } from "../../../../../mocks/ecommerce";
-import FacebookPixel from "../../../FacebookPixel";
-import checkoutStarted from "../checkoutStarted";
+import { mockPaymentInfoEntered } from "../../../../../mocks/ecommerce";
+import paymentInfoEntered from "../paymentInfoEntered";
 
 it("creates parameters matching the snapshot", () => {
-  const res = checkoutStarted.call(
-    new FacebookPixel({ pixelId: "pixelID" }),
-    mockCheckoutStarted
-  );
+  const res = paymentInfoEntered(mockPaymentInfoEntered);
 
   expect(res).toMatchInlineSnapshot(`
     Object {
-      "name": "InitiateCheckout",
+      "name": "AddPaymentInfo",
       "properties": Object {
         "content_ids": Array [
           "productID",
-        ],
-        "content_type": Array [
-          "product",
         ],
         "contents": Array [
           Object {
@@ -26,7 +19,7 @@ it("creates parameters matching the snapshot", () => {
         ],
         "currency": "GBP",
         "eventID": "orderID",
-        "value": 200,
+        "value": 100,
       },
     }
   `);

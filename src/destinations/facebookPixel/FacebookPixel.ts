@@ -10,6 +10,7 @@ import { TEvent } from "../../types/TrackEvent";
 import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
 import Destination from "../Destination";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
+import paymentInfoEntered from "./mapping/ecommerce/paymentInfoEntered";
 import productAdded from "./mapping/ecommerce/productAdded";
 import productListViewed from "./mapping/ecommerce/productListViewed";
 import productsSearched from "./mapping/ecommerce/productsSearched";
@@ -21,6 +22,7 @@ import productViewed from "./mapping/ecommerce/productViewed";
 export {
   checkoutStarted,
   orderCompleted,
+  paymentInfoEntered,
   productAdded,
   productListViewed,
   productsSearched,
@@ -51,6 +53,7 @@ export default class FacebookPixel implements Destination {
   // Note we bind `this` to all methods that require access to `this.config`
   eventMappings = {
     "Order Completed": orderCompleted.bind(this),
+    "Payment Info Entered": paymentInfoEntered,
     "Product Added": productAdded.bind(this),
     "Product Viewed": productViewed.bind(this),
     "Checkout Started": checkoutStarted.bind(this),
