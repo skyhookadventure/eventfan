@@ -4,7 +4,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-  root: path.resolve("./src/e2e/browser/"),
+  root: path.resolve("./src/e2e/react/"),
   server: {
     port: 8080,
   },
