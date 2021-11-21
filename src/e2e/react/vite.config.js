@@ -4,15 +4,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-  root: path.resolve(__dirname),
-  build: {
-    outDir: path.resolve(__dirname, " dist"),
-    rollupOptions: {
-      input: {
-        index: path.resolve(__dirname, "src/index.html"),
-      },
-    },
-  },
+  root: path.resolve("./src/e2e/browser/"),
   server: {
     port: 8080,
   },

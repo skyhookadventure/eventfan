@@ -1,9 +1,9 @@
 /* eslint-disable default-param-last */
 /* eslint-disable no-restricted-syntax */
-import Destination from "../destinations/Destination";
-import { TEvent } from "../types/TrackEvent";
-import { User } from "../types/User";
-import { Page } from "../types/PageViewProps";
+import type Destination from "../destinations/Destination";
+import type { TEvent } from "../types/TrackEvent";
+import type { User } from "../types/User";
+import type { Page } from "../types/PageViewProps";
 import type { RudderStack } from "../types/RudderStack";
 import { DestinationName } from "../destinations/DestinationName";
 

@@ -1,14 +1,10 @@
 {
+  "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
     "declaration": true,
     "outDir": "dist/node",
     "jsx": "react-jsx",
-    "isolatedModules": true
+    "esModuleInterop": true
   },
   "include": ["./src/**/*"]
 }

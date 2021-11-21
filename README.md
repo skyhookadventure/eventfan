@@ -9,7 +9,7 @@ formatting applied automatically.
 
 ## Key Features
 
-- Tiny & fast (4kb) core lib. Then just load the destinations (e.g. Google Analytics) that you use.
+- Tiny (6kb) & fast core lib. Then just load the destinations (e.g. Google Analytics) that you use.
 - Great developer experience - send events (e.g. `page`/`track`/`identify`) immediately and EventFan will replay them for
   each destination as soon as they finish loading.
 - Supports React and pure JavaScript (on the browser).
@@ -25,6 +25,9 @@ Npmjs release will be available shortly - for now:
 ```bash
 yarn add https://github.com/alan-cooney/eventfan/releases/download/latest/node.tgz
 ```
+
+If you are using a bundler (e.g. Parcel, Webpack or SWCPack) make sure to enable code splitting and tree shaking, so that destinations
+are loaded dynamically and package size is kept to a minimum.
 
 ### Initialise Client & Destinations
 
