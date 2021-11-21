@@ -7,7 +7,8 @@
     "skipLibCheck": true,
     "declaration": true,
     "outDir": "dist/node",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "isolatedModules": true
   },
   "include": ["./src/**/*"]
 }
