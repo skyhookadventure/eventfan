@@ -4,12 +4,12 @@
 typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
 [![Supports react](https://badgen.net/badge/supports/react/green)](https://reactjs.org/)
 
-Send tracking events (e.g. order completed) to multiple destinations (Google Analytics, Facebook...), with the correct
+Send tracking events (e.g. `Order Completed`) to multiple destinations (Google Analytics, Facebook...), with the correct
 formatting applied automatically.
 
 ## Key Features
 
-- Tiny & fast (4kb) core lib. Then just load the destinations (e.g. Google Analytics) that you use.
+- Tiny (4kb) & fast core lib.
 - Great developer experience - send events (e.g. `page`/`track`/`identify`) immediately and EventFan will replay them for
   each destination as soon as they finish loading.
 - Supports React and pure JavaScript (on the browser).
@@ -20,10 +20,29 @@ formatting applied automatically.
 
 ## Quick Start
 
-Npmjs release will be available shortly - for now:
+### Install
+
+Install directly (will be on `npmjs` in the future):
 
 ```bash
 yarn add https://github.com/alan-cooney/eventfan/releases/download/latest/node.tgz
+```
+
+Or load in the browser:
+
+```html
+<script
+  id="eventFanModule"
+  type="module"
+  src="https://yourCdn.com/browser/browser.js"
+  async
+></script>
+<script
+  id="eventFanNoModule"
+  nomodule
+  src="https://yourCdn.com/browser-legacy/browser.js"
+  async
+></script>
 ```
 
 ### Initialise Client & Destinations
@@ -33,36 +52,25 @@ Initialise just once in your application:
 ```typescript
 import EventFan, { FacebookPixel } from "event-fan";
 
-const eventFan = new EventFan({
-  destinations: [
-    // Any destinations you want to load directly
-    new FacebookPixel({ pixelId: "your-facebook-pixel-id" }),
-  ],
-});
-
-// Load all your destinations from RudderStack
+const eventFan = new EventFan();
 eventFan.load("YOUR_WRITE_KEY", "OPTIONAL_RUDDER_URL");
 ```
 
 #### React
 
-Alternatively for React, wrap your app with the provider component:
+Instead for React, wrap your app with the provider component:
 
 ```typescript
 export default function App() {
-   return (
-     <EventFanProvider
-       destinations={[
-         new FacebookPixel({ pixelId: "your-facebook-pixel-id" })
-       ]}
-       rudderStack={{ writeKey: "YOUR_WRITE_KEY" }}
-      >
-       <h1>Your app</h1>
-     </EventFanProvider>
- }
+  return (
+    <EventFanProvider rudderStack={{ writeKey: "YOUR_WRITE_KEY" }}>
+      <h1>Your app</h1>
+    </EventFanProvider>
+  );
+}
 ```
 
-For React you can then access the methods (detailed below) with the `useEventFan` hook:
+Note that for React, you can then access the methods (detailed below) with the `useEventFan` hook:
 
 ```typescript
 const { track, page, identify } = useEventFan();
@@ -76,7 +84,7 @@ useEffect(() => {
 
 ### Track page loads
 
-You must first page calls on each page view. By default it will use the page `<Title/>` and url, unless you specify these:
+You must fire page calls on each page view. By default it will use the page `<Title/>` and url, unless you specify these:
 
 ```typescript
 eventFan.page();

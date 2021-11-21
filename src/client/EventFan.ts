@@ -1,9 +1,9 @@
 /* eslint-disable default-param-last */
 /* eslint-disable no-restricted-syntax */
-import Destination from "../destinations/Destination";
-import { TEvent } from "../types/TrackEvent";
-import { User } from "../types/User";
-import { Page } from "../types/PageViewProps";
+import type Destination from "../destinations/Destination";
+import type { TEvent } from "../types/TrackEvent";
+import type { User } from "../types/User";
+import type { Page } from "../types/PageViewProps";
 import type { RudderStack } from "../types/RudderStack";
 import { DestinationName } from "../destinations/DestinationName";
 
@@ -91,13 +91,21 @@ export default class EventFan {
    */
   async load(
     writeKey: string,
-    url = "https://api.rudderlabs.com/sourceConfig/"
+    url = "https://api.rudderlabs.com",
+    dataPlaneURL = "https://hosted.rudderlabs.com"
   ) {
-    const response = await fetch(url, {
+    const response = await fetch(`${url}/sourceConfig/`, {
       headers: { Authorization: `Basic ${btoa(`${writeKey}:`)}` },
     });
     const settings = (await response.json()) as RudderStack;
     const { destinations } = settings.source;
+
+    // Load the RudderStack destination
+    import("../destinations/rudderStack/RudderStack").then(
+      ({ default: RudderStack }) => {
+        this.addDestination(new RudderStack({ writeKey, dataPlaneURL }));
+      }
+    );
 
     // Load each destination asynchronously, with dynamic imports
     // We use dynamic imports here to avoid a large initial bundle that would otherwise include all destinations

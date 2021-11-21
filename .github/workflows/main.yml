@@ -89,6 +89,7 @@ jobs:
             --exclude .gitignore \
             --exclude coverage \
             --exclude dist/browser \
+            --exclude dist/legacy \
             --exclude dist/node/e2e \
             --exclude esbuild.js \
             --exclude node_modules \
@@ -97,6 +98,8 @@ jobs:
             ./
       - name: Zip Browser
         run: tar -czvf ./packages/browser.tgz ./dist/browser
+      - name: Zip Browser Legacy
+        run: tar -czvf ./packages/browser-legacy.tgz ./dist/legacy
       - name: "Build & test"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
