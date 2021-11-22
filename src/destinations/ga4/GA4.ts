@@ -77,13 +77,16 @@ export default class GA4 implements Destination {
   async initialise(): Promise<void> {
     // Run initial Gtag setup
     // https://developers.google.com/analytics/devguides/collection/ga4
-    if (!this.gtag) {
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = (...args: any[]) => {
-        window.dataLayer.push(args);
-      };
-      this.gtag = window.gtag;
-    }
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer.push(arguments);
+    };
+    window.gtag("js", new Date());
+    window.gtag("config", this.config.measurementId, {
+      // Default send page view to false (so it can be done with `.page()`)
+      send_page_view: false,
+    });
 
     // Load the script
     await loadScript(
@@ -91,12 +94,7 @@ export default class GA4 implements Destination {
       `https://www.googletagmanager.com/gtag/js?id=${this.config.measurementId}`
     );
 
-    // Set the measurement ID & config
-    this.gtag("js", new Date());
-    this.gtag("config", this.config.measurementId, {
-      // Default send page view to false (so it can be done with `.page()`)
-      send_page_view: false,
-    });
+    this.gtag = window.gtag;
 
     // Set the destination as loaded
     this.isLoaded = true;
