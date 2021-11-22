@@ -1,5 +1,4 @@
 import { Button, Container, Row, Col } from "react-bootstrap";
-import { useEffect } from "react";
 import { capitalCase } from "change-case";
 import {
   FacebookPixel,
@@ -8,7 +7,6 @@ import {
   Posthog,
   EventFanProvider,
   useEventFan,
-  Ecommerce,
   Drip,
   TEvent,
 } from "../../../index";
