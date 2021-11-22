@@ -8,8 +8,8 @@
   "scripts": {
     "build": "yarn buildBrowser && yarn buildNode && yarn buildTypes",
     "buildBrowser": "parcel build",
-    "buildNode": "babel src -d dist/node --extensions '.tsx,.ts' --config-file ./babelNode.json",
-    "buildTypes": "tsc",
+    "buildNode": "babel src -d dist/module --extensions '.tsx,.ts' --config-file ./babelNode.json",
+    "buildTypes": "tsc --emitDeclarationOnly",
     "bump": "./node_modules/.bin/versiony package.json --patch",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "dev": "yarn react",
@@ -69,7 +69,6 @@
     "postal-address-field-names": "^1.0.3",
     "prettier": "^2.4.1",
     "quicktype-core": "^6.0.70",
-    "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.0.2",
@@ -114,15 +113,12 @@
   "sideEffects": false,
   "dependencies": {
     "posthog-js": "^1.16.6",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "react": "^17.0.2"
   },
-  "externals": [
-    "react",
-    "react/jsx-runtime"
-  ],
-  "type": "module",
-  "main": "./dist/node/index.js",
-  "types": "./dist/node/index.d.ts",
+  "main": "./dist/main/index.js",
+  "module": "./dist/module/index.js",
+  "types": "./dist/module/index.d.ts",
   "targets": {
     "browser": {
       "context": "browser",
@@ -136,7 +132,7 @@
       "sourceMap": true,
       "distDir": "./dist/browser"
     },
-    "legacy": {
+    "legacyBrowser": {
       "engines": {
         "browsers": "> 0.5%, last 2 versions, not dead"
       },
@@ -150,6 +146,18 @@
       },
       "sourceMap": true,
       "distDir": "./dist/legacy"
+    },
+    "main": {
+      "engines": {
+        "node": ">= 12"
+      },
+      "context": "node",
+      "isLibrary": true,
+      "source": "./src/index.ts",
+      "optimize": false,
+      "includeNodeModules": false,
+      "sourceMap": false,
+      "distDir": "./dist/main"
     }
   }
 }

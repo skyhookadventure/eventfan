@@ -4,7 +4,7 @@
     "module": "es2020",
     "target": "es2020",
     "declaration": true,
-    "outDir": "dist/node",
+    "outDir": "dist/module",
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "moduleResolution": "node",

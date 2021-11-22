@@ -90,7 +90,8 @@ jobs:
             --exclude coverage \
             --exclude dist/browser \
             --exclude dist/legacy \
-            --exclude dist/node/e2e \
+            --exclude dist/main/e2e \
+            --exclude dist/module/e2e \
             --exclude node_modules \
             --exclude packages \
             --exclude src \
