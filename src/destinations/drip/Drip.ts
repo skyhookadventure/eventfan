@@ -33,7 +33,6 @@ export default class Drip implements Destination {
     window._dcq = window._dcq || [];
     window._dcs = window._dcs || {};
     window._dcs.account = this.config.accountId;
-    this.drip = window._dcq;
   }
 
   eventMappings = {
@@ -76,6 +75,8 @@ export default class Drip implements Destination {
       "event-fan-drip",
       `//tag.getdrip.com/${this.config.accountId}.js`
     );
+
+    this.drip = window._dcq;
 
     // Set the destination as loaded
     this.isLoaded = true;
