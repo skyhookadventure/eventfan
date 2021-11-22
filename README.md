@@ -9,7 +9,7 @@ formatting applied automatically.
 
 ## Key Features
 
-- Tiny (4kb) & fast core lib.
+- Tiny (2kb compressed) & fast core lib.
 - Great developer experience - send events (e.g. `page`/`track`/`identify`) immediately and EventFan will replay them for
   each destination as soon as they finish loading.
 - Supports React and pure JavaScript (on the browser).
