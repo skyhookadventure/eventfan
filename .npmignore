@@ -8,6 +8,7 @@ esbuild.js
 tsconfig.json
 yarn.lock
 dist/browser
-dist/node/e2e
+dist/main/e2e
+dist/module/e2e
 src
 .parcel-cache
