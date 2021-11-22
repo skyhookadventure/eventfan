@@ -17,6 +17,12 @@ export default function productViewed({
       categories: properties.category ? [properties.category] : undefined,
       // Drip requires the value in Zero Decimal form (cents not dollars)
       price: properties.price ? properties.price * 100 : undefined,
+      // Set the other properties available as custom properties
+      ...({
+        currency: properties.currency,
+        image_url: properties.image_url,
+        url: properties.url,
+      } as any),
     },
   };
 }
