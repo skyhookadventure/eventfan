@@ -12,6 +12,8 @@ test("It sends the page event", async ({ page }) => {
   // Wait for script to load
   await page.waitForFunction(() => !!window.gtag);
 
+  await page.click("text=Page");
+
   // Expect page to have been set
   const dataLayer = await page.evaluate(() => window.dataLayer);
   expect(
@@ -26,6 +28,8 @@ test("It sends the track event", async ({ page }) => {
 
   // Wait for script to load
   await page.waitForFunction(() => !!window.gtag);
+
+  await page.click("text=Order Completed");
 
   // Expect page to have been set
   const dataLayer = await page.evaluate(() => window.dataLayer);

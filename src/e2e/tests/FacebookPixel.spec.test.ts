@@ -11,11 +11,13 @@ test("It loads the FB Pixel", async ({ page }) => {
 });
 
 test("It sends the page event", async ({ page }) => {
+  page.click("text=Page");
   const urlMatch = /www.facebook.com\/tr\/\?id=[\d]*&ev=PageView/;
   await expectRequest(page, "http://127.0.0.1:8080", urlMatch);
 });
 
 test("It sends the track event", async ({ page }) => {
+  page.click("text=Order Completed");
   const urlMatch = /www.facebook.com\/tr\/\?id=[\d]*&ev=Purchase/;
   await expectRequest(page, "http://127.0.0.1:8080", urlMatch);
 });

@@ -1,5 +1,6 @@
-import { Container } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import { useEffect } from "react";
+import { capitalCase } from "change-case";
 import {
   FacebookPixel,
   GA4,
@@ -9,59 +10,57 @@ import {
   useEventFan,
   Ecommerce,
   Drip,
-} from "../../..";
+  TEvent,
+} from "../../../index";
 
-/**
- * Emit a sample page call
- */
-function Page() {
-  const { page } = useEventFan();
+import * as ecommerceMockEvents from "../../../mocks/ecommerce";
 
-  useEffect(() => {
-    page();
-  });
+function CoreEvents() {
+  const { identify, page } = useEventFan();
 
-  return null;
+  return (
+    <div className="d-grid gap-2">
+      <h2>Core Events</h2>
+      <Button
+        onClick={() =>
+          identify("userID", {
+            firstName: "Fname",
+            lastName: "Lname",
+            email: "test@example.com",
+          })
+        }
+      >
+        Identify
+      </Button>
+      <Button onClick={() => page()}>Page</Button>
+    </div>
+  );
 }
 
-/**
- * Emit a sample identify call
- */
-function Identify() {
-  const { identify } = useEventFan();
-
-  useEffect(() => {
-    identify("userID", {
-      firstName: "Fname",
-      lastName: "Lname",
-      email: "test@example.com",
-    });
-  });
-
-  return null;
-}
-
-/**
- * Emit a sample track call
- */
-function Track() {
+function EcommerceEvents() {
   const { track } = useEventFan();
 
-  useEffect(() => {
-    track<Ecommerce.OrderCompleted>("Order Completed", {
-      order_id: "orderID",
-      revenue: 100.0,
-      products: [
-        {
-          product_id: "productID",
-          quantity: 1,
-        },
-      ],
-      currency: "GBP",
-    });
-  });
+  const mockEventNames = Object.keys(ecommerceMockEvents);
 
-  return null;
+  return (
+    <div className="d-grid gap-2">
+      <h2>Ecommerce Events</h2>
+      {mockEventNames.map((name) => {
+        const eventName = capitalCase(name.replace("mock", ""));
+        const mock = (ecommerceMockEvents as any)[name] as TEvent;
+
+        function onClick(): void {
+          track(mock.name, mock.properties);
+        }
+
+        return (
+          <Button key={name} onClick={onClick}>
+            {eventName}
+          </Button>
+        );
+      })}
+    </div>
+  );
 }
 
 /**
@@ -76,7 +75,7 @@ function App() {
         destinations={[
           new Drip({ accountId: "7500000" }), // Drip doesn't have a sandbox so use a dummy accountId
           new FacebookPixel({ pixelId: "243635977408985" }),
-          new GA4({ measurementId: "GTM-TNBDGJR" }),
+          new GA4({ measurementId: "G-0PST7G69H1" }),
           new Hotjar({ siteID: "2705682" }),
           new Posthog({
             teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
@@ -88,9 +87,14 @@ function App() {
       >
         <Container>
           <h1>EventFan React Test</h1>
-          <Identify />
-          <Page />
-          <Track />
+          <Row>
+            <Col>
+              <CoreEvents />
+            </Col>
+            <Col>
+              <EcommerceEvents />
+            </Col>
+          </Row>
         </Container>
       </EventFanProvider>
     </div>
