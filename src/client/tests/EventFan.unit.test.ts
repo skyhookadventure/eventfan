@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-classes-per-file */
 import EventFan from "../EventFan";
-import Destination from "../../destinations/Destination";
+import type Destination from "../../destinations/Destination";
 import { DestinationName } from "../../destinations/DestinationName";
 import mockUser from "../../mocks/mockUser";
 import mockPage from "../../mocks/mockPage";

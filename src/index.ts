@@ -1,4 +1,4 @@
-import Destination from "./destinations/Destination";
+import type Destination from "./destinations/Destination";
 import Drip from "./destinations/drip/Drip";
 import EventFan from "./client/EventFan";
 import FacebookPixel from "./destinations/facebookPixel/FacebookPixel";
@@ -14,7 +14,7 @@ export default EventFan;
 export { loadScript };
 
 // Destinations
-export { Destination };
+export type { Destination };
 export { FacebookPixel, GA4, Hotjar, Posthog, Drip };
 
 // Mocks for testing

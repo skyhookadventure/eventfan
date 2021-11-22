@@ -2,7 +2,7 @@
 to: <%= h.changeCase.lower(name) %>/<%= h.changeCase.pascal(name) %>.ts
 ---
 import { User } from "../../types/User";
-import Destination from "../Destination";
+import type Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
 import loadScript from "../../utils/loadScript";
 

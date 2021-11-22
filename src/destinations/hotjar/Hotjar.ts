@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { User } from "../../types/User";
-import Destination from "../Destination";
+import type Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
 import loadScript from "../../utils/loadScript";
 import { HotjarWindow } from "./types/HotjarWindow";

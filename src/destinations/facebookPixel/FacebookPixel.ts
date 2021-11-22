@@ -8,7 +8,7 @@ import { Gender, User } from "../../types/User";
 import { loadScript } from "../..";
 import { TEvent } from "../../types/TrackEvent";
 import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
-import Destination from "../Destination";
+import type Destination from "../Destination";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import paymentInfoEntered from "./mapping/ecommerce/paymentInfoEntered";
 import productAdded from "./mapping/ecommerce/productAdded";

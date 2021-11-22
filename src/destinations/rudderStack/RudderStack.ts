@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { User } from "../../types/User";
-import Destination from "../Destination";
+import type Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
 import { Page } from "../../types/PageViewProps";
 import {

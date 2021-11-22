@@ -2,7 +2,7 @@
 import posthog from "posthog-js";
 import { TEvent } from "../../types/TrackEvent";
 import { User } from "../../types/User";
-import Destination from "../Destination";
+import type Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
 
 /**

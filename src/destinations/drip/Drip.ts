@@ -4,7 +4,7 @@ import { DripIdentity } from "./types/DripJsAPI";
 import { TEvent } from "../../types/TrackEvent";
 import { User } from "../../types/User";
 import checkoutStarted from "./mapping/ecommerce/checkoutStarted";
-import Destination from "../Destination";
+import type Destination from "../Destination";
 import loadScript from "../../utils/loadScript";
 import orderCompleted from "./mapping/ecommerce/orderCompleted";
 import productViewed from "./mapping/ecommerce/productViewed";
