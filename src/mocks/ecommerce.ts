@@ -24,11 +24,14 @@ import {
  */
 const mockProduct: ProductViewed["properties"] = {
   category: "Trip",
+  currency: "GBP",
+  image_url: "http://example.com/image.jpg",
   name: "Product Name",
   price: 100.0,
   product_id: "productID",
   quantity: 1,
   sku: "sku",
+  url: "http://example.com/productID",
   variant: "variant",
 };
 

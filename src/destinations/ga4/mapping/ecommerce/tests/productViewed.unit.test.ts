@@ -8,7 +8,7 @@ it("creates parameters matching the snapshot", () => {
     Object {
       "name": "view_item",
       "properties": Object {
-        "currency": "USD",
+        "currency": "GBP",
         "items": Array [
           Object {
             "item_id": "productID",
