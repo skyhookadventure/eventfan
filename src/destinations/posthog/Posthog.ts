@@ -19,21 +19,30 @@ export default class Posthog implements Destination {
   // Expose for use outside of EventFan (e.g. for feature flags)
   public posthog = posthog;
 
-  constructor(protected config: PosthogConfig) {}
-
-  async identify(user: User): Promise<void> {
-    posthog.identify(user.userId, user.traits);
-  }
-
-  async initialise(): Promise<void> {
+  constructor(protected config: PosthogConfig) {
+    // Initialise in the constructor so that it can be used instantly with feature flags
+    // However disable auto capture for now until initialisation
     posthog.init(this.config.teamApiKey, {
-      autocapture: true,
+      autocapture: false, // Start with this disabled
       api_host: "https://app.posthog.com",
       capture_pageview: false, // We do this with `.page()`
     });
 
     // Set to the window (so it can be used globally as well e.g. for feature flags, and tested more easily)
     (window as any).posthog = posthog;
+  }
+
+  async identify(user: User): Promise<void> {
+    posthog.identify(user.userId, user.traits);
+  }
+
+  async initialise(): Promise<void> {
+    // Enable auto capture now it is initialised
+    posthog.init(this.config.teamApiKey, {
+      autocapture: true,
+      api_host: "https://app.posthog.com",
+      capture_pageview: false, // We do this with `.page()`
+    });
 
     // Set the destination as loaded
     this.isLoaded = true;

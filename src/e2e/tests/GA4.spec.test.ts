@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 import expectRequest from "./utils/expectRequest";
 
 test("It loads GA4", async ({ page }) => {
