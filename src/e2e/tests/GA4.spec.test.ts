@@ -6,36 +6,20 @@ test("It loads GA4", async ({ page }) => {
   await expectRequest(page, "http://127.0.0.1:8080", urlMatch);
 });
 
+test("It sends the identify event", async ({ page }) => {
+  page.click("text=Identify");
+  const urlMatch = /google-analytics.com\/g\/collect.*userID/;
+  await expectRequest(page, "http://127.0.0.1:8080", urlMatch);
+});
+
 test("It sends the page event", async ({ page }) => {
-  await page.goto("http://127.0.0.1:8080");
-
-  // Wait for script to load
-  await page.waitForFunction(() => !!window.gtag);
-
-  await page.click("text=Page");
-
-  // Expect page to have been set
-  const dataLayer = await page.evaluate(() => window.dataLayer);
-  expect(
-    dataLayer.some((event) => {
-      return event[0] === "event" && event[1] === "page_view";
-    })
-  );
+  page.click("text=Page");
+  const urlMatch = /google-analytics.com\/g\/collect.*page_view/;
+  await expectRequest(page, "http://127.0.0.1:8080", urlMatch);
 });
 
 test("It sends the track event", async ({ page }) => {
-  await page.goto("http://127.0.0.1:8080");
-
-  // Wait for script to load
-  await page.waitForFunction(() => !!window.gtag);
-
-  await page.click("text=Order Completed");
-
-  // Expect page to have been set
-  const dataLayer = await page.evaluate(() => window.dataLayer);
-  expect(
-    dataLayer.some((event) => {
-      return event[0] === "event" && event[1] === "purchase";
-    })
-  );
+  page.click("text=Order Completed");
+  const urlMatch = /google-analytics.com\/g\/collect.*purchase/;
+  await expectRequest(page, "http://127.0.0.1:8080", urlMatch);
 });
