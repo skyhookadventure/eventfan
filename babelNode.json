@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["@babel/preset-env", { "modules": false, "targets": { "node": true } }],
+    ["@babel/preset-typescript"],
+    ["@babel/preset-react"]
+  ],
+  "ignore": ["node_modules"],
+  "comments": true,
+  "minified": false,
+  "plugins": ["babel-plugin-add-import-extension"]
+}

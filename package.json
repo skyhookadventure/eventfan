@@ -6,7 +6,10 @@
   "author": "Alan Cooney <alan@skyhookadventure.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "parcel build && tsc",
+    "build": "yarn buildBrowser && yarn buildNode && yarn buildTypes",
+    "buildBrowser": "parcel build",
+    "buildNode": "babel src -d dist/node --extensions '.tsx,.ts' --config-file ./babelNode.json",
+    "buildTypes": "tsc",
     "bump": "./node_modules/.bin/versiony package.json --patch",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
     "dev": "yarn react",
@@ -17,6 +20,11 @@
     "browser": "yarn vite --config ./src/e2e/browser/vite.config.js"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
     "@playwright/test": "^1.16.3",
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.111",
@@ -34,6 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vitejs/plugin-react": "^1.1.0",
+    "babel-plugin-add-import-extension": "^1.6.0",
     "change-case": "^4.1.2",
     "cross-fetch": "^3.1.4",
     "eslint": "^8.3.0",
@@ -60,6 +69,7 @@
     "postal-address-field-names": "^1.0.3",
     "prettier": "^2.4.1",
     "quicktype-core": "^6.0.70",
+    "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.0.2",
@@ -104,13 +114,15 @@
   "sideEffects": false,
   "dependencies": {
     "posthog-js": "^1.16.6",
-    "react": "^17.0.2",
     "uuid": "^8.3.2"
   },
   "externals": [
     "react",
     "react/jsx-runtime"
   ],
+  "type": "module",
+  "main": "./dist/node/index.js",
+  "types": "./dist/node/index.d.ts",
   "targets": {
     "browser": {
       "context": "browser",

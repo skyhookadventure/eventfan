@@ -22,7 +22,7 @@ formatting applied automatically.
 
 ### Install
 
-Install directly (will be on `npmjs` in the future):
+Install the node module (requires Node 12+) directly. This will be on `npmjs` in the future.
 
 ```bash
 yarn add https://github.com/alan-cooney/eventfan/releases/download/latest/node.tgz
