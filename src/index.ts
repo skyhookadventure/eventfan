@@ -17,11 +17,14 @@ export { loadScript };
 export { Destination };
 export { FacebookPixel, GA4, Hotjar, Posthog, Drip };
 
-// Event types
-export { Ecommerce, Mobile, SAAS, Video } from "./sourceEvents/Events";
-
 // Mocks for testing
 export * as mocks from "./mocks";
 
 // React
 export { EventFanProvider, useEventFan } from "./react";
+
+// Types
+export type { TEvent } from "./types/TrackEvent";
+export type { Page, PageViewProps } from "./types/PageViewProps";
+export type { User, IdentifyTraits } from "./types/User";
+export type { Ecommerce, Mobile, SAAS, Video } from "./sourceEvents/Events";
