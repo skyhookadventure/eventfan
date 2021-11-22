@@ -91,7 +91,6 @@ jobs:
             --exclude dist/browser \
             --exclude dist/legacy \
             --exclude dist/node/e2e \
-            --exclude esbuild.js \
             --exclude node_modules \
             --exclude packages \
             --exclude src \
@@ -100,7 +99,7 @@ jobs:
         run: tar -czvf ./packages/browser.tgz ./dist/browser
       - name: Zip Browser Legacy
         run: tar -czvf ./packages/browser-legacy.tgz ./dist/legacy
-      - name: "Build & test"
+      - name: Update Github release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
