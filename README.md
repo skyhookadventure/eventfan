@@ -28,23 +28,6 @@ Install the node module (requires Node 12+) directly. This will be on `npmjs` in
 yarn add https://github.com/alan-cooney/eventfan/releases/download/latest/node.tgz
 ```
 
-Or load in the browser:
-
-```html
-<script
-  id="eventFanModule"
-  type="module"
-  src="https://yourCdn.com/browser/browser.js"
-  async
-></script>
-<script
-  id="eventFanNoModule"
-  nomodule
-  src="https://yourCdn.com/browser-legacy/browser.js"
-  async
-></script>
-```
-
 ### Initialise Client & Destinations
 
 Initialise just once in your application:
