@@ -20,6 +20,11 @@ export default class Posthog implements Destination {
   public posthog = posthog;
 
   constructor(protected config: PosthogConfig) {
+    // Don't do anything if window is undefined (e.g. on server side rendering)
+    // This is because Posthog cannot run on the server
+    if (typeof window === "undefined") return;
+    console.log("Hi", typeof window);
+
     // Initialise in the constructor so that it can be used instantly with feature flags
     // However disable auto capture for now until initialisation
     posthog.init(this.config.teamApiKey, {
@@ -37,6 +42,10 @@ export default class Posthog implements Destination {
   }
 
   async initialise(): Promise<void> {
+    // Don't do anything if window is undefined (e.g. on server side rendering)
+    // This is because Posthog cannot run on the server
+    if (typeof window === "undefined") return;
+
     // Enable auto capture now it is initialised
     posthog.init(this.config.teamApiKey, {
       autocapture: true,
