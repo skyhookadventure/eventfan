@@ -23,10 +23,10 @@ it("tries to initialise as soon as a class instance is created", () => {
 });
 
 describe("When server side rendering", () => {
+  // Remove the window object as it won't exist on SSR
   const { window } = global;
   beforeEach(() => {
-    // @ts-ignore
-    delete global.window;
+    delete (global as any).window;
   });
   afterAll(() => {
     global.window = window;
