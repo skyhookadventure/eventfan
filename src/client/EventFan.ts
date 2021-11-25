@@ -94,10 +94,17 @@ export default class EventFan {
     url = "https://api.rudderlabs.com",
     dataPlaneURL = "https://hosted.rudderlabs.com"
   ) {
-    const response = await fetch(`${url}/sourceConfig/`, {
-      headers: { Authorization: `Basic ${btoa(`${writeKey}:`)}` },
-    });
-    const settings = (await response.json()) as RudderStack;
+    let settings: RudderStack;
+    try {
+      const response = await fetch(`${url}/sourceConfig/`, {
+        headers: { Authorization: `Basic ${btoa(`${writeKey}:`)}` },
+      });
+      settings = (await response.json()) as RudderStack;
+    } catch (_e) {
+      // Don't try and load any destinations if there is an error (e.g. a http error).
+      console.log("Failed to load destinations from RudderStack.");
+      return;
+    }
     const { destinations } = settings.source;
 
     // Load the RudderStack destination

@@ -10,4 +10,15 @@ describe("load", () => {
     await eventFan.load(stagingRudderStackKey);
     expect(eventFan["destinations"].length).toBeGreaterThanOrEqual(3);
   });
+
+  it("fails gracefully", async () => {
+    const mockConsole = jest.fn();
+    jest.spyOn(console, "log").mockImplementation(mockConsole);
+    const eventFan = new EventFan();
+    await eventFan.load(stagingRudderStackKey, "https://fail.rudderlabs.com");
+    expect(mockConsole.mock.calls[0][0]).toMatchInlineSnapshot(
+      `"Failed to load destinations from RudderStack."`
+    );
+    expect(eventFan["destinations"].length).toBe(0);
+  });
 });
