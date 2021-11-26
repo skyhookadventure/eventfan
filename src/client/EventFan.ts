@@ -5,6 +5,9 @@ import type { TEvent } from "../types/TrackEvent";
 import type { User } from "../types/User";
 import type { Page } from "../types/PageViewProps";
 import type { RudderStack } from "../types/RudderStack";
+import loadDestinationsDynamically, {
+  dynamicImportDestination,
+} from "./utils/loadDestinationsDynamically";
 import { DestinationName } from "../destinations/DestinationName";
 
 /**
@@ -85,7 +88,7 @@ export default class EventFan {
   }
 
   /**
-   * Load rudderstack Config
+   * Load destinations setup in RudderStack
    *
    * Asynchronously loads all destinations within the RudderStack config that are enabled
    */
@@ -94,6 +97,7 @@ export default class EventFan {
     url = "https://api.rudderlabs.com",
     dataPlaneURL = "https://hosted.rudderlabs.com"
   ) {
+    // Get the RudderStack Config
     let settings: RudderStack;
     try {
       const response = await fetch(`${url}/sourceConfig/`, {
@@ -102,72 +106,20 @@ export default class EventFan {
       settings = (await response.json()) as RudderStack;
     } catch (_e) {
       // Don't try and load any destinations if there is an error (e.g. a http error).
-      console.log("Failed to load destinations from RudderStack.");
+      console.error("Failed to load destinations from RudderStack.");
       return;
     }
-    const { destinations } = settings.source;
 
     // Load the RudderStack destination
-    import("../destinations/rudderStack/RudderStack").then(
-      ({ default: RudderStack }) => {
-        this.addDestination(new RudderStack({ writeKey, dataPlaneURL }));
-      }
-    );
+    await dynamicImportDestination.call(this, {
+      destinationDefinition: {
+        name: DestinationName.RUDDERSTACK,
+      },
+      config: { writeKey, dataPlaneURL },
+    });
 
-    // Load each destination asynchronously, with dynamic imports
-    // We use dynamic imports here to avoid a large initial bundle that would otherwise include all destinations
-    await Promise.all(
-      destinations.map(async (destinationSettings) => {
-        // Don't add if the destination is disabled
-        if (destinationSettings.enabled !== true) return;
-
-        // Dynamically import by name
-        switch (destinationSettings.destinationDefinition.name) {
-          case DestinationName.DRIP:
-            import("../destinations/drip/Drip").then(({ default: Drip }) => {
-              this.addDestination(new Drip(destinationSettings.config));
-            });
-            break;
-
-          case DestinationName.FACEBOOK_PIXEL:
-            import("../destinations/facebookPixel/FacebookPixel").then(
-              ({ default: FacebookPixel }) => {
-                this.addDestination(
-                  new FacebookPixel(destinationSettings.config)
-                );
-              }
-            );
-            break;
-
-          case DestinationName.GA4:
-            import("../destinations/ga4/GA4").then(({ default: GA4 }) => {
-              this.addDestination(new GA4(destinationSettings.config));
-            });
-            break;
-
-          case DestinationName.HOTJAR:
-            import("../destinations/hotjar/Hotjar").then(
-              ({ default: Hotjar }) => {
-                this.addDestination(new Hotjar(destinationSettings.config));
-              }
-            );
-            break;
-
-          case DestinationName.POSTHOG:
-            import("../destinations/posthog/Posthog").then(
-              ({ default: Posthog }) => {
-                this.addDestination(new Posthog(destinationSettings.config));
-              }
-            );
-            break;
-
-          default:
-            console.log(
-              `EventFan does not support ${destinationSettings.name} yet.`
-            );
-        }
-      })
-    );
+    // Load each other destination asynchronously, with dynamic imports (to avoid a large initial bundle size).
+    await loadDestinationsDynamically.call(this, settings.source.destinations);
   }
 
   /**

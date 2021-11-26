@@ -206,20 +206,10 @@ We recommend looking in `/src/e2e/` for examples of end-to-end tests.
 
 ### Adding a destination
 
-1. Codegen the basics by running this from the destinations directory:
-
-```bash
-cd /src/destinations
-npx hygen generator new [destinationName]
-```
-
+1. Codegen the basics by running `npx hygen generator new [destinationName]` within `/src/destinations/`.
 2. Add the destination name to `/src/destinations/DestinationName.ts`
-
-3. Create the initialise, identify, page and track methods in your destination. You can run `yarn dev` whilst doing this
-   to see the impact in a real browser, with hot reloading (note you need to update `/e2e/react` to add the destination
-   staging credentials to do this). Make sure to add full unit testing and at least one e2e test.
-
-4. Add the destination to the EventFan client as a dynamic import (on the load method).
+3. Create the initialise, identify, page and track methods in your destination. You can run `yarn dev` whilst doing this to see the impact in a real browser, with hot reloading (note you need to update `/e2e/react` to add the destination staging credentials to do this). Make sure to add full unit testing and at least one e2e test.
+4. Add the destination to the EventFan client as a dynamic import (in `/src/client/utils/loadDestinationsDynamically`).
 
 ### Adding an event mapping
 
