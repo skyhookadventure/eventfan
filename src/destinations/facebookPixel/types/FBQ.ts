@@ -14,6 +14,8 @@ export interface FBQ {
 
   (eventType: "track", eventName: string, properties?: any): void;
 
+  (eventType: "trackCustom", eventName: string, properties?: any): void;
+
   callMethod: (...params: any) => void;
   disablePushState: boolean;
   allowDuplicatePageViews: boolean;

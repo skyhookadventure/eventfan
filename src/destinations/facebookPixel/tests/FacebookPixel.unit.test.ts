@@ -59,6 +59,19 @@ describe("track", () => {
     const mockFbWindowObject = jest.fn() as any;
     fb["fb"] = mockFbWindowObject;
 
+    await fb.track({
+      name: "Purchase",
+      properties: mockOrderCompleted.properties,
+    });
+
+    expect(mockFbWindowObject.mock.calls[0]).toMatchSnapshot();
+  });
+
+  it("calls the facebook trackCustom method with parameters matching the snapshot", async () => {
+    const fb = new FacebookPixel({ pixelId: "pixelId" });
+    const mockFbWindowObject = jest.fn() as any;
+    fb["fb"] = mockFbWindowObject;
+
     await fb.track(mockTrack);
 
     expect(mockFbWindowObject.mock.calls[0]).toMatchSnapshot();

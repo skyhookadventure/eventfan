@@ -136,7 +136,33 @@ export default class FacebookPixel implements Destination {
   }
 
   async track(event: TEvent): Promise<void> {
-    this.fb("track", event.name, event.properties);
+    // Standard events use `track` and custom use `trackCustom`
+    // https://developers.facebook.com/docs/facebook-pixel/reference#standard-events
+    const standardTrackNames = [
+      "AddPaymentInfo",
+      "AddToCart",
+      "AddToWishlist",
+      "CompleteRegistration",
+      "Contact",
+      "CustomizeProduct",
+      "Donate",
+      "FindLocation",
+      "InitiateCheckout",
+      "Lead",
+      "Purchase",
+      "Schedule",
+      "Search",
+      "StartTrial",
+      "SubmitApplication",
+      "Subscribe",
+      "ViewContent",
+    ];
+
+    if (standardTrackNames.includes(event.name)) {
+      this.fb("track", event.name, event.properties);
+    } else {
+      this.fb("trackCustom", event.name, event.properties);
+    }
   }
 
   name = DestinationName.FACEBOOK_PIXEL;

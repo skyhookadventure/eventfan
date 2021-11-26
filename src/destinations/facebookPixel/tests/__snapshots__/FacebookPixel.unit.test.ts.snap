@@ -30,6 +30,33 @@ Array [
 exports[`track calls the facebook track method with parameters matching the snapshot 1`] = `
 Array [
   "track",
+  "Purchase",
+  Object {
+    "currency": "GBP",
+    "order_id": "orderID",
+    "products": Array [
+      Object {
+        "category": "Trip",
+        "currency": "GBP",
+        "image_url": "http://example.com/image.jpg",
+        "name": "Product Name",
+        "price": 100,
+        "product_id": "productID",
+        "quantity": 1,
+        "sku": "sku",
+        "url": "http://example.com/productID",
+        "variant": "variant",
+      },
+    ],
+    "revenue": 100,
+    "total": 200,
+  },
+]
+`;
+
+exports[`track calls the facebook trackCustom method with parameters matching the snapshot 1`] = `
+Array [
+  "trackCustom",
   "Test Event",
   Object {
     "iceCream": "vanilla",
