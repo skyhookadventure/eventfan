@@ -83,5 +83,9 @@ export default function loadDestinationsDynamically(
   // Filter to only those destinations that are enabled
   const enabledDestinations = destinations.filter((i) => i.enabled === true);
 
-  return Promise.all(enabledDestinations.map(dynamicImportDestination));
+  return Promise.all(
+    enabledDestinations.map((destination) =>
+      dynamicImportDestination.call(this, destination)
+    )
+  );
 }
