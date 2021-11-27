@@ -84,7 +84,7 @@ describe("addDestination", () => {
 
   it("handles errors gracefully", async () => {
     const mockLog = jest.fn();
-    jest.spyOn(console, "log").mockImplementation(mockLog);
+    jest.spyOn(console, "warn").mockImplementation(mockLog);
 
     const eventFan = new EventFan();
     const destination = new MinimalMockDestination();

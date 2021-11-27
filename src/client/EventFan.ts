@@ -83,7 +83,10 @@ export default class EventFan {
     } catch (e: any) {
       // Initialisation can fail for many reasons (most likely http errors). If this happens we simply log here, and as
       // the destination `isLoaded` property will still be false it won't be called again.
-      console.log(`Failed to load destination ${destination.name}`, e?.message);
+      console.warn(
+        `Failed to load destination ${destination.name}`,
+        e?.message
+      );
     }
   }
 
@@ -106,7 +109,7 @@ export default class EventFan {
       settings = (await response.json()) as RudderStack;
     } catch (_e) {
       // Don't try and load any destinations if there is an error (e.g. a http error).
-      console.error("Failed to load destinations from RudderStack.");
+      console.warn("Failed to load destinations from RudderStack.");
       return;
     }
 

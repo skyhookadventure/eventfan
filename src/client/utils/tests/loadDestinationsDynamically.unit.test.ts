@@ -45,7 +45,7 @@ describe("dynamicImportDestination", () => {
 
   it("logs an error when failing to load a destination dynamically", async () => {
     const mockConsole = jest.fn();
-    jest.spyOn(console, "error").mockImplementation(mockConsole);
+    jest.spyOn(console, "warn").mockImplementation(mockConsole);
 
     eventFan.addDestination = jest.fn(() => {
       throw new Error("Err message");

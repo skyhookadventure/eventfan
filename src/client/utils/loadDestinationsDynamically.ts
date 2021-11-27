@@ -28,44 +28,41 @@ export async function dynamicImportDestination(
     switch (destinationName) {
       case DestinationName.DRIP:
         mod = await import("../../destinations/drip/Drip");
-        await this.addDestination(new mod.default(destinationSettings.config));
-        return;
+        break;
 
       case DestinationName.FACEBOOK_PIXEL:
         mod = await import("../../destinations/facebookPixel/FacebookPixel");
-        await this.addDestination(new mod.default(destinationSettings.config));
-        return;
+        break;
 
       case DestinationName.GA4:
         mod = await import("../../destinations/ga4/GA4");
-        await this.addDestination(new mod.default(destinationSettings.config));
-        return;
+        break;
 
       case DestinationName.HOTJAR:
         mod = await import("../../destinations/hotjar/Hotjar");
-        await this.addDestination(new mod.default(destinationSettings.config));
-        return;
+        break;
 
       case DestinationName.POSTHOG:
         mod = await import("../../destinations/posthog/Posthog");
-        await this.addDestination(new mod.default(destinationSettings.config));
-        return;
+        break;
 
       case DestinationName.RUDDERSTACK:
         mod = await import("../../destinations/rudderStack/RudderStack");
-        await this.addDestination(new mod.default(destinationSettings.config));
-        return;
+        break;
 
       default:
-        console.warn(`EventFan does not support ${destinationName} yet.`);
+        throw new Error(`EventFan does not support ${destinationName} yet.`);
     }
+
+    // Add the destination
+    await this.addDestination(new mod.default(destinationSettings.config));
   } catch (err) {
     // Note that where this is transpiled to use polyfills (to create a regular `<script>` tag with an event handler) by
     // e.g. Webpack/SWC Pack, the error message can be quite unhelpful (typically it just shows a timeout error where it
     // could have actually been a 404 or connection load). Also note that some imports will always fail with certain AdBlock
     // settings enabled (e.g. if they block anything referencing a Facebook Pixel) so you should expect this error
     // message to appear in logs regardless of any underlying issues.
-    console.error(
+    console.warn(
       `Failed to dynamically import ${destinationName}. The error given was: ${err}`
     );
   }
