@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidV4 } from "uuid";
 import { User } from "../../types/User";
 import type Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
@@ -22,7 +22,7 @@ export interface RudderStackConfig {
  * RudderStack Destination
  */
 export default class RudderStack implements Destination {
-  private anonymousId: string;
+  private anonymousId: string = uuidV4();
 
   private config: RudderStackConfig;
 
@@ -35,12 +35,18 @@ export default class RudderStack implements Destination {
     // RudderStack uses an anonymous user ID where a signed-in user id is not available
     // To try and maintain this between session, we use local storage to maintain a value
     const key = "eventFanRSAnonymousUserID";
-    const anonymousIdFromStorage = localStorage?.getItem(key);
-    if (anonymousIdFromStorage) {
-      this.anonymousId = anonymousIdFromStorage;
-    } else {
-      this.anonymousId = uuidv4();
-      localStorage?.setItem(key, this.anonymousId);
+
+    try {
+      const anonymousIdFromStorage = localStorage.getItem(key);
+      if (anonymousIdFromStorage) {
+        this.anonymousId = anonymousIdFromStorage;
+      } else {
+        localStorage.setItem(key, this.anonymousId);
+      }
+    } catch (_e) {
+      // If local storage is disabled (disabling cookies does this in some browsers) then
+      // simply calling `localStorage.getItem` can throw a security error. In that case we
+      // fail silently and fallback to using the default anonymousId.
     }
 
     // Set config
