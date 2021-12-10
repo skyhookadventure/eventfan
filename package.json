@@ -1,8 +1,8 @@
 {
   "name": "eventfan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Send tracking/analytics events to multiple destinations (Google Analytics, Facebook...).",
-  "repository": "https://github.com/alan-cooney/eventfan.git",
+  "repository": "https://github.com/skyhookadventure/eventfan.git",
   "author": "Alan Cooney <alan@skyhookadventure.com>",
   "license": "UNLICENSED",
   "scripts": {
@@ -109,12 +109,11 @@
       ]
     }
   },
-  "private": true,
   "sideEffects": false,
   "dependencies": {
     "posthog-js": "^1.16.6",
-    "uuid": "^8.3.2",
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "uuid": "^8.3.2"
   },
   "main": "./dist/main/index.js",
   "module": "./dist/module/index.js",
