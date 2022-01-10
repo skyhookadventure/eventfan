@@ -4,7 +4,7 @@
 typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
 [![Supports react](https://badgen.net/badge/supports/react/green)](https://reactjs.org/)
 
-Send tracking events (e.g. `Order Completed`) to multiple destinations (Google Analytics, Facebook...), with the correct
+Send analytics events (e.g. `Order Completed`) to multiple destinations (Google Analytics, Facebook...), with the correct
 formatting applied automatically.
 
 ## Key Features
@@ -13,19 +13,17 @@ formatting applied automatically.
 - Great developer experience - send events (e.g. `page`/`track`/`identify`) immediately and EventFan will replay them for
   each destination as soon as they finish loading.
 - Supports React and pure JavaScript (on the browser).
-- TypeScript types included.
+- TypeScript types included, based on the standard Segment/RudderStack specs.
 - Easy to extend.
-- High reliability with unit/integration/e2e testing. Handles network errors with destinations (e.g. failing to load a
-  third party script) gracefully.
+- High reliability - handles network errors with destinations (e.g. failing to load a third party script) gracefully.
+- Supports RudderStack out of the box, dynamically loading just the destinations you have enabled.
 
 ## Quick Start
 
 ### Install
 
-Install the node module (requires Node 12+) directly. This will be on `npmjs` in the future.
-
 ```bash
-yarn add https://github.com/alan-cooney/eventfan/releases/download/latest/node.tgz
+yarn add eventfan
 ```
 
 ### Initialise Client & Destinations
@@ -35,18 +33,27 @@ Initialise just once in your application:
 ```typescript
 import EventFan, { FacebookPixel } from "event-fan";
 
-const eventFan = new EventFan();
-eventFan.load("YOUR_WRITE_KEY", "OPTIONAL_RUDDER_URL");
+const eventFan = new EventFan({
+  destinations: [
+    new FacebookPixel({ pixelId: "YOUR-PIXEL-ID" }),
+    new GA4({ measurementId: "YOUR-GOOGLE-ANALYTICS-ID" }),
+  ],
+});
 ```
 
 #### React
 
-Instead for React, wrap your app with the provider component:
+For React, instead wrap your app with the provider component:
 
 ```typescript
 export default function App() {
   return (
-    <EventFanProvider rudderStack={{ writeKey: "YOUR_WRITE_KEY" }}>
+    <EventFanProvider
+      destinations={[
+        new FacebookPixel({ pixelId: "YOUR-PIXEL-ID" }),
+        new GA4({ measurementId: "YOUR-GOOGLE-ANALYTICS-ID" }),
+      ]}
+    >
       <h1>Your app</h1>
     </EventFanProvider>
   );
@@ -63,6 +70,14 @@ useEffect(() => {
     value: 100.0,
   });
 }, []);
+```
+
+#### RudderStack
+
+After initialising, load the RudderStack destinations using your write key:
+
+```typescript
+eventFan.load("YOUR-WRITE-KEY");
 ```
 
 ### Track page loads
