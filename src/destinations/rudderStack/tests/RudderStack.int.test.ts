@@ -6,6 +6,9 @@ const stagingConfig: RudderStackConfig = {
   writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn",
 };
 
+// Allow for long RudderStack timeout as their servers can be very slow
+jest.setTimeout(60000);
+
 describe("callRudderStackAPI", () => {
   it("fails gracefully with an error", async () => {
     const destination = new RudderStack({
