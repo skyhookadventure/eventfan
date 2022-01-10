@@ -1,10 +1,10 @@
 {
   "name": "eventfan",
   "version": "1.0.2",
-  "description": "Send tracking/analytics events to multiple destinations (Google Analytics, Facebook...).",
-  "repository": "https://github.com/skyhookadventure/eventfan.git",
+  "description": "Send analytics events to multiple destinations (Google Analytics, Facebook...).",
+  "repository": "https://github.com/alan-cooney/eventfan",
   "author": "Alan Cooney <alan@skyhookadventure.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "yarn buildBrowser && yarn buildNode && yarn buildTypes",
     "buildBrowser": "parcel build",
