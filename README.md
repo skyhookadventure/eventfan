@@ -4,8 +4,7 @@
 typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
 [![Supports react](https://badgen.net/badge/supports/react/green)](https://reactjs.org/)
 
-Send analytics events (e.g. `Order Completed`) to multiple destinations (Google Analytics, Facebook...), with the correct
-formatting applied automatically.
+Setup analytics destinations (e.g. Google Analytics, Facebook Pixel) in a really simple way on React/node. Then you can send events (e.g. Order Completed) using the Segment/RudderStack specs, and have them automatically formatted for each destination correctly.
 
 ## Key Features
 
