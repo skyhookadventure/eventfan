@@ -30,6 +30,9 @@ describe("identify", () => {
           "first_name": "FirstName",
           "last_name": "LastName",
           "phone": "+447111111111",
+          "tags": Array [
+            "admin",
+          ],
           "user_id": "userID",
         },
       ]

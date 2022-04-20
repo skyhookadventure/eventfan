@@ -21,6 +21,7 @@ const mockUser: User = {
     lastName: "LastName",
     name: "FirstName LastName",
     phone: "+447111111111",
+    tags: ["admin"],
     username: "userID",
   },
   userId: "userID",
