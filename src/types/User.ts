@@ -34,6 +34,8 @@ export interface IdentifyTraits {
   lastName?: string;
   name?: string;
   phone?: string;
+  /** Keyword tags, useful for e.g. email marketing */
+  tags?: string[];
   title?: string;
   username?: string;
   website?: string;

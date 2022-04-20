@@ -59,6 +59,7 @@ export default class Drip implements Destination {
       last_name: traits.lastName,
       phone: traits.phone,
       user_id: traits.id,
+      tags: traits.tags,
     };
 
     this.drip.push(["identify", dripUser]);
