@@ -38,7 +38,7 @@ describe("identify", () => {
 });
 
 describe("track", () => {
-  it("calls the facebook track method with parameters matching the snapshot", async () => {
+  it("calls the Drip track method with parameters matching the snapshot", async () => {
     const destination = new Drip({ accountId: "123" });
     await destination.track(mockTrack);
     expect(destination["drip"][0]).toMatchInlineSnapshot(`

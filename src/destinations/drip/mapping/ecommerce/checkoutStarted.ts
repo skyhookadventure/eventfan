@@ -1,9 +1,22 @@
 import { Ecommerce } from "../../../../sourceEvents/Events";
 import { TEvent } from "../../../../types/TrackEvent";
 
+/**
+ * Checkout Started
+ *
+ * There is no standardized "Checkout Started" event with the Drip JS API, so we've created a custom one.It is similar to "Product Viewed".
+ */
 export default function checkoutStarted({
   properties,
 }: Ecommerce.CheckoutStarted): TEvent<"Checkout Started"> {
+  // Note that Drip's version of Liquid templating language doesn't seem to support arrays, so in addition to passing
+  // all products in the `products` property we we also pass properties called `product_X`. This enables you to take
+  // images etc from each product in your campaign.
+  const productsNumbered: any = {};
+  properties.products?.forEach((product, key) => {
+    productsNumbered[`product_${key + 1}`] = product;
+  });
+
   return {
     name: "Checkout Started",
     properties: {
@@ -19,6 +32,7 @@ export default function checkoutStarted({
         price: i.price ? i.price * 100 : undefined,
         ...i,
       })),
+      ...productsNumbered,
       shipping: properties.shipping,
       tax: properties.tax,
     },
