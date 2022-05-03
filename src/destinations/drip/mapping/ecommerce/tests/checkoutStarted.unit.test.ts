@@ -13,18 +13,16 @@ it("creates parameters matching the snapshot", () => {
         "currency": "GBP",
         "discount": undefined,
         "order_id": "orderID",
-        "product_1": Object {
-          "category": "Trip",
-          "currency": "GBP",
-          "image_url": "http://example.com/image.jpg",
-          "name": "Product Name",
-          "price": 100,
-          "product_id": "productID",
-          "quantity": 1,
-          "sku": "sku",
-          "url": "http://example.com/productID",
-          "variant": "variant",
-        },
+        "product_1_category": "Trip",
+        "product_1_currency": "GBP",
+        "product_1_image_url": "http://example.com/image.jpg",
+        "product_1_name": "Product Name",
+        "product_1_price": 100,
+        "product_1_product_id": "productID",
+        "product_1_quantity": 1,
+        "product_1_sku": "sku",
+        "product_1_url": "http://example.com/productID",
+        "product_1_variant": "variant",
         "products": Array [
           Object {
             "category": "Trip",
@@ -45,10 +43,4 @@ it("creates parameters matching the snapshot", () => {
       },
     }
   `);
-});
-
-it("creates numeric product properties (e.g. product_1)", () => {
-  const res = checkoutStarted(mockCheckoutStarted);
-
-  expect(res.properties.product_1).toBeTruthy();
 });
