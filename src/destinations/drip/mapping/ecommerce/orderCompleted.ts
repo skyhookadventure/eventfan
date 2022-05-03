@@ -4,6 +4,14 @@ import { TEvent } from "../../../../types/TrackEvent";
 export default function orderCompleted({
   properties,
 }: Ecommerce.OrderCompleted): TEvent<"Order Completed"> {
+  // Note that Drip's version of Liquid templating language doesn't seem to support arrays, so in addition to passing
+  // all products in the `products` property we we also pass properties called `product_X`. This enables you to take
+  // images etc from each product in your campaign.
+  const productsNumbered: any = {};
+  properties.products?.forEach((product, key) => {
+    productsNumbered[`product_${key + 1}`] = product;
+  });
+
   return {
     name: "Order Completed",
     properties: {
@@ -19,6 +27,7 @@ export default function orderCompleted({
         price: i.price ? i.price * 100 : undefined,
         ...i,
       })),
+      ...productsNumbered,
       shipping: properties.shipping,
       tax: properties.tax,
     },

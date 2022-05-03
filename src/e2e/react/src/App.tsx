@@ -71,7 +71,7 @@ function App() {
     <div>
       <EventFanProvider
         destinations={[
-          new Drip({ accountId: "7500000" }), // Drip doesn't have a sandbox so use a dummy accountId
+          new Drip({ accountId: "7546327" }), // Drip doesn't have a sandbox so use a dummy accountId
           new FacebookPixel({ pixelId: "243635977408985" }),
           new GA4({ measurementId: "G-0PST7G69H1" }),
           new Hotjar({ siteID: "2705682" }),
@@ -79,9 +79,9 @@ function App() {
             teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
           }),
         ]}
-        rudderStack={{
-          writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn",
-        }}
+        // rudderStack={{
+        //   writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn",
+        // }}
       >
         <Container>
           <h1>EventFan React Test</h1>
