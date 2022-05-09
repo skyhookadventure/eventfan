@@ -88,6 +88,6 @@ describe("loadDestinationsDynamically", () => {
       },
     ]);
 
-    expect(eventFan.addDestination).not.toHaveBeenCalled();
+    expect(eventFan.addDestination).toHaveBeenCalled();
   });
 });
