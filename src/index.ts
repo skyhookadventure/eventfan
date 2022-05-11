@@ -6,6 +6,7 @@ import GA4 from "./destinations/ga4/GA4";
 import Hotjar from "./destinations/hotjar/Hotjar";
 import loadScript from "./utils/loadScript";
 import Posthog from "./destinations/posthog/Posthog";
+import * as allMocks from "./mocks";
 
 // Client
 export default EventFan;
@@ -18,7 +19,8 @@ export type { Destination };
 export { FacebookPixel, GA4, Hotjar, Posthog, Drip };
 
 // Mocks for testing
-export * as mocks from "./mocks";
+const mocks = { ...allMocks }; // Fix parcel bug
+export { mocks };
 
 // React
 export { EventFanProvider, useEventFan } from "./react";

@@ -11,11 +11,10 @@ Setup analytics destinations (e.g. Google Analytics, Facebook Pixel) in a really
 - Tiny (2kb compressed) & fast core lib.
 - Great developer experience - send events (e.g. `page`/`track`/`identify`) immediately and EventFan will replay them for
   each destination as soon as they finish loading.
-- Supports React and pure JavaScript (on the browser).
+- Supports React
 - TypeScript types included, based on the standard Segment/RudderStack specs.
 - Easy to extend.
 - High reliability - handles network errors with destinations (e.g. failing to load a third party script) gracefully.
-- Supports RudderStack out of the box, dynamically loading just the destinations you have enabled.
 
 ## Quick Start
 
@@ -69,14 +68,6 @@ useEffect(() => {
     value: 100.0,
   });
 }, []);
-```
-
-#### RudderStack
-
-After initialising, load the RudderStack destinations using your write key:
-
-```typescript
-eventFan.load("YOUR-WRITE-KEY");
 ```
 
 ### Track page loads

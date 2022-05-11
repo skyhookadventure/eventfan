@@ -97,11 +97,8 @@ jobs:
             --exclude node_modules \
             --exclude packages \
             --exclude src \
+            --exclude yarn.lock \
             ./
-      - name: Zip Browser
-        run: tar -czvf ./packages/browser.tgz ./dist/browser
-      - name: Zip Browser Legacy
-        run: tar -czvf ./packages/browser-legacy.tgz ./dist/legacy
       - name: Update Github release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:

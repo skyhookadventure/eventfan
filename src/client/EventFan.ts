@@ -4,11 +4,6 @@ import type Destination from "../destinations/Destination";
 import type { TEvent } from "../types/TrackEvent";
 import type { User } from "../types/User";
 import type { Page } from "../types/PageViewProps";
-import type { RudderStack } from "../types/RudderStack";
-import loadDestinationsDynamically, {
-  dynamicImportDestination,
-} from "./utils/loadDestinationsDynamically";
-import { DestinationName } from "../destinations/DestinationName";
 
 /**
  * Constructor props
@@ -88,41 +83,6 @@ export default class EventFan {
         e?.message
       );
     }
-  }
-
-  /**
-   * Load destinations setup in RudderStack
-   *
-   * Asynchronously loads all destinations within the RudderStack config that are enabled
-   */
-  async load(
-    writeKey: string,
-    url = "https://api.rudderlabs.com",
-    dataPlaneURL = "https://hosted.rudderlabs.com"
-  ) {
-    // Get the RudderStack Config
-    let settings: RudderStack;
-    try {
-      const response = await fetch(`${url}/sourceConfig/`, {
-        headers: { Authorization: `Basic ${btoa(`${writeKey}:`)}` },
-      });
-      settings = (await response.json()) as RudderStack;
-    } catch (_e) {
-      // Don't try and load any destinations if there is an error (e.g. a http error).
-      console.warn("Failed to load destinations from RudderStack.");
-      return;
-    }
-
-    // Load the RudderStack destination
-    await dynamicImportDestination.call(this, {
-      destinationDefinition: {
-        name: DestinationName.RUDDERSTACK,
-      },
-      config: { writeKey, dataPlaneURL },
-    });
-
-    // Load each other destination asynchronously, with dynamic imports (to avoid a large initial bundle size).
-    await loadDestinationsDynamically.call(this, settings.source.destinations);
   }
 
   /**

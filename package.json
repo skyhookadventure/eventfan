@@ -1,14 +1,14 @@
 {
   "name": "eventfan",
-  "version": "1.0.10",
+  "version": "2.0.0",
   "description": "Send analytics events to multiple destinations (Google Analytics, Facebook...).",
   "repository": "https://github.com/alan-cooney/eventfan",
   "author": "Alan Cooney <alan@skyhookadventure.com>",
   "license": "MIT",
   "scripts": {
-    "build": "yarn buildBrowser && yarn buildNode && yarn buildTypes",
-    "buildBrowser": "parcel build",
-    "buildNode": "babel src -d dist/module --extensions '.tsx,.ts' --config-file ./babelNode.json",
+    "build": "yarn buildCommonJS && yarn buildESM && yarn buildTypes",
+    "buildCommonJS": "parcel build",
+    "buildESM": "babel src -d dist/module --extensions '.tsx,.ts' --config-file ./babelNode.json",
     "buildTypes": "tsc --emitDeclarationOnly",
     "bump": "./node_modules/.bin/versiony package.json --patch",
     "coverage": "./node_modules/.bin/jest --collect-coverage",
@@ -71,6 +71,7 @@
     "prettier": "^2.6.2",
     "quicktype-core": "^6.0.71",
     "react-bootstrap": "^2.3.1",
+    "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
@@ -80,6 +81,10 @@
     "typescript": "~4.6.4",
     "versiony-cli": "^1.3.0",
     "vite": "^2.9.8"
+  },
+  "peerDependencies": {
+    "react": ">=16.14.0",
+    "react-dom": ">=16.14.0"
   },
   "jest": {
     "coverageThreshold": {
@@ -114,40 +119,12 @@
   "sideEffects": false,
   "dependencies": {
     "posthog-js": "^1.21.0",
-    "react": "^18.1.0",
     "uuid": "^8.3.2"
   },
   "main": "./dist/main/index.js",
   "module": "./dist/module/index.js",
   "types": "./dist/module/index.d.ts",
   "targets": {
-    "browser": {
-      "context": "browser",
-      "outputFormat": "esmodule",
-      "isLibrary": true,
-      "source": "./src/browser.ts",
-      "optimize": true,
-      "includeNodeModules": {
-        "react": false
-      },
-      "sourceMap": true,
-      "distDir": "./dist/browser"
-    },
-    "legacyBrowser": {
-      "engines": {
-        "browsers": "> 0.5%, last 2 versions, not dead"
-      },
-      "context": "browser",
-      "outputFormat": "global",
-      "isLibrary": true,
-      "source": "./src/browser.ts",
-      "optimize": true,
-      "includeNodeModules": {
-        "react": false
-      },
-      "sourceMap": true,
-      "distDir": "./dist/legacy"
-    },
     "main": {
       "engines": {
         "node": ">= 12"
