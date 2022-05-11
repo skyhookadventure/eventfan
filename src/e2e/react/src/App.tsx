@@ -12,6 +12,7 @@ import {
 } from "../../../index";
 
 import * as ecommerceMockEvents from "../../../mocks/ecommerce";
+import RudderStack from "../../../destinations/rudderStack/RudderStack";
 
 function CoreEvents() {
   const { identify, page } = useEventFan();
@@ -78,10 +79,8 @@ function App() {
           new Posthog({
             teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
           }),
+          new RudderStack({writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn"})
         ]}
-        // rudderStack={{
-        //   writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn",
-        // }}
       >
         <Container>
           <h1>EventFan React Test</h1>

@@ -9,11 +9,6 @@ const eventFan = new EventFan();
 
 export const EventFanContext = createContext<EventFan>(eventFan);
 
-export interface RudderStackConfig {
-  writeKey: string;
-  url?: string;
-}
-
 /**
  * EventFan Provider
  *
@@ -31,15 +26,7 @@ export interface RudderStackConfig {
 export function EventFanProvider(props: {
   children: ReactNode;
   destinations?: EventFanConfig["destinations"];
-  rudderStack?: RudderStackConfig;
 }) {
-  // Load RudderStack config if set
-  useEffect(() => {
-    if (props.rudderStack?.writeKey) {
-      eventFan.load(props.rudderStack.writeKey, props.rudderStack.url);
-    }
-  }, [props.rudderStack]);
-
   // Load destinations where set
   useEffect(() => {
     props.destinations?.forEach((destination) => {
@@ -77,7 +64,6 @@ export function useEventFan() {
   return {
     addDestination: client.addDestination.bind(client),
     identify: client.identify.bind(client),
-    load: client.load.bind(client),
     page: client.page.bind(client),
     track: client.track.bind(client),
   };

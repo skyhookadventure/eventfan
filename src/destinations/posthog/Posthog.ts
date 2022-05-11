@@ -6,6 +6,11 @@ import type Destination from "../Destination";
 import { DestinationName } from "../DestinationName";
 
 /**
+ * Export posthog so it can be used directly where needed
+ */
+export { posthog };
+
+/**
  * Hotjar Config
  */
 export interface PosthogConfig {
