@@ -79,7 +79,7 @@ function App() {
           new Posthog({
             teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
           }),
-          new RudderStack({writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn"})
+          new RudderStack({ writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn" }),
         ]}
       >
         <Container>
