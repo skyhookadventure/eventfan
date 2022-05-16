@@ -86,7 +86,7 @@ export default class Drip implements Destination {
   async track(track: TEvent): Promise<void> {
     // Drip Track event nested properties must be JSON stringified (but not the top level object).
     // This is not documented anywhere.
-    const properties = JSON.parse(JSON.stringify(track.properties)); // Clone
+    const properties = JSON.parse(JSON.stringify(track.properties || {})); // Clone
     Object.keys(properties).forEach((key) => {
       if (typeof properties[key] === "object") {
         properties[key] = JSON.stringify(properties[key]);
