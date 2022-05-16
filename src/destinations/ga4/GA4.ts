@@ -41,7 +41,7 @@ export interface GA4Config {
  * Gtag Destination
  */
 export default class GA4 implements Destination {
-  private gtag: Gtag = window.gtag as Gtag;
+  public gtag: Gtag = window.gtag as Gtag;
 
   constructor(protected config: GA4Config) {}
 
