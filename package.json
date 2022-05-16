@@ -1,6 +1,6 @@
 {
   "name": "eventfan",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Send analytics events to multiple destinations (Google Analytics, Facebook...).",
   "repository": "https://github.com/alan-cooney/eventfan",
   "author": "Alan Cooney <alan@skyhookadventure.com>",
