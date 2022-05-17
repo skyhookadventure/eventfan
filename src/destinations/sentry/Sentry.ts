@@ -47,9 +47,6 @@ export default class Sentry implements Destination {
    * Track
    */
   async track(event: TEvent): Promise<void> {
-    console.log(event);
-    console.log(this.sentry.addBreadcrumb);
-
     this.sentry.addBreadcrumb({
       category: event.name,
       data: event.properties,

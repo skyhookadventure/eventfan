@@ -52,7 +52,7 @@ Array [
       "revenue": 100,
       "total": 200,
     },
-    "level": "debug",
+    "level": "info",
   },
 ]
 `;
