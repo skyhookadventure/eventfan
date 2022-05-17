@@ -1,16 +1,22 @@
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { capitalCase } from "change-case";
 import {
+  init,
+  setUser,
+  addBreadcrumb,
+  captureException,
+} from "@sentry/browser";
+import {
+  Drip,
+  EventFanProvider,
   FacebookPixel,
   GA4,
   Hotjar,
   Posthog,
-  EventFanProvider,
-  useEventFan,
-  Drip,
+  Sentry,
   TEvent,
+  useEventFan,
 } from "../../../index";
-
 import * as ecommerceMockEvents from "../../../mocks/ecommerce";
 import RudderStack from "../../../destinations/rudderStack/RudderStack";
 
@@ -21,13 +27,16 @@ function CoreEvents() {
     <div className="d-grid gap-2">
       <h2>Core Events</h2>
       <Button
-        onClick={() =>
+        onClick={() => {
           identify("userID", {
             firstName: "Fname",
             lastName: "Lname",
             email: "test@example.com",
-          })
-        }
+          });
+
+          // Capture a sentry exception as only then will breadcrumbs be sent
+          captureException("identify");
+        }}
       >
         Identify
       </Button>
@@ -50,6 +59,8 @@ function EcommerceEvents() {
 
         function onClick(): void {
           track(mock.name, mock.properties);
+          // Capture a sentry exception as only then will breadcrumbs be sent
+          captureException("event");
         }
 
         return (
@@ -61,6 +72,10 @@ function EcommerceEvents() {
     </div>
   );
 }
+
+init({
+  dsn: "https://f85d892a283445cd9ab271e829356553@o925922.ingest.sentry.io/6414036",
+});
 
 /**
  * Test React App
@@ -80,6 +95,7 @@ function App() {
             teamApiKey: "phc_CrjkOExGDLy4CXCwuht6eEIHDM7VDNsTXAI3tpTATim",
           }),
           new RudderStack({ writeKey: "1uFnpaQiJmOxs4zG2jIon52HIhn" }),
+          new Sentry({ setUser, addBreadcrumb }),
         ]}
       >
         <Container>
