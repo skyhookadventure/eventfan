@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`identify passes on the traits to the .setUser method 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "city": "City",
+      "country": "GB",
+      "postalCode": "SW11 111",
+      "state": "London",
+      "street": "1 Road Name",
+    },
+    "age": 30,
+    "birthday": "1990-01-01",
+    "createdAt": 2020-01-01T00:00:00.000Z,
+    "email": "test@gmail.com",
+    "firstName": "FirstName",
+    "gender": "MALE",
+    "id": "userID",
+    "lastName": "LastName",
+    "name": "FirstName LastName",
+    "phone": "+447111111111",
+    "tags": Array [
+      "admin",
+    ],
+    "username": "userID",
+  },
+]
+`;
+
+exports[`track creates a breadcrumb matching the snapshot 1`] = `
+Array [
+  Object {
+    "category": "Purchase",
+    "data": Object {
+      "currency": "GBP",
+      "order_id": "orderID",
+      "products": Array [
+        Object {
+          "category": "Trip",
+          "currency": "GBP",
+          "image_url": "http://example.com/image.jpg",
+          "name": "Product Name",
+          "price": 100,
+          "product_id": "productID",
+          "quantity": 1,
+          "sku": "sku",
+          "url": "http://example.com/productID",
+          "variant": "variant",
+        },
+      ],
+      "revenue": 100,
+      "total": 200,
+    },
+    "level": "debug",
+  },
+]
+`;

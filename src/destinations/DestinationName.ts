@@ -10,4 +10,5 @@ export enum DestinationName {
   HOTJAR = "HOTJAR",
   POSTHOG = "POSTHOG",
   RUDDERSTACK = "RUDDERSTACK",
+  SENTRY = "SENTRY",
 }
