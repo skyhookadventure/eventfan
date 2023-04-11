@@ -5,9 +5,9 @@ it("creates parameters matching the snapshot", () => {
   const res = productsSearched(mockProductsSearched);
 
   expect(res).toMatchInlineSnapshot(`
-    Object {
+    {
       "name": "Search",
-      "properties": Object {
+      "properties": {
         "search_string": "Query string",
       },
     }

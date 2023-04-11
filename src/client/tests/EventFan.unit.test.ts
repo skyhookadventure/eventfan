@@ -94,7 +94,7 @@ describe("addDestination", () => {
     await eventFan.addDestination(destination);
 
     expect(mockLog.mock.calls[0]).toMatchInlineSnapshot(`
-      Array [
+      [
         "Failed to load destination MOCK_DESTINATION",
         "Error message.",
       ]

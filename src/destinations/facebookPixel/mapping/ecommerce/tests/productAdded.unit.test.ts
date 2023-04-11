@@ -9,19 +9,19 @@ it("creates parameters matching the snapshot", () => {
   );
 
   expect(res).toMatchInlineSnapshot(`
-    Object {
+    {
       "name": "AddToCart",
-      "properties": Object {
+      "properties": {
         "content_category": "Trip",
-        "content_ids": Array [
+        "content_ids": [
           "productID",
         ],
         "content_name": "Product Name",
-        "content_type": Array [
+        "content_type": [
           "product",
         ],
-        "contents": Array [
-          Object {
+        "contents": [
+          {
             "id": "productID",
             "quantity": 1,
           },

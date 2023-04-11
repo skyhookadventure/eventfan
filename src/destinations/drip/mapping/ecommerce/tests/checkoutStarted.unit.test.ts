@@ -5,9 +5,9 @@ it("creates parameters matching the snapshot", () => {
   const res = checkoutStarted(mockCheckoutStarted);
 
   expect(res).toMatchInlineSnapshot(`
-    Object {
+    {
       "name": "Checkout Started",
-      "properties": Object {
+      "properties": {
         "affiliation": undefined,
         "coupon": undefined,
         "currency": "GBP",
@@ -23,8 +23,8 @@ it("creates parameters matching the snapshot", () => {
         "product_1_sku": "sku",
         "product_1_url": "http://example.com/productID",
         "product_1_variant": "variant",
-        "products": Array [
-          Object {
+        "products": [
+          {
             "category": "Trip",
             "currency": "GBP",
             "image_url": "http://example.com/image.jpg",

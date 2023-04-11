@@ -5,12 +5,12 @@ it("creates parameters matching the snapshot", () => {
   const res = paymentInfoEntered(mockPaymentInfoEntered);
 
   expect(res).toMatchInlineSnapshot(`
-    Object {
+    {
       "name": "add_payment_info",
-      "properties": Object {
+      "properties": {
         "currency": "GBP",
-        "items": Array [
-          Object {
+        "items": [
+          {
             "item_id": "productID",
             "item_name": "Product Name",
             "price": 100,

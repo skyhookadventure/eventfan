@@ -25,17 +25,17 @@ describe("orderCompleted", () => {
     );
 
     expect(res).toMatchInlineSnapshot(`
-      Object {
+      {
         "name": "Purchase",
-        "properties": Object {
-          "content_ids": Array [
+        "properties": {
+          "content_ids": [
             "productID",
           ],
-          "content_type": Array [
+          "content_type": [
             "product",
           ],
-          "contents": Array [
-            Object {
+          "contents": [
+            {
               "id": "productID",
               "quantity": 1,
             },

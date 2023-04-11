@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`identify formats the advance matching parameters in a way that matches the snapshot 1`] = `
-Array [
+[
   "init",
   "pixelId",
-  Object {
+  {
     "country": "gb",
     "ct": "city",
     "db": 19900101,
@@ -21,21 +21,21 @@ Array [
 `;
 
 exports[`page calls the correct facebook track method 1`] = `
-Array [
+[
   "track",
   "PageView",
 ]
 `;
 
 exports[`track calls the facebook track method with parameters matching the snapshot 1`] = `
-Array [
+[
   "track",
   "Purchase",
-  Object {
+  {
     "currency": "GBP",
     "order_id": "orderID",
-    "products": Array [
-      Object {
+    "products": [
+      {
         "category": "Trip",
         "currency": "GBP",
         "image_url": "http://example.com/image.jpg",
@@ -55,10 +55,10 @@ Array [
 `;
 
 exports[`track calls the facebook trackCustom method with parameters matching the snapshot 1`] = `
-Array [
+[
   "trackCustom",
   "Test Event",
-  Object {
+  {
     "iceCream": "vanilla",
   },
 ]
