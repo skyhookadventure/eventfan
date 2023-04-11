@@ -16,7 +16,7 @@ describe("callRudderStackAPI", () => {
       writeKey: "incorrect",
     });
     const res = await destination.identify({} as any);
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(404);
   });
 });
 
