@@ -17,8 +17,7 @@
     "playwright": "playwright test --config=src/e2e/playwright.config.ts",
     "playwrightInstall": "playwright install && playwright install-deps",
     "react": "yarn vite --config ./src/e2e/react/vite.config.js",
-    "test": "./node_modules/.bin/jest",
-    "browser": "yarn vite --config ./src/e2e/browser/vite.config.js"
+    "test": "./node_modules/.bin/jest"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
