@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`identify passes on the traits to the .setUser method 1`] = `
-Array [
-  Object {
-    "address": Object {
+[
+  {
+    "address": {
       "city": "City",
       "country": "GB",
       "postalCode": "SW11 111",
@@ -20,7 +20,7 @@ Array [
     "lastName": "LastName",
     "name": "FirstName LastName",
     "phone": "+447111111111",
-    "tags": Array [
+    "tags": [
       "admin",
     ],
     "username": "userID",
@@ -29,14 +29,14 @@ Array [
 `;
 
 exports[`track creates a breadcrumb matching the snapshot 1`] = `
-Array [
-  Object {
+[
+  {
     "category": "Purchase",
-    "data": Object {
+    "data": {
       "currency": "GBP",
       "order_id": "orderID",
-      "products": Array [
-        Object {
+      "products": [
+        {
           "category": "Trip",
           "currency": "GBP",
           "image_url": "http://example.com/image.jpg",

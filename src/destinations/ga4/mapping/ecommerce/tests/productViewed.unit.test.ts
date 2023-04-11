@@ -5,12 +5,12 @@ it("creates parameters matching the snapshot", () => {
   const res = productViewed(mockProductViewed);
 
   expect(res).toMatchInlineSnapshot(`
-    Object {
+    {
       "name": "view_item",
-      "properties": Object {
+      "properties": {
         "currency": "GBP",
-        "items": Array [
-          Object {
+        "items": [
+          {
             "item_id": "productID",
             "item_name": "Product Name",
             "price": 100,

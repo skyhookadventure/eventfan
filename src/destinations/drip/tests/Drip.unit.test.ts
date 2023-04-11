@@ -23,14 +23,14 @@ describe("identify", () => {
     const destination = new Drip({ accountId: "123" });
     await destination.identify(mockUser);
     expect(destination["drip"][0]).toMatchInlineSnapshot(`
-      Array [
+      [
         "identify",
-        Object {
+        {
           "email": "test@gmail.com",
           "first_name": "FirstName",
           "last_name": "LastName",
           "phone": "+447111111111",
-          "tags": Array [
+          "tags": [
             "admin",
           ],
           "user_id": "userID",
@@ -45,10 +45,10 @@ describe("track", () => {
     const destination = new Drip({ accountId: "123" });
     await destination.track(mockTrack);
     expect(destination["drip"][0]).toMatchInlineSnapshot(`
-      Array [
+      [
         "track",
         "Test Event",
-        Object {
+        {
           "iceCream": "vanilla",
           "occurred_at": undefined,
         },
