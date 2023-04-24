@@ -11128,9 +11128,9 @@ quick-lru@^5.1.1:
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
 quicktype-core@^23.0.19:
-  version "23.0.19"
-  resolved "https://registry.yarnpkg.com/quicktype-core/-/quicktype-core-23.0.19.tgz#2e28620636345a5138ad9e707bb2d21045d1e53e"
-  integrity sha512-CjJdvbVhj7g0+V+guS67+lc8RyuiRDAMe4eKEULyOL3bWBcSnFzGpnkYA/iCLi/g5ujsMmKr+DSCuloCSG+kOw==
+  version "23.0.21"
+  resolved "https://registry.yarnpkg.com/quicktype-core/-/quicktype-core-23.0.21.tgz#be29ed5ff04377bf2508a4ec225fe2ed6581351d"
+  integrity sha512-KWvhTtRSEqbeYJEK/Lq1YM3+vK1iqPU2N3TpOOLC0mPnWEo/He+wl8qcm/W6FcGNDZDrnw98kJIw9PO8zDYqcA==
   dependencies:
     "@glideapps/ts-necessities" "2.1.2"
     "@types/urijs" "^1.19.19"
