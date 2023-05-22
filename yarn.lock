@@ -11128,9 +11128,9 @@ quick-lru@^5.1.1:
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
 quicktype-core@^23.0.19:
-  version "23.0.19"
-  resolved "https://registry.yarnpkg.com/quicktype-core/-/quicktype-core-23.0.19.tgz#2e28620636345a5138ad9e707bb2d21045d1e53e"
-  integrity sha512-CjJdvbVhj7g0+V+guS67+lc8RyuiRDAMe4eKEULyOL3bWBcSnFzGpnkYA/iCLi/g5ujsMmKr+DSCuloCSG+kOw==
+  version "23.0.36"
+  resolved "https://registry.yarnpkg.com/quicktype-core/-/quicktype-core-23.0.36.tgz#3483e9021ddac71f183e53ee118ebb4b266ab240"
+  integrity sha512-MIaxvB8Tr0Lj5LHFq8yGxuzUpsN1t7t8J5fq4yPFDLIbCW7Sg548qG5s64bsSdAT+HQOhzb0wMZDNPQxT8eDZw==
   dependencies:
     "@glideapps/ts-necessities" "2.1.2"
     "@types/urijs" "^1.19.19"
@@ -11146,7 +11146,7 @@ quicktype-core@^23.0.19:
     unicode-properties "^1.4.1"
     urijs "^1.19.1"
     wordwrap "^1.0.0"
-    yaml "^2.2.1"
+    yaml "^2.2.2"
 
 raf@^3.4.1:
   version "3.4.1"
@@ -13767,10 +13767,10 @@ yaml@^1.10.0, yaml@^1.10.2, yaml@^1.7.2:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-yaml@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.2.1.tgz#3014bf0482dcd15147aa8e56109ce8632cd60ce4"
-  integrity sha512-e0WHiYql7+9wr4cWMx3TVQrNwejKaEe7/rHNmQmqRjazfOP5W8PB6Jpebb5o6fIapbz9o9+2ipcaTM2ZwDI6lw==
+yaml@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.2.2.tgz#ec551ef37326e6d42872dad1970300f8eb83a073"
+  integrity sha512-CBKFWExMn46Foo4cldiChEzn7S7SRV+wqiluAb6xmueD/fGyRHIhX8m14vVGgeFWjN540nKCNVj6P21eQjgTuA==
 
 yargs-parser@^20.2.2:
   version "20.2.9"
