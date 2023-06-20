@@ -119,7 +119,7 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "posthog-js": "^1.52.0",
+    "posthog-js": "^1.68.1",
     "uuid": "^9.0.0"
   },
   "main": "./dist/main/index.js",
