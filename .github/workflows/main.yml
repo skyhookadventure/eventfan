@@ -2,10 +2,10 @@ name: CD
 
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -14,11 +14,13 @@ jobs:
     timeout-minutes: 3
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - uses: actions/cache@v2
+          node-version: 22
+      - name: Enable Corepack
+        run: corepack enable
+      - uses: actions/cache@v4
         with:
           path: ${{ env.working-directory }}/node_modules
           key: ${{ env.working-directory }}-${{ hashFiles(format('{0}/yarn.lock', env.working-directory)) }}
@@ -35,11 +37,13 @@ jobs:
     timeout-minutes: 3
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - uses: actions/cache@v2
+          node-version: 22
+      - name: Enable Corepack
+        run: corepack enable
+      - uses: actions/cache@v4
         with:
           path: ${{ env.working-directory }}/node_modules
           key: ${{ env.working-directory }}-${{ hashFiles(format('{0}/yarn.lock', env.working-directory)) }}
@@ -63,11 +67,13 @@ jobs:
     timeout-minutes: 3
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - uses: actions/cache@v2
+          node-version: 22
+      - name: Enable Corepack
+        run: corepack enable
+      - uses: actions/cache@v4
         with:
           path: ${{ env.working-directory }}/node_modules
           key: ${{ env.working-directory }}-${{ hashFiles(format('{0}/yarn.lock', env.working-directory)) }}
@@ -100,12 +106,12 @@ jobs:
             --exclude yarn.lock \
             ./
       - name: Update Github release
-        uses: "marvinpinto/action-automatic-releases@latest"
+        uses: 'marvinpinto/action-automatic-releases@latest'
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          automatic_release_tag: 'latest'
           prerelease: true
-          title: "Latest"
+          title: 'Latest'
           files: |
             packages/*
       - name: Publish to NPMJS
