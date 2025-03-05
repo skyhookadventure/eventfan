@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-useless-constructor */
+ 
+ 
 import { DestinationName } from "./DestinationName";
 import { User } from "../types/User";
 import { Page } from "../types/PageViewProps";

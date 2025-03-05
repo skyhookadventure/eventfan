@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+ 
 import { test, expect } from "@playwright/test";
 
 test("It loads Posthog", async ({ page }) => {

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
+ 
 import { AdvancedMatching } from "./types/AdvancedMatching";
 import { ContentType } from "./types/shared/GenericFacebookEvent";
 import { DestinationName } from "../DestinationName";
@@ -109,7 +109,7 @@ export default class FacebookPixel implements Destination {
       }
     };
     this.fb = window.fbq!;
-    // eslint-disable-next-line no-underscore-dangle
+     
     window._fbq = this.fb;
     this.fb.push = this.fb;
     this.fb.loaded = !0;

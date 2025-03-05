@@ -1,5 +1,5 @@
-/* eslint-disable default-param-last */
-/* eslint-disable no-restricted-syntax */
+ 
+ 
 import type Destination from "../destinations/Destination";
 import type { TEvent } from "../types/TrackEvent";
 import type { User } from "../types/User";

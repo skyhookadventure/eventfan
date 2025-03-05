@@ -57,7 +57,7 @@ export function EventFanProvider(props: {
  */
 export function useEventFan() {
   // Assume EventFan is already setup (with `EventFanContext.Provider`)
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+   
   const client = useContext(EventFanContext)!;
 
   // Bind the methods so they still work when destructured (otherwise `this` context on the instance would be lost)

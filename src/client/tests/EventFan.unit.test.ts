@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/dot-notation */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable max-classes-per-file */
+ 
+ 
+ 
 import EventFan from "../EventFan";
 import type Destination from "../../destinations/Destination";
 import { DestinationName } from "../../destinations/DestinationName";

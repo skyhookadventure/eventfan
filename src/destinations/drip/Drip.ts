@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+ 
 import { DestinationName } from "../DestinationName";
 import { DripIdentity } from "./types/DripJsAPI";
 import { TEvent } from "../../types/TrackEvent";

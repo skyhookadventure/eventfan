@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+ 
 import { Ecommerce } from "../../../../index";
 import { TEvent } from "../../../../types/TrackEvent";
 import { AddToCart } from "../../types/events";
