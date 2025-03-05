@@ -7,6 +7,5 @@ export enum DestinationName {
   GA4 = 'GA4',
   HOTJAR = 'HOTJAR',
   POSTHOG = 'POSTHOG',
-  RUDDERSTACK = 'RUDDERSTACK',
   SENTRY = 'SENTRY',
 }
