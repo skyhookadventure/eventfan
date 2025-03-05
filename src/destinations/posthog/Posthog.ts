@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+ 
 import posthog from "posthog-js";
 import { TEvent } from "../../types/TrackEvent";
 import { User } from "../../types/User";

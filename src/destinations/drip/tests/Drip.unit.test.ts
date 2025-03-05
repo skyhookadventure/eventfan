@@ -1,5 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/dot-notation */
+ 
+ 
 import { mockTrack, mockUser } from "../../../mocks";
 import { DestinationName } from "../../DestinationName";
 import Drip from "../Drip";

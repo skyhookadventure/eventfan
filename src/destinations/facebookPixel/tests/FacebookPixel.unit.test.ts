@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/dot-notation */
+ 
 import { mockOrderCompleted, mockTrack, mockUser } from "../../../mocks";
 import { DestinationName } from "../../DestinationName";
 import FacebookPixel from "../FacebookPixel";

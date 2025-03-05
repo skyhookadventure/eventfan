@@ -1,14 +1,10 @@
-import { v4 as uuidV4 } from "uuid";
-import { User } from "../../types/User";
-import type Destination from "../Destination";
-import { DestinationName } from "../DestinationName";
-import { Page } from "../../types/PageViewProps";
-import {
-  RudderStackIdentify,
-  RudderStackPage,
-  RudderStackTrack,
-} from "./types/rudder";
-import { TEvent } from "../../types/TrackEvent";
+import { v4 as uuidV4 } from 'uuid';
+import { Page } from '../../types/PageViewProps';
+import { TEvent } from '../../types/TrackEvent';
+import { User } from '../../types/User';
+import type Destination from '../Destination';
+import { DestinationName } from '../DestinationName';
+import { RudderStackIdentify, RudderStackPage, RudderStackTrack } from './types/rudder';
 
 /**
  * RudderStack Config
@@ -28,13 +24,10 @@ export default class RudderStack implements Destination {
 
   private userId?: string;
 
-  constructor({
-    writeKey,
-    dataPlaneURL = "https://hosted.rudderlabs.com",
-  }: RudderStackConfig) {
+  constructor({ writeKey, dataPlaneURL = 'https://hosted.rudderlabs.com' }: RudderStackConfig) {
     // RudderStack uses an anonymous user ID where a signed-in user id is not available
     // To try and maintain this between session, we use local storage to maintain a value
-    const key = "eventFanRSAnonymousUserID";
+    const key = 'eventFanRSAnonymousUserID';
 
     try {
       const anonymousIdFromStorage = localStorage.getItem(key);
@@ -43,7 +36,7 @@ export default class RudderStack implements Destination {
       } else {
         localStorage.setItem(key, this.anonymousId);
       }
-    } catch (_e) {
+    } catch {
       // If local storage is disabled (disabling cookies does this in some browsers) then
       // simply calling `localStorage.getItem` can throw a security error. In that case we
       // fail silently and fallback to using the default anonymousId.
@@ -54,12 +47,12 @@ export default class RudderStack implements Destination {
   }
 
   private callRudderStackAPI(
-    endpoint: "identify" | "track" | "page" | "screen" | "group" | "alias",
-    body: object
+    endpoint: 'identify' | 'track' | 'page' | 'screen' | 'group' | 'alias',
+    body: object,
   ): Promise<Response | undefined> {
     return fetch(`${this.config.dataPlaneURL}/v1/${endpoint}`, {
       headers: { Authorization: `Basic ${btoa(`${this.config.writeKey}:`)}` },
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(body),
     });
   }
@@ -73,7 +66,7 @@ export default class RudderStack implements Destination {
       traits: user.traits,
     };
 
-    return this.callRudderStackAPI("identify", body);
+    return this.callRudderStackAPI('identify', body);
   }
 
   async page(page: Page): Promise<any> {
@@ -84,7 +77,7 @@ export default class RudderStack implements Destination {
       properties: page.properties,
     };
 
-    return this.callRudderStackAPI("page", body);
+    return this.callRudderStackAPI('page', body);
   }
 
   async track(event: TEvent): Promise<any> {
@@ -95,10 +88,9 @@ export default class RudderStack implements Destination {
       properties: event.properties,
     };
 
-    return this.callRudderStackAPI("track", body);
+    return this.callRudderStackAPI('track', body);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   initialise(): Promise<void> {
     // No initialisation needed
     return Promise.resolve();
