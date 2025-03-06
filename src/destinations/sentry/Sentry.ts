@@ -1,8 +1,8 @@
-import type { User as SentryUser, Breadcrumb, Severity } from "@sentry/browser";
-import { TEvent } from "../../types/TrackEvent";
-import { User } from "../../types/User";
-import type Destination from "../Destination";
-import { DestinationName } from "../DestinationName";
+import type { Breadcrumb, User as SentryUser, SeverityLevel } from '@sentry/browser';
+import { TEvent } from '../../types/TrackEvent';
+import { User } from '../../types/User';
+import type Destination from '../Destination';
+import { DestinationName } from '../DestinationName';
 
 /**
  * Sentry Config
@@ -49,7 +49,7 @@ export default class Sentry implements Destination {
     this.sentry.addBreadcrumb({
       category: event.name,
       data: event.properties,
-      level: "info" as Severity.Info,
+      level: 'info' as SeverityLevel,
     });
   }
 
